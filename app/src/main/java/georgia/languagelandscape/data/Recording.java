@@ -1,8 +1,11 @@
 package georgia.languagelandscape.data;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import java.util.ArrayList;
 
-public class Recording {
+public class Recording implements Parcelable{
     /*
     * Requirements:
     *   -a name
@@ -148,4 +151,48 @@ public class Recording {
                 ", speakers=" + speakers +
                 '}';
     }
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeString(title);
+        dest.writeLong(duration);
+        dest.writeString(description);
+        dest.writeDouble(latitude);
+        dest.writeDouble(longitude);
+        dest.writeString(location);
+        dest.writeStringList(language);
+        dest.writeString(date);
+        dest.writeString(uploader);
+        dest.writeStringList(speakers);
+    }
+
+    protected Recording(Parcel in) {
+        title = in.readString();
+        duration = in.readLong();
+        description = in.readString();
+        latitude = in.readDouble();
+        longitude = in.readDouble();
+        location = in.readString();
+        language = in.createStringArrayList();
+        date = in.readString();
+        uploader = in.readString();
+        speakers = in.createStringArrayList();
+    }
+
+    public static final Creator<Recording> CREATOR = new Creator<Recording>() {
+        @Override
+        public Recording createFromParcel(Parcel in) {
+            return new Recording(in);
+        }
+
+        @Override
+        public Recording[] newArray(int size) {
+            return new Recording[size];
+        }
+    };
 }

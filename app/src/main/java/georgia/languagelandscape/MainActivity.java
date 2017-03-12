@@ -30,6 +30,8 @@ import org.json.JSONObject;
 import java.util.HashMap;
 import java.util.Map;
 
+import georgia.languagelandscape.data.User;
+
 public class MainActivity extends AppCompatActivity {
 
     public static final int REQUEST_LOCATION = 1002;
@@ -91,13 +93,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.mainFab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "what ", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
-                Intent myIntent = new Intent(MainActivity.this, NavigationDrawerActivity.class);
+                Intent myIntent = new Intent(MainActivity.this, MapActivity.class);
                 startActivity(myIntent);
                 finish();
             }

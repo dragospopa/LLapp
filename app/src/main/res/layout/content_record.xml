@@ -12,7 +12,7 @@
     android:focusableInTouchMode="true"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".RecordingActivity"
-    tools:showIn="@layout/activity_record">
+    tools:showIn="@layout/activity_record_nav_drawer">
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/player"

@@ -1,4 +1,4 @@
-package georgia.languagelandscape;
+package georgia.languagelandscape.data;
 
 public class User {
 

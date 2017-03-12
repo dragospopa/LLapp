@@ -19,8 +19,6 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Menu;
@@ -44,14 +42,12 @@ import java.util.Locale;
 
 import georgia.languagelandscape.data.Recording;
 
-public class RecordingActivity extends AppCompatActivity {
+public class RecordingActivity extends BaseActivity {
 
     private static final String LOG_TAG = "AudioRecordTest";
     public static final int REQUEST_RECORD_AUDIO = 1001;
-    public static final int REQUEST_LOCATION = 1002;
     public static final int CACHE_SIZE = 1024;
     private boolean audioPermissionGranted = false;
-    private boolean locationPermissionGranted = false;
     private static String audioFileName = null;
     private static boolean canRecord = true;
     private static boolean canPlay = true;
@@ -96,22 +92,8 @@ public class RecordingActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         // TODO: clean the file stored in the cache
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_record);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-
-        // ask for fine location access
-        if (!locationPermissionGranted) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(
-                        this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        REQUEST_LOCATION);
-            } else {
-                locationPermissionGranted = true;
-            }
-        }
+        setContentView(R.layout.activity_record_nav_drawer);
+        super.onDrawerCreated();
 
         recordingTimer = (TextView) findViewById(R.id.timer);
         recordingName = (TextView) findViewById(R.id.recording_name);
@@ -141,6 +123,11 @@ public class RecordingActivity extends AppCompatActivity {
         recordingTitle = numDup == 0 ? defaultRecordingTitle : defaultRecordingTitle + " " + numDup;
         recordingName.setText(recordingTitle);
         nameInputLayout.setHint(recordingTitle);
+
+        longitude = getIntent().getExtras().getDouble(MapActivity.GEO_LONGITUDE);
+        latitude = getIntent().getExtras().getDouble(MapActivity.GEO_LATITUDE);
+        location = updateLocation(longitude, latitude);
+        recordingLocation.setText(location);
 
         doneButton = (Button) findViewById(R.id.button_done);
         doneButton.setOnClickListener(new View.OnClickListener() {
@@ -302,49 +289,6 @@ public class RecordingActivity extends AppCompatActivity {
                 handler.postDelayed(this, 0);
             }
         };
-
-        // use last location because we need the result immediately
-        locationManager = (LocationManager) this.getSystemService(Context.LOCATION_SERVICE);
-
-        currentLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
-        if (currentLocation != null) {
-            longitude = currentLocation.getLongitude();
-            latitude = currentLocation.getLatitude();
-            location = updateLocation(longitude, latitude);
-            recordingLocation.setText(location);
-        }
-        locationListener = new LocationListener() {
-            @Override
-            public void onLocationChanged(Location location) {
-                if (isBetterLocation(location)){
-                    longitude = currentLocation.getLongitude();
-                    latitude = currentLocation.getLatitude();
-                    RecordingActivity.location = updateLocation(longitude, latitude);
-                    recordingLocation.setText(RecordingActivity.location);
-                    try {
-                        locationManager.removeUpdates(locationListener);
-                    } catch (SecurityException e) {
-                        e.printStackTrace();
-                    }
-                }
-            }
-
-            @Override
-            public void onStatusChanged(String provider, int status, Bundle extras) {
-
-            }
-
-            @Override
-            public void onProviderEnabled(String provider) {
-
-            }
-
-            @Override
-            public void onProviderDisabled(String provider) {
-
-            }
-        };
-        locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
         try {
             audioCacheFilePath = getCacheDir().getCanonicalPath();
@@ -526,16 +470,6 @@ public class RecordingActivity extends AppCompatActivity {
         }
     }
 
-    private boolean isBetterLocation(Location location) {
-        if (currentLocation == null) {
-            return true;
-        }
-
-        // check whether the new location is meets accuracy criteria
-        float accuracy = location.getAccuracy();
-        return accuracy < 200;
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -577,19 +511,6 @@ public class RecordingActivity extends AppCompatActivity {
 //                    Toast.LENGTH_SHORT).show();
 //            return false;
 //        }
-
-        if (!locationPermissionGranted) {
-            if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION)
-                    != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(
-                        this,
-                        new String[]{Manifest.permission.ACCESS_FINE_LOCATION},
-                        REQUEST_LOCATION);
-                return false;
-            } else {
-                locationPermissionGranted = true;
-            }
-        }
         return true;
     }
 
@@ -609,13 +530,6 @@ public class RecordingActivity extends AppCompatActivity {
                             Toast.LENGTH_SHORT).show();
 //                    finish();
                 }
-            case REQUEST_LOCATION:
-                if (grantResults.length > 0
-                        && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    locationPermissionGranted = true;
-                    Log.i(LOG_TAG, "location permission granted.");
-                }
-                // TODO: do something if location access denied.
         }
     }
 }

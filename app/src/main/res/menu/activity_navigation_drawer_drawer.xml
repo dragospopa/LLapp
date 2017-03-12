@@ -15,6 +15,11 @@
             android:icon="@mipmap/ic_my_profile"
             android:title="My profile" />
         <item
+            android:id="@+id/nav_my_recordings"
+            android:icon="@mipmap/ic_my_projects"
+            android:title="My Recordings" />
+
+        <item
             android:id="@+id/nav_new_project"
             android:icon="@mipmap/ic_new_project"
             android:title="Add a project" />

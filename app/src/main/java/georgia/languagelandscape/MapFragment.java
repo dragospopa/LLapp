@@ -2,16 +2,18 @@ package georgia.languagelandscape;
 
 //import android.app.Fragment;
 
-import android.support.v4.app.Fragment;
+import android.content.Context;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
-import com.google.android.gms.maps.MapView;
-import com.google.android.gms.maps.MapsInitializer;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
@@ -33,6 +35,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 public class MapFragment extends SupportMapFragment implements OnMapReadyCallback {
 
     private GoogleMap mGoogleMap;
+    private double longitude = 0.0;
+    private double latitude = 0.0;
 
     @Override
     public void onResume() {
@@ -45,9 +49,9 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
-        // latitude and longitude
-        double latitude = 17.385044;
-        double longitude = 78.486671;
+
+        longitude = getArguments().getDouble(MapActivity.GEO_LONGITUDE);
+        latitude = getArguments().getDouble(MapActivity.GEO_LATITUDE);
 
         // create marker
         MarkerOptions marker = new MarkerOptions().position(
@@ -60,7 +64,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         // adding marker
         googleMap.addMarker(marker);
         CameraPosition cameraPosition = new CameraPosition.Builder()
-                .target(new LatLng(17.385044, 78.486671)).zoom(12).build();
+                .target(new LatLng(latitude, longitude)).zoom(5).build();
         googleMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition));
     }
