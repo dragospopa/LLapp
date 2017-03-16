@@ -24,9 +24,18 @@ public class MapActivity extends BaseActivity{
     private static double latitude = 0.0;
     public final static String GEO_LONGITUDE = "geo_longitude";
     public final static String GEO_LATITUDE = "geo_latitude";
+    public final static String FRAGMENT_ID = "fragment_id";
+//    public static enum Frags {MAP, FEED, NEW_PROJECT, MY_PROJECT, PROFILE, SETTINGS};
+    public static final int FRAG_MAP = 2000;
+    public static final int FRAG_FEED = 2001;
+    public static final int FRAG_NEW_PROJECT = 2002;
+    public static final int FRAG_MY_PROJECT = 2003;
+    public static final int FRAG_PROFILE = 2004;
+    public static final int FRAG_SETTINGS = 2005;
 
     private MapFragment mapFragment= null;
     private FragmentManager fm = null;
+    private FragmentTransaction ft = null;
     private LocationManager locationManager = null;
     private Location currentLocation = null;
     private LocationListener locationListener = null;
@@ -91,15 +100,49 @@ public class MapActivity extends BaseActivity{
         };
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
-        Bundle bundle = new Bundle();
-        bundle.putDouble(GEO_LONGITUDE, longitude);
-        bundle.putDouble(GEO_LATITUDE, latitude);
-        mapFragment.setArguments(bundle);
+        /* check to see which fragment to replace */
+//        Frags fragId = (Frags) getIntent().getExtras().getSerializable(FRAGMENT_ID);
+//        switch (fragId) {
+//            case MAP:
+//
+//        }
 
-        fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-        ft.replace(R.id.content_replace, mapFragment);
-        ft.commit();
+        int fragId = getIntent().getIntExtra(FRAGMENT_ID, FRAG_MAP);
+        switch (fragId) {
+            case FRAG_MAP:
+                Bundle bundle = new Bundle();
+                bundle.putDouble(GEO_LONGITUDE, longitude);
+                bundle.putDouble(GEO_LATITUDE, latitude);
+                mapFragment.setArguments(bundle);
+                fm = getSupportFragmentManager();
+                ft = fm.beginTransaction();
+                ft.replace(R.id.content_replace, mapFragment);
+                ft.commit();
+                break;
+            case FRAG_NEW_PROJECT:
+                NewProjectFragment newProjectFragment= new NewProjectFragment();
+                fm = getSupportFragmentManager();
+                ft = fm.beginTransaction();
+                ft.replace(R.id.content_replace, newProjectFragment);
+                ft.commit();
+                break;
+            case FRAG_PROFILE:
+                ProfileFragment profileFragment = new ProfileFragment();
+                fm = getSupportFragmentManager();
+                ft = fm.beginTransaction();
+                ft.replace(R.id.content_replace, profileFragment);
+                ft.commit();
+                break;
+            case FRAG_MY_PROJECT:
+                MyProjectsFragment myProjectsFragment= new MyProjectsFragment();
+                fm = getSupportFragmentManager();
+                ft = fm.beginTransaction();
+                ft.replace(R.id.content_replace, myProjectsFragment);
+                ft.commit();
+                break;
+            default:
+                break;
+        }
 
         FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.homeFab);
         fab.setOnClickListener(new View.OnClickListener() {

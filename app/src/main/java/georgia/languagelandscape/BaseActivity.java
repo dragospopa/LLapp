@@ -123,16 +123,22 @@ public class BaseActivity extends AppCompatActivity
                 // TODO: go to all recordings page
                 break;
             case R.id.nav_my_profile:
-                ProfileFragment profileFragment= new ProfileFragment();
-                ft.replace(R.id.content_replace, profileFragment);
+                myIntent = new Intent(BaseActivity.this, MapActivity.class);
+                myIntent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.FRAG_PROFILE);
+                startActivity(myIntent);
+                finish();
                 break;
             case R.id.nav_new_project:
-                NewProjectFragment newProjectFragment= new NewProjectFragment();
-                ft.replace(R.id.content_replace, newProjectFragment);
+                myIntent = new Intent(BaseActivity.this, MapActivity.class);
+                myIntent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.FRAG_NEW_PROJECT);
+                startActivity(myIntent);
+                finish();
                 break;
             case R.id.nav_my_projects:
-                MyProjectsFragment myProjectsFragment= new MyProjectsFragment();
-                ft.replace(R.id.content_replace, myProjectsFragment);
+                myIntent = new Intent(BaseActivity.this, MapActivity.class);
+                myIntent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.FRAG_MY_PROJECT);
+                startActivity(myIntent);
+                finish();
                 break;
             case R.id.nav_seetings:
                 // TODO: go to setting page

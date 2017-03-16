@@ -42,10 +42,10 @@
         <activity
             android:name=".RecordingActivity"
             android:theme="@style/AppTheme.NoActionBar"
-            android:parentActivityName=".BaseActivity">
+            android:parentActivityName=".MapActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".BaseActivity"/>
+                android:value=".MapActivity"/>
         </activity>
 
         <activity
@@ -55,6 +55,13 @@
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".BaseActivity"/>
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
         </activity>
 
         <meta-data
