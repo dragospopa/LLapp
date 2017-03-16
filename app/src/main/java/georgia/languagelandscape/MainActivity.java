@@ -100,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
                 Snackbar.make(view, "what ", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
                 Intent myIntent = new Intent(MainActivity.this, MapActivity.class);
+//                myIntent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.Frags.MAP);
+                myIntent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.FRAG_MAP);
                 startActivity(myIntent);
                 finish();
             }
