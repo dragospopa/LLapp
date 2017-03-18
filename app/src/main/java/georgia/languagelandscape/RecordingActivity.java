@@ -5,9 +5,6 @@ import android.content.Context;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
-import android.location.Location;
-import android.location.LocationListener;
-import android.location.LocationManager;
 import android.media.MediaMetadataRetriever;
 import android.media.MediaPlayer;
 import android.media.MediaRecorder;
@@ -66,10 +63,6 @@ public class RecordingActivity extends BaseActivity {
     private double latitude = 0.0;
     private static String location = null;
 
-    private LocationManager locationManager = null;
-    private LocationListener locationListener = null;
-
-    private Location currentLocation = null;
     private FloatingActionButton recordButton = null;
     private MediaRecorder recorder = null;
     private FloatingActionButton playButton = null;

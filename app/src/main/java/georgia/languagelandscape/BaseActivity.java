@@ -16,6 +16,11 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import georgia.languagelandscape.fragments.MapFragment;
+import georgia.languagelandscape.fragments.MyProjectsFragment;
+import georgia.languagelandscape.fragments.NewProjectFragment;
+import georgia.languagelandscape.fragments.ProfileFragment;
+
 public class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         ProfileFragment.OnFragmentInteractionListener,

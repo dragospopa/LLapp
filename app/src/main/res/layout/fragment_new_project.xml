@@ -2,7 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="georgia.languagelandscape.NewProjectFragment"
+    tools:context="georgia.languagelandscape.fragments.NewProjectFragment"
     tools:background="@android:color/white"
     android:background="@android:color/background_light">
 

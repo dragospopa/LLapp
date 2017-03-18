@@ -1,4 +1,6 @@
 package georgia.languagelandscape;
 
-public class MyRecordingsActivity extends BaseActivity {
+import android.support.v7.app.AppCompatActivity;
+
+public class MyRecordingsActivity extends AppCompatActivity {
 }

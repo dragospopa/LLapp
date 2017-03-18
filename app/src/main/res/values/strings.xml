@@ -16,4 +16,8 @@
     <string name="Done">Done</string>
     <string name="default_description">Recording Description</string>
     <string name="default_speakers">Speakers</string>
+    <string name="default_userName">User</string>
+    <string name="edit">Edit</string>
+    <string name="speaker">Speaker:</string>
+    <string name="language">Languages</string>
 </resources>

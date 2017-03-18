@@ -17,6 +17,11 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Toast;
 
+import georgia.languagelandscape.fragments.MapFragment;
+import georgia.languagelandscape.fragments.MyProjectsFragment;
+import georgia.languagelandscape.fragments.NewProjectFragment;
+import georgia.languagelandscape.fragments.ProfileFragment;
+
 public class MapActivity extends BaseActivity{
 
     private static boolean active = false;
