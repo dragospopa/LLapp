@@ -14,4 +14,12 @@
         android:text="My projects" />
 
 
+
+    <ListView
+        android:id="@+id/listview_projects"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+
+
 </FrameLayout>

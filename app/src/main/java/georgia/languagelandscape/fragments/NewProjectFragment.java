@@ -7,8 +7,12 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.LinearLayout;
 
 import georgia.languagelandscape.R;
+import georgia.languagelandscape.data.Projects;
 
 
 /**
@@ -28,6 +32,12 @@ public class NewProjectFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
+    LinearLayout container;
+
+    EditText new_project;
+    String tv_project_name;
+    final Projects project=new Projects();
 
     private OnFragmentInteractionListener mListener;
 
@@ -53,6 +63,8 @@ public class NewProjectFragment extends Fragment {
         return fragment;
     }
 
+
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -60,13 +72,32 @@ public class NewProjectFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
     }
+
+    Button addButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_new_project, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_new_project, container, false);
+
+        new_project=(EditText) view.findViewById(R.id.editText_new_project);
+
+
+        addButton= (Button) view.findViewById(R.id.button_add_project);
+
+        addButton.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v)
+            {
+                addItem(tv_project_name);
+            }
+        });
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -107,4 +138,11 @@ public class NewProjectFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+    public void addItem(String name) {
+        tv_project_name= String.valueOf(new_project.getText());
+        project.addItem(tv_project_name);
+        System.out.println(tv_project_name);
+    }
+
 }

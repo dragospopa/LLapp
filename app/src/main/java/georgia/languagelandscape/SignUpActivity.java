@@ -32,7 +32,7 @@ import java.util.Map;
 
 import georgia.languagelandscape.data.User;
 
-public class MainActivity extends AppCompatActivity {
+public class SignUpActivity extends AppCompatActivity {
 
     public static final int REQUEST_LOCATION = 1002;
     TextView content;
@@ -43,10 +43,13 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_signup);
         //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         //setSupportActionBar(toolbar);
         content = (TextView) findViewById(R.id.content);
+
+        Intent intent = getIntent();
+        String value = intent.getStringExtra("");
 
         // ask for fine location access
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
@@ -66,7 +69,7 @@ public class MainActivity extends AppCompatActivity {
 
                 EditText userText = (EditText) findViewById(R.id.nameText);
                 EditText passwordText = (EditText) findViewById(R.id.passText);
-
+                EditText emailText = (EditText) findViewById(R.id.emailText);
 
 
                 if (mRequestQueue == null) {
@@ -76,22 +79,25 @@ public class MainActivity extends AppCompatActivity {
 
                 String name = userText.getText().toString();
                 String pass = passwordText.getText().toString();
+                String email = emailText.getText().toString();
 
                 User user = new User();
 
                 user.setUsername(name);
                 user.setPassword(pass);
+                user.setEmail(email);
 
                 Map<String, String> map = new HashMap<>();
 
                 map.put("username", user.getUsername());
                 map.put("password", user.getPassword());
+                map.put("email", user.getEmail());
 
                 JSONObject json = new JSONObject(map);
 
 
                 sendMessage(json);
-                Toast.makeText(MainActivity.this, "Username: "+ user.getUsername() + " Password: " + user.getPassword() , Toast.LENGTH_SHORT).show();
+                Toast.makeText(SignUpActivity.this, "Username: "+ user.getUsername() + " Password: " + user.getPassword() + " Email: "+user.getEmail() , Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -104,23 +110,21 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-
-        TextView signup = (TextView) findViewById(R.id.signUp);
-        signup.setOnClickListener(new View.OnClickListener(){
+        TextView forgotpass = (TextView) findViewById(R.id.forgotPass);
+        forgotpass.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
+                Intent intent = new Intent(SignUpActivity.this, ForgotPassActivity.class);
                 // intent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.FRAG_MAP);
                 startActivity(intent);
                 finish();
             }
         });
-
-        TextView forgotpass = (TextView) findViewById(R.id.forgotPass);
-        forgotpass.setOnClickListener(new View.OnClickListener(){
+        TextView login = (TextView) findViewById(R.id.logIn);
+        login.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                Intent intent = new Intent(MainActivity.this, ForgotPassActivity.class);
+                Intent intent = new Intent(SignUpActivity.this, MainActivity.class);
                 // intent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.FRAG_MAP);
                 startActivity(intent);
                 finish();
@@ -160,7 +164,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void doSthWithResponse(JSONObject object){
         content.setText(object.toString());
-        Intent myIntent = new Intent(MainActivity.this, MapActivity.class);
+        Intent myIntent = new Intent(SignUpActivity.this, MainActivity.class);
 //                myIntent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.Frags.MAP);
         myIntent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.FRAG_MAP);
         startActivity(myIntent);

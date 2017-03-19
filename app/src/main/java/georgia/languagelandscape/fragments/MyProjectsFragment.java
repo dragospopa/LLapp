@@ -7,8 +7,13 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ArrayAdapter;
+import android.widget.ListView;
+
+import java.util.ArrayList;
 
 import georgia.languagelandscape.R;
+import georgia.languagelandscape.data.Projects;
 
 
 /**
@@ -62,11 +67,29 @@ public class MyProjectsFragment extends Fragment {
         }
     }
 
+
+    ListView listView;
+    ArrayList<String> listItems= Projects.getArrayList();
+    ArrayAdapter<String> adapter;
+
+    @Override
+    public void onStart() {
+        super.onStart();
+    }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_my_projects, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_my_projects, container, false);
+
+        listView=(ListView) view.findViewById(R.id.listview_projects);
+
+        adapter= new ArrayAdapter<String>(getActivity(), android.R.layout.simple_list_item_1, listItems);
+        listView.setAdapter(adapter);
+
+        return view;
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -107,4 +130,6 @@ public class MyProjectsFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
 }
