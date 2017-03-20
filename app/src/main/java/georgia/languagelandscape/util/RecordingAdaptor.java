@@ -71,7 +71,7 @@ public class RecordingAdaptor extends RecyclerView.Adapter<RecordingAdaptor.View
             rlLocation = (TextView) itemView.findViewById(R.id.recordingList_location);
             rlSpeakers = (TextView) itemView.findViewById(R.id.recordingList_speakers_content);
             rlLanguages = (TextView) itemView.findViewById(R.id.recordingList_languages_content);
-            rlDate = (TextView) itemView.findViewById(R.id.recording_date);
+            rlDate = (TextView) itemView.findViewById(R.id.recordingList_date);
             moreButton = (Button) itemView.findViewById(R.id.recordingList_more);
         }
     }

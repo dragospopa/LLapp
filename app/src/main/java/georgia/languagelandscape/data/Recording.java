@@ -1,9 +1,17 @@
 package georgia.languagelandscape.data;
 
+import android.content.ContentValues;
 import android.os.Parcel;
 import android.os.Parcelable;
 
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
+import java.lang.reflect.Type;
 import java.util.ArrayList;
+import java.util.UUID;
+
+import georgia.languagelandscape.database.RecordingTableContract;
 
 public class Recording implements Parcelable{
     /*
@@ -19,6 +27,7 @@ public class Recording implements Parcelable{
     *   -optional picture
     *   -optional video
     * */
+    private String recordingID = null;
     private String title = null;
     private long duration = 0L; // in milliseconds
     private String description = null;
@@ -27,10 +36,13 @@ public class Recording implements Parcelable{
     private String location = null;
     private ArrayList<String> language = null;
     private String date = null;
-    private String uploader = null;
+    private User uploader = null;
     private ArrayList<String> speakers = null;
 
     public Recording() {
+        if (recordingID == null) {
+            recordingID = UUID.randomUUID().toString();
+        }
     }
 
     public Recording(String title,
@@ -41,7 +53,7 @@ public class Recording implements Parcelable{
                      String location,
                      ArrayList<String> language,
                      String date,
-                     String uploader,
+                     User uploader,
                      ArrayList<String> speakers) {
 
         this.title = title;
@@ -54,6 +66,14 @@ public class Recording implements Parcelable{
         this.date = date;
         this.uploader = uploader;
         this.speakers = speakers;
+    }
+
+    public String getRecordingID() {
+        return recordingID;
+    }
+
+    public void setRecordingID(String recordingID) {
+        this.recordingID = recordingID;
     }
 
     public String getTitle() {
@@ -120,11 +140,11 @@ public class Recording implements Parcelable{
         this.date = date;
     }
 
-    public String getUploader() {
+    public User getUploader() {
         return uploader;
     }
 
-    public void setUploader(String uploader) {
+    public void setUploader(User uploader) {
         this.uploader = uploader;
     }
 
@@ -136,9 +156,29 @@ public class Recording implements Parcelable{
         this.speakers = speakers;
     }
 
+    public ContentValues toValues() {
+        ContentValues values = new ContentValues(10);
+        Gson gson = new Gson();
+
+        values.put(RecordingTableContract.COLUMN_ID, recordingID);
+        values.put(RecordingTableContract.COLUMN_TITLE, title);
+        values.put(RecordingTableContract.COLUMN_DURATION, duration);
+        values.put(RecordingTableContract.COLUMN_DESCRIPTION, description);
+        values.put(RecordingTableContract.COLUMN_LATITUDE, latitude);
+        values.put(RecordingTableContract.COLUMN_LONGITUDE, longitude);
+        values.put(RecordingTableContract.COLUMN_LOCATION, location);
+        values.put(RecordingTableContract.COLUMN_LANGUAGE, gson.toJson(language));
+        values.put(RecordingTableContract.COLUMN_DATE, date);
+        values.put(RecordingTableContract.COLUMN_UPLOADER, gson.toJson(uploader));
+        values.put(RecordingTableContract.COLUMN_SPEAKER, gson.toJson(speakers));
+
+        return values;
+    }
+
     @Override
     public String toString() {
         return "Recording{" +
+                "id='" + recordingID + '\'' +
                 "title='" + title + '\'' +
                 ", duration=" + duration +
                 ", description='" + description + '\'' +
@@ -159,6 +199,9 @@ public class Recording implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+        Gson gson = new Gson();
+
+        dest.writeString(recordingID);
         dest.writeString(title);
         dest.writeLong(duration);
         dest.writeString(description);
@@ -167,11 +210,15 @@ public class Recording implements Parcelable{
         dest.writeString(location);
         dest.writeStringList(language);
         dest.writeString(date);
-        dest.writeString(uploader);
+        dest.writeString(gson.toJson(uploader));
         dest.writeStringList(speakers);
     }
 
+
     protected Recording(Parcel in) {
+        Gson gson = new Gson();
+
+        recordingID = in.readString();
         title = in.readString();
         duration = in.readLong();
         description = in.readString();
@@ -180,7 +227,8 @@ public class Recording implements Parcelable{
         location = in.readString();
         language = in.createStringArrayList();
         date = in.readString();
-        uploader = in.readString();
+        Type type = new TypeToken<User>() {}.getType();
+        uploader = gson.fromJson(in.readString(), type);
         speakers = in.createStringArrayList();
     }
 
