@@ -149,7 +149,9 @@ public class BaseActivity extends AppCompatActivity
                 // TODO: go to setting page
                 break;
             case R.id.nav_my_recordings:
-                // TODO: go to myrecording page
+                myIntent = new Intent(BaseActivity.this, MyRecordingsActivity.class);
+                startActivity(myIntent);
+                finish();
                 break;
         }
 

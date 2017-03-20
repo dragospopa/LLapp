@@ -92,6 +92,12 @@ public class MainActivity extends AppCompatActivity {
 
                 sendMessage(json);
                 Toast.makeText(MainActivity.this, "Username: "+ user.getUsername() + " Password: " + user.getPassword() , Toast.LENGTH_SHORT).show();
+
+                Intent myIntent = new Intent(MainActivity.this, MapActivity.class);
+//                myIntent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.Frags.MAP);
+                myIntent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.FRAG_MAP);
+                startActivity(myIntent);
+                finish();
             }
         });
 
@@ -160,11 +166,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void doSthWithResponse(JSONObject object){
         content.setText(object.toString());
-        Intent myIntent = new Intent(MainActivity.this, MapActivity.class);
-//                myIntent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.Frags.MAP);
-        myIntent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.FRAG_MAP);
-        startActivity(myIntent);
-        finish();
     }
 
 

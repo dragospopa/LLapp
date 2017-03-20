@@ -2,6 +2,7 @@ package georgia.languagelandscape;
 
 import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
 import android.location.Geocoder;
@@ -38,6 +39,8 @@ import java.util.List;
 import java.util.Locale;
 
 import georgia.languagelandscape.data.Recording;
+import georgia.languagelandscape.data.User;
+import georgia.languagelandscape.database.RecordingDataSource;
 
 public class RecordingActivity extends BaseActivity {
 
@@ -168,19 +171,21 @@ public class RecordingActivity extends BaseActivity {
 
                 String title = userDefinedName.getText().toString();
                 recordingTitle = title.equals("") ? defaultRecordingTitle : title;
+                recordingName.setText(recordingTitle);
 
                 /* copy the file from cache to internal storage */
                 int numDup;
+                String recordingFileName;
                 if (recordingTitle.matches(defaultRecordingTitle + " [0-9]+$")) {
                     numDup = checkDuplication(defaultRecordingTitle);
-                    recordingTitle =
+                    recordingFileName =
                             numDup == 0 ? defaultRecordingTitle : defaultRecordingTitle + " " + numDup;
                 } else {
                     numDup = checkDuplication(recordingTitle);
-                    recordingTitle =
+                    recordingFileName =
                             numDup == 0 ? recordingTitle : recordingTitle + " " + numDup;
                 }
-                File to = new File(audioInternalFileDir, recordingTitle + defaultAudioFormat);
+                File to = new File(audioInternalFileDir, recordingFileName + defaultAudioFormat);
                 audioFileName = to.getAbsolutePath();
                 boolean success = from.renameTo(to);
 
@@ -200,9 +205,17 @@ public class RecordingActivity extends BaseActivity {
                     recording.setLatitude(latitude);
                     recording.setLongitude(longitude);
                     recording.setLocation(location);
+                    recording.setUploader(new User("franktest@gmail.com", "passwd", "frankie"));
                     Log.i(LOG_TAG, recording.toString());
                     // TODO: set the uploader in the future
                     // TODO: take to the list of recordings the user has
+                    RecordingDataSource dataSource = new RecordingDataSource(RecordingActivity.this);
+                    dataSource.open();
+                    dataSource.insertRecording(recording);
+                    dataSource.close();
+
+                    Intent intent = new Intent(RecordingActivity.this, MyRecordingsActivity.class);
+                    startActivity(intent);
 
                 } else {
                     if (!canPlay){
