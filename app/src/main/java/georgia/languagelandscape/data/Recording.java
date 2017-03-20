@@ -14,19 +14,7 @@ import java.util.UUID;
 import georgia.languagelandscape.database.RecordingTableContract;
 
 public class Recording implements Parcelable{
-    /*
-    * Requirements:
-    *   -a name
-    *   -duration
-    *   -description
-    *   -geolocation
-    *   -name of the city/country
-    *   -language spoken
-    *   -date of upload
-    *   -have uploader name, ie the user who uploaded it
-    *   -optional picture
-    *   -optional video
-    * */
+
     private String recordingID = null;
     private String title = null;
     private long duration = 0L; // in milliseconds
@@ -45,7 +33,9 @@ public class Recording implements Parcelable{
         }
     }
 
-    public Recording(String title,
+    public Recording(
+                     String ID,
+                     String title,
                      long duration,
                      String description,
                      double latitude,
@@ -55,6 +45,10 @@ public class Recording implements Parcelable{
                      String date,
                      User uploader,
                      ArrayList<String> speakers) {
+
+        if (recordingID == null) {
+            recordingID = UUID.randomUUID().toString();
+        }
 
         this.title = title;
         this.duration = duration;
@@ -74,6 +68,10 @@ public class Recording implements Parcelable{
 
     public void setRecordingID(String recordingID) {
         this.recordingID = recordingID;
+    }
+
+    public void setRecordingID() {
+        this.recordingID = UUID.randomUUID().toString();
     }
 
     public String getTitle() {
