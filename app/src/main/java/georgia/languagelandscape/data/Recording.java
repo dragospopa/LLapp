@@ -155,7 +155,7 @@ public class Recording implements Parcelable{
     }
 
     public ContentValues toValues() {
-        ContentValues values = new ContentValues(10);
+        ContentValues values = new ContentValues();
         Gson gson = new Gson();
 
         values.put(RecordingTableContract.COLUMN_ID, recordingID);
@@ -165,10 +165,16 @@ public class Recording implements Parcelable{
         values.put(RecordingTableContract.COLUMN_LATITUDE, latitude);
         values.put(RecordingTableContract.COLUMN_LONGITUDE, longitude);
         values.put(RecordingTableContract.COLUMN_LOCATION, location);
-        values.put(RecordingTableContract.COLUMN_LANGUAGE, gson.toJson(language));
         values.put(RecordingTableContract.COLUMN_DATE, date);
-        values.put(RecordingTableContract.COLUMN_UPLOADER, gson.toJson(uploader));
-        values.put(RecordingTableContract.COLUMN_SPEAKER, gson.toJson(speakers));
+
+        String languageString = gson.toJson(language);
+        values.put(RecordingTableContract.COLUMN_LANGUAGE, languageString);
+
+        String uploaderString = gson.toJson(uploader);
+        values.put(RecordingTableContract.COLUMN_UPLOADER, uploaderString);
+
+        String speakerString = gson.toJson(speakers);
+        values.put(RecordingTableContract.COLUMN_SPEAKER, speakerString);
 
         return values;
     }

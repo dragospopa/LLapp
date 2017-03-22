@@ -196,19 +196,19 @@ public class RecordingActivity extends BaseActivity {
                     String durationStr = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
                     long duration = Long.parseLong(durationStr);
                     recording = new Recording();
+                    recording.setRecordingID();
                     recording.setDuration(duration);
                     recording.setTitle(recordingTitle);
                     recording.setDate(recordingDate.getText().toString());
-                    recording.setDescription(recordingDescription);
+                    recording.setDescription("nmb");
+//                    recording.setDescription(recordingDescription);
                     recording.setLanguage(recordingLanguages);
                     recording.setSpeakers(recordingSpeaker);
                     recording.setLatitude(latitude);
                     recording.setLongitude(longitude);
                     recording.setLocation(location);
                     recording.setUploader(new User("franktest@gmail.com", "passwd", "frankie"));
-                    Log.i(LOG_TAG, recording.toString());
                     // TODO: set the uploader in the future
-                    // TODO: take to the list of recordings the user has
                     RecordingDataSource dataSource = new RecordingDataSource(RecordingActivity.this);
                     dataSource.open();
                     dataSource.insertRecording(recording);
