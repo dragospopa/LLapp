@@ -25,7 +25,9 @@ public class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         ProfileFragment.OnFragmentInteractionListener,
         MyProjectsFragment.OnFragmentInteractionListener ,
-        NewProjectFragment.OnFragmentInteractionListener{
+        NewProjectFragment.OnFragmentInteractionListener,
+        AboutFragment.OnFragmentInteractionListener,
+        HelpFragment.OnFragmentInteractionListener{
 
     private ActionBarDrawerToggle toggle = null;
     private DrawerLayout drawer = null;
@@ -150,6 +152,18 @@ public class BaseActivity extends AppCompatActivity
                 break;
             case R.id.nav_my_recordings:
                 myIntent = new Intent(BaseActivity.this, MyRecordingsActivity.class);
+                startActivity(myIntent);
+                finish();
+                break;
+            case R.id.nav_about:
+                myIntent = new Intent(BaseActivity.this, MainActivity.class);
+                myIntent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.FRAG_ABOUT);
+                startActivity(myIntent);
+                finish();
+                break;
+            case R.id.nav_help:
+                myIntent = new Intent(BaseActivity.this, MainActivity.class);
+                myIntent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.FRAG_HELP);
                 startActivity(myIntent);
                 finish();
                 break;

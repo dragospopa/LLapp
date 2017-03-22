@@ -4,8 +4,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
@@ -101,15 +99,6 @@ public class SignUpActivity extends AppCompatActivity {
             }
         });
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.mainFab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "what ", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
         TextView forgotpass = (TextView) findViewById(R.id.forgotPass);
         forgotpass.setOnClickListener(new View.OnClickListener(){
             @Override
@@ -135,7 +124,7 @@ public class SignUpActivity extends AppCompatActivity {
 
     public void sendMessage(JSONObject object){
         try{
-            String url = "http://d2ddaedd.ngrok.io";
+            String url = "http://a50f184b.ngrok.io";
             JsonObjectRequest req = new JsonObjectRequest(url, object,
                     new Response.Listener<JSONObject>() {
                         @Override

@@ -33,9 +33,18 @@
             android:icon="@mipmap/ic_settings"
             android:title="Seetings" />
         <item
+            android:id="@+id/nav_help"
+            android:icon="@mipmap/ic_settings"
+            android:title="Help" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@mipmap/ic_my_projects"
+            android:title="About" />
+        <item
             android:id="@+id/nav_log_out"
             android:icon="@mipmap/ic_log_out"
             android:title="Log out"/>
+
     </group>
 
 </menu>
