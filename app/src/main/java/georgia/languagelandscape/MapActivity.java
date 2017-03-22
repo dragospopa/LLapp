@@ -37,6 +37,8 @@ public class MapActivity extends BaseActivity{
     public static final int FRAG_MY_PROJECT = 2003;
     public static final int FRAG_PROFILE = 2004;
     public static final int FRAG_SETTINGS = 2005;
+    public static final int FRAG_ABOUT = 2006;
+    public static final int FRAG_HELP = 2007;
 
     private MapFragment mapFragment= null;
     private FragmentManager fm = null;
@@ -143,6 +145,20 @@ public class MapActivity extends BaseActivity{
                 fm = getSupportFragmentManager();
                 ft = fm.beginTransaction();
                 ft.replace(R.id.content_replace, myProjectsFragment);
+                ft.commit();
+                break;
+            case FRAG_ABOUT:
+                AboutFragment aboutFragment= new AboutFragment();
+                fm = getSupportFragmentManager();
+                ft = fm.beginTransaction();
+                ft.replace(R.id.content_replace, aboutFragment);
+                ft.commit();
+                break;
+            case FRAG_HELP:
+                HelpFragment helpFragment= new HelpFragment();
+                fm = getSupportFragmentManager();
+                ft = fm.beginTransaction();
+                ft.replace(R.id.content_replace, helpFragment);
                 ft.commit();
                 break;
             default:

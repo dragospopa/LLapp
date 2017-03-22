@@ -3,6 +3,7 @@ package georgia.languagelandscape.fragments;
 //import android.app.Fragment;
 
 import android.support.v4.app.Fragment;
+import android.util.Log;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -11,9 +12,13 @@ import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
+import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 
+import java.util.ArrayList;
+
 import georgia.languagelandscape.MapActivity;
+import georgia.languagelandscape.data.Markers;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -44,20 +49,38 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         longitude = getArguments().getDouble(MapActivity.GEO_LONGITUDE);
         latitude = getArguments().getDouble(MapActivity.GEO_LATITUDE);
 
-        // create marker
-        MarkerOptions marker = new MarkerOptions().position(
-                new LatLng(latitude, longitude)).title("Hello Maps");
 
-        // Changing marker icon
-        marker.icon(BitmapDescriptorFactory
-                .defaultMarker(BitmapDescriptorFactory.HUE_ROSE));
 
         // adding marker
-        googleMap.addMarker(marker);
+
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(new LatLng(latitude, longitude)).zoom(5).build();
         googleMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition));
+
+
+        Markers.AddLongitude(45.657975);
+        Markers.AddLatitude(45.657975);
+
+        Markers.AddLongitude(-0.1324591);
+        Markers.AddLatitude(51.523229);
+
+
+        ArrayList<Double> longitudes= Markers.getLongitudes();
+        ArrayList<Double> latitudes= Markers.getLatitudes();
+
+        String string=longitudes.toString();
+        Log.d("cf",string);
+
+
+        for(int i=0;i<longitudes.size();i++)
+        {
+            LatLng loc = new LatLng(latitudes.get(i), longitudes.get(i));
+            googleMap.addMarker(new MarkerOptions()
+                    .position(loc)
+                    .title("yay"));
+            Log.d("d","1");
+        }
     }
 }
 
