@@ -22,6 +22,7 @@ public class RecordingDataSource {
     private Context context;
     private SQLiteDatabase database = null;
     private SQLiteOpenHelper dbHelper = null;
+    public static final String LOG_TAG = "RecordingDatasource";
 
     public RecordingDataSource(Context context) {
         this.context = context;
@@ -46,7 +47,7 @@ public class RecordingDataSource {
         return DatabaseUtils.queryNumEntries(database, RecordingTableContract.TABLE_NAME);
     }
 
-    public List<Recording> getAllReordings() {
+    public List<Recording> getAllRecordings() {
         List<Recording> recordings = new ArrayList<>();
         Cursor cursor = database.query(
                 RecordingTableContract.TABLE_NAME,

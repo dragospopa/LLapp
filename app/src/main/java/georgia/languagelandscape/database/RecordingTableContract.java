@@ -4,7 +4,7 @@ import android.provider.BaseColumns;
 
 public final class RecordingTableContract implements BaseColumns {
     public static final String TABLE_NAME = "MyRecordings";
-    public static final String COLUMN_ID = "recording id";
+    public static final String COLUMN_ID = "id";
     public static final String COLUMN_TITLE = "title";
     public static final String COLUMN_DURATION = "duration";
     public static final String COLUMN_DESCRIPTION = "description";

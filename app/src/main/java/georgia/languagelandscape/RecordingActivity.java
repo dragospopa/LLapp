@@ -41,6 +41,7 @@ import java.util.Locale;
 import georgia.languagelandscape.data.Markers;
 import georgia.languagelandscape.data.Recording;
 import georgia.languagelandscape.data.User;
+import georgia.languagelandscape.database.RecordingDataSource;
 
 public class RecordingActivity extends BaseActivity {
 
@@ -196,10 +197,12 @@ public class RecordingActivity extends BaseActivity {
                     String durationStr = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
                     long duration = Long.parseLong(durationStr);
                     recording = new Recording();
+                    recording.setRecordingID();
                     recording.setDuration(duration);
                     recording.setTitle(recordingTitle);
                     recording.setDate(recordingDate.getText().toString());
-                    recording.setDescription(recordingDescription);
+                    recording.setDescription("nmb");
+//                    recording.setDescription(recordingDescription);
                     recording.setLanguage(recordingLanguages);
                     recording.setSpeakers(recordingSpeaker);
                     recording.setLatitude(latitude);
@@ -210,6 +213,13 @@ public class RecordingActivity extends BaseActivity {
                     Markers.addLatitude(latitude);
                     Markers.addLongitude(longitude);
                     Markers.addTitle(title);
+
+                    // TODO: set the uploader in the future
+                    RecordingDataSource dataSource = new RecordingDataSource(RecordingActivity.this);
+                    dataSource.open();
+                    dataSource.insertRecording(recording);
+                    dataSource.close();
+
                     ArrayList<Double> dumb= Markers.getLatitudes();
                     ArrayList<Double> dumb1= Markers.getLongitudes();
 
@@ -217,9 +227,6 @@ public class RecordingActivity extends BaseActivity {
                         Log.d("cf",Double.toString(i));
                     for(double i:dumb1)
                         Log.d("cf",Double.toString(i));
-
-                    // TODO: set the uploader in the future
-                    // TODO: take to the list of recordings the user has
                     Intent intent = new Intent(RecordingActivity.this, MyRecordingsActivity.class);
                     startActivity(intent);
 
