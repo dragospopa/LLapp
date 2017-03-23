@@ -2,6 +2,8 @@ package georgia.languagelandscape.fragments;
 
 //import android.app.Fragment;
 
+import android.app.Dialog;
+import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 
@@ -9,7 +11,6 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
-import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -17,7 +18,10 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 import java.util.ArrayList;
 
+import georgia.languagelandscape.DialogActivity;
+import georgia.languagelandscape.ForgotPassActivity;
 import georgia.languagelandscape.MapActivity;
+import georgia.languagelandscape.SignUpActivity;
 import georgia.languagelandscape.data.Markers;
 
 /**
@@ -28,7 +32,7 @@ import georgia.languagelandscape.data.Markers;
  * Use the {@link MapFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class MapFragment extends SupportMapFragment implements OnMapReadyCallback {
+public class MapFragment extends SupportMapFragment implements OnMapReadyCallback{
 
     private GoogleMap mGoogleMap;
     private double longitude = 0.0;
@@ -51,7 +55,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
 
 
 
-        // adding marker
+
 
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(new LatLng(latitude, longitude)).zoom(5).build();
@@ -59,15 +63,16 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                 .newCameraPosition(cameraPosition));
 
 
-        Markers.AddLongitude(45.657975);
-        Markers.AddLatitude(45.657975);
+        Markers.addLongitude(45.657975);
+        Markers.addLatitude(45.657975);
 
-        Markers.AddLongitude(-0.1324591);
-        Markers.AddLatitude(51.523229);
+        Markers.addLongitude(-0.1324591);
+        Markers.addLatitude(51.523229);
 
 
         ArrayList<Double> longitudes= Markers.getLongitudes();
         ArrayList<Double> latitudes= Markers.getLatitudes();
+        ArrayList<String> titles=Markers.getTitles();
 
         String string=longitudes.toString();
         Log.d("cf",string);
@@ -79,8 +84,25 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
             googleMap.addMarker(new MarkerOptions()
                     .position(loc)
                     .title("yay"));
+
+            googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+
+
+                                                   @Override
+                                                   public boolean onMarkerClick(Marker marker) {
+                                                       Intent intent = new Intent(getActivity(), DialogActivity.class);
+                                                       // intent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.FRAG_MAP);
+                                                       startActivity(intent);
+                                                       Log.d("cf","merge");
+                                                       return true;
+                                                   }
+                                               });
+
             Log.d("d","1");
         }
+
+
     }
+
 }
 

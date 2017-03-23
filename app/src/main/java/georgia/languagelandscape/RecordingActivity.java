@@ -207,8 +207,9 @@ public class RecordingActivity extends BaseActivity {
                     recording.setLocation(location);
                     recording.setUploader(new User("franktest@gmail.com", "passwd", "frankie"));
                     Log.i(LOG_TAG, recording.toString());
-                    Markers.AddLatitude(latitude);
-                    Markers.AddLongitude(longitude);
+                    Markers.addLatitude(latitude);
+                    Markers.addLongitude(longitude);
+                    Markers.addTitle(title);
                     ArrayList<Double> dumb= Markers.getLatitudes();
                     ArrayList<Double> dumb1= Markers.getLongitudes();
 

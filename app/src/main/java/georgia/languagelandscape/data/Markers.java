@@ -10,16 +10,18 @@ import java.util.ArrayList;
 
 public class Markers {
 
+
     public static ArrayList<Double> longitudes=new ArrayList<>();
     public static ArrayList<Double> latitudes=new ArrayList<>();
+    public static ArrayList<String> titles=new ArrayList<>();
     public static ArrayList<Pair<Double, Double>> latLong= new ArrayList<>();
 
-    public static void AddLatitude(double latitude)
+    public static void addLatitude(double latitude)
     {
         latitudes.add(latitude);
     }
 
-    public static void AddLongitude(double longitude)
+    public static void addLongitude(double longitude)
     {
         longitudes.add(longitude);
 
@@ -33,6 +35,16 @@ public class Markers {
     public static ArrayList<Double> getLatitudes()
     {
         return latitudes;
+    }
+
+    public static void addTitle(java.lang.String title)
+    {
+        titles.add(title);
+    }
+
+    public static ArrayList<String> getTitles()
+    {
+        return titles;
     }
 
 }
