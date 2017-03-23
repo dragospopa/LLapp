@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_record"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:focusableInTouchMode="true"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".RecordingActivity"
+    tools:showIn="@layout/activity_record_nav_drawer">
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/player"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom|end"
+        app:srcCompat="@android:drawable/btn_star"
+        android:layout_marginRight="55dp"
+        android:layout_marginEnd="55dp"
+        android:layout_alignTop="@+id/recorder"
+        android:layout_toLeftOf="@+id/recorder"
+        android:layout_toStartOf="@+id/recorder" />
+
+    <TextView
+        android:text="         "
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/recording_date"
+        android:layout_marginBottom="22dp"
+        android:layout_above="@+id/player"
+        android:layout_alignLeft="@+id/recording_name"
+        android:layout_alignStart="@+id/recording_name" />
+
+    <TextView
+        android:text="@string/default_recording_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/recording_name"
+        android:layout_marginBottom="13dp"
+        android:layout_above="@+id/recording_date"
+        android:layout_alignLeft="@+id/timer"
+        android:layout_alignStart="@+id/timer" />
+
+    <TextView
+        android:text="@string/default_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/timer"
+        android:layout_marginRight="15dp"
+        android:layout_marginEnd="15dp"
+        android:layout_alignBottom="@+id/recording_name"
+        android:layout_alignRight="@+id/player"
+        android:layout_alignEnd="@+id/player"
+        android:layout_marginBottom="27dp" />
+
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/recorder"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom|end"
+        app:srcCompat="@android:drawable/btn_radio"
+        android:layout_marginTop="110dp"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true" />
+
+    <TextView
+        android:text=""
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/recording_date"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginRight="15dp"
+        android:layout_marginEnd="25dp"
+        android:id="@+id/recording_location" />
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/userDefined_name_textInput_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="180dp"
+        android:layout_alignLeft="@id/recording_name"
+        android:layout_alignStart="@id/recording_name">
+
+        <EditText
+            android:id="@+id/userDefined_name"
+            android:inputType="text|textAutoCorrect"
+            android:imeOptions="actionNext"
+            android:hint="@string/default_title"
+            android:ems="14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/userDefined_languages_textInput_layout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/userDefined_name_textInput_layout"
+        android:layout_marginTop="50dp"
+        android:layout_alignLeft="@id/recording_name"
+        android:layout_alignStart="@id/recording_name">
+
+        <EditText
+            android:id="@+id/userDefined_languages"
+            android:hint="@string/default_language"
+            android:inputType="text|textAutoCorrect"
+            android:imeOptions="actionNext"
+            android:ems="14"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="60dp" />
+    </android.support.design.widget.TextInputLayout>
+
+    <Button
+        android:id="@+id/button_done"
+        android:text="@string/Done"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@id/recorder"
+        android:layout_alignStart="@id/recorder"
+        android:layout_marginLeft="80dp"
+        android:layout_marginStart="80dp"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="110dp" />
+
+    <EditText
+        android:id="@+id/userDefined_speakers"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="@string/default_speakers"
+        android:inputType="text"
+        android:imeOptions="actionNext"
+        android:ems="14"
+        android:layout_below="@+id/userDefined_languages_textInput_layout"
+        android:layout_alignLeft="@+id/userDefined_languages_textInput_layout"
+        android:layout_alignStart="@+id/userDefined_languages_textInput_layout"
+        android:layout_marginTop="10dp"/>
+
+    <EditText
+        android:id="@+id/userDefined_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:inputType="textAutoComplete|textAutoCorrect|textMultiLine"
+        android:maxLines="3"
+        android:textSize="16sp"
+        android:ems="18"
+        android:hint="@string/default_description"
+        android:imeOptions="actionDone"
+        android:layout_below="@+id/userDefined_speakers"
+        android:layout_alignLeft="@+id/userDefined_languages_textInput_layout"
+        android:layout_alignStart="@+id/userDefined_languages_textInput_layout"
+        android:layout_marginTop="10dp" />
+
+</RelativeLayout>

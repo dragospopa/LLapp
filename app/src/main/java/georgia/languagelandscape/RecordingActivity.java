@@ -38,6 +38,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
+import georgia.languagelandscape.data.Markers;
 import georgia.languagelandscape.data.Recording;
 import georgia.languagelandscape.data.User;
 import georgia.languagelandscape.database.RecordingDataSource;
@@ -214,6 +215,15 @@ public class RecordingActivity extends BaseActivity {
                     dataSource.insertRecording(recording);
                     dataSource.close();
 
+                    Markers.AddLatitude(latitude);
+                    Markers.AddLongitude(longitude);
+                    ArrayList<Double> dumb= Markers.getLatitudes();
+                    ArrayList<Double> dumb1= Markers.getLongitudes();
+
+                    for(double i: dumb)
+                        Log.d("cf",Double.toString(i));
+                    for(double i:dumb1)
+                        Log.d("cf",Double.toString(i));
                     Intent intent = new Intent(RecordingActivity.this, MyRecordingsActivity.class);
                     startActivity(intent);
 
