@@ -129,7 +129,7 @@ public class ForgotPassActivity extends AppCompatActivity {
 
     public void sendMessage(JSONObject object){
         try{
-            String url = "http://d2ddaedd.ngrok.io";
+            String url = "http://7602f906.ngrok.io/";
             JsonObjectRequest req = new JsonObjectRequest(url, object,
                     new Response.Listener<JSONObject>() {
                         @Override

@@ -137,7 +137,7 @@ public class MainActivity extends AppCompatActivity {
 
     public void sendMessage(JSONObject object){
         try{
-            String url = "http://a50f184b.ngrok.io";
+            String url = "http://7602f906.ngrok.io/";
             JsonObjectRequest req = new JsonObjectRequest(url, object,
                     new Response.Listener<JSONObject>() {
                         @Override
