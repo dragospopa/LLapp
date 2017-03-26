@@ -1,4 +1,4 @@
-package georgia.languagelandscape;
+package georgia.languagelandscape.fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -7,8 +7,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
+import android.webkit.WebView;
+import android.webkit.WebViewClient;
 
-import georgia.languagelandscape.fragments.ProfileFragment;
+import georgia.languagelandscape.R;
 
 //import android.support.v4.app.Fragment;
 
@@ -21,7 +24,7 @@ import georgia.languagelandscape.fragments.ProfileFragment;
  * Use the {@link ProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class AboutFragment extends Fragment {
+public class HelpFragment extends Fragment {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -33,7 +36,7 @@ public class AboutFragment extends Fragment {
 
     private OnFragmentInteractionListener mListener;
 
-    public AboutFragment() {
+    public HelpFragment() {
         // Required empty public constructor
     }
 
@@ -46,8 +49,8 @@ public class AboutFragment extends Fragment {
      * @return A new instance of fragment ProfileFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static ProfileFragment newInstance(String param1, String param2) {
-        ProfileFragment fragment = new ProfileFragment();
+    public static HelpFragment newInstance(String param1, String param2) {
+        HelpFragment fragment = new HelpFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -58,17 +61,38 @@ public class AboutFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+
+
+
         if (getArguments() != null) {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
+
+
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false);
+        String frameVideo = "<html><body>Youtube video .. <br> <iframe width=\"320\" height=\"315\" src=\"https://www.youtube.com/embed/lY2H2ZP56K4\" frameborder=\"0\" allowfullscreen></iframe></body></html>";
+
+      View v = inflater.inflate(R.layout.fragment_help, container, false);
+        WebView display = (WebView) v.findViewById(R.id.webView);
+        display.setWebViewClient(new WebViewClient(){
+            @Override
+            public boolean shouldOverrideUrlLoading(WebView view, String url) {
+                return false;
+            }
+        });
+        WebSettings webSettings = display.getSettings();
+        webSettings.setJavaScriptEnabled(true);
+        display.loadData(frameVideo, "text/html", "utf-8");
+        return inflater.inflate(R.layout.fragment_help, container, false);
+
     }
 
     // TODO: Rename method, update argument and hook method into UI event
@@ -94,6 +118,8 @@ public class AboutFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
+
+
 
     /**
      * This interface must be implemented by activities that contain this
