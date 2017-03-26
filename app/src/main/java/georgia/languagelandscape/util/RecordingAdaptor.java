@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
@@ -40,11 +39,16 @@ public class RecordingAdaptor extends RecyclerView.Adapter<RecordingAdaptor.View
         holder.rlLocation.setText(recording.getLocation());
         holder.rlDate.setText(recording.getDate());
 
-        // TODO: set onclick listener for both more button and the whole view
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "clicked" + recording.getTitle(), Toast.LENGTH_SHORT).show();
+                recording.play();
+            }
+        });
+        holder.moreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
             }
         });
     }

@@ -13,11 +13,12 @@
     <string name="default_recording_name">New Recording</string>
     <string name="default_title">New Recording</string>
     <string name="default_language">Languages</string>
-    <string name="Done">Done</string>
+    <string name="Save">Save</string>
     <string name="default_description">Recording Description</string>
     <string name="default_speakers">Speakers</string>
     <string name="default_userName">User</string>
     <string name="edit">Edit</string>
     <string name="speaker">Speaker:</string>
     <string name="language">Languages</string>
+    <string name="empty_recordings">You don\'t have any recordings yet. \nGo and record one</string>
 </resources>

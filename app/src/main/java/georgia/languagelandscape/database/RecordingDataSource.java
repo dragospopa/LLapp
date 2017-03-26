@@ -73,6 +73,8 @@ public class RecordingDataSource {
                     cursor.getColumnIndex(RecordingTableContract.COLUMN_DATE)));
             recording.setDescription(cursor.getString(
                     cursor.getColumnIndex(RecordingTableContract.COLUMN_DESCRIPTION)));
+            recording.setFilePath(cursor.getString(
+                    cursor.getColumnIndex(RecordingTableContract.COLUMN_FILEPATH)));
 
             Type type = new TypeToken<ArrayList<String>>() {}.getType();
             String languageJsonString =

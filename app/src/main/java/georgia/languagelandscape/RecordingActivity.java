@@ -81,7 +81,7 @@ public class RecordingActivity extends BaseActivity {
     private EditText userDefinedLanguages = null;
     private EditText userDefinedDescription = null;
     private EditText userDefinedSpeakers = null;
-    private Button doneButton = null;
+    private Button saveButton = null;
     private TextInputLayout nameInputLayout = null;
     private TextInputLayout languageInputLayout = null;
 
@@ -126,8 +126,8 @@ public class RecordingActivity extends BaseActivity {
         location = updateLocation(longitude, latitude);
         recordingLocation.setText(location);
 
-        doneButton = (Button) findViewById(R.id.button_done);
-        doneButton.setOnClickListener(new View.OnClickListener() {
+        saveButton = (Button) findViewById(R.id.button_save);
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // if nothing has been recorded
@@ -209,6 +209,7 @@ public class RecordingActivity extends BaseActivity {
                     recording.setLongitude(longitude);
                     recording.setLocation(location);
                     recording.setUploader(new User("franktest@gmail.com", "passwd", "frankie"));
+                    recording.setFilePath(audioFileName);
                     // TODO: set the uploader in the future
                     RecordingDataSource dataSource = new RecordingDataSource(RecordingActivity.this);
                     dataSource.open();
@@ -360,13 +361,13 @@ public class RecordingActivity extends BaseActivity {
         player.release();
         player = null;
         canPlay = true;
-        doneButton.setClickable(true);
+        saveButton.setClickable(true);
         recordButton.setClickable(true);
     }
 
     private void startPlaying() {
         canPlay = false;
-        doneButton.setClickable(true);
+        saveButton.setClickable(true);
         recordButton.setClickable(false);
 
         player = new MediaPlayer();
@@ -411,7 +412,7 @@ public class RecordingActivity extends BaseActivity {
 
     private void stopRecording() {
         canRecord = true;
-        doneButton.setClickable(true);
+        saveButton.setClickable(true);
         playButton.setClickable(true);
 
         recorder.stop();
@@ -443,7 +444,7 @@ public class RecordingActivity extends BaseActivity {
         }
 
         canRecord = false;
-        doneButton.setClickable(false);
+        saveButton.setClickable(false);
         playButton.setClickable(false);
 
         recorder = new MediaRecorder();
