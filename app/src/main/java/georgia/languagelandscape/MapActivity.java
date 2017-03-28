@@ -17,6 +17,8 @@ import android.support.v4.content.ContextCompat;
 import android.view.View;
 import android.widget.Toast;
 
+import georgia.languagelandscape.fragments.AboutFragment;
+import georgia.languagelandscape.fragments.HelpFragment;
 import georgia.languagelandscape.fragments.MapFragment;
 import georgia.languagelandscape.fragments.MyProjectsFragment;
 import georgia.languagelandscape.fragments.NewProjectFragment;

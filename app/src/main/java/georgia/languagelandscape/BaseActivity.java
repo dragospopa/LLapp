@@ -16,6 +16,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import georgia.languagelandscape.fragments.AboutFragment;
+import georgia.languagelandscape.fragments.HelpFragment;
 import georgia.languagelandscape.fragments.MapFragment;
 import georgia.languagelandscape.fragments.MyProjectsFragment;
 import georgia.languagelandscape.fragments.NewProjectFragment;
@@ -156,13 +158,13 @@ public class BaseActivity extends AppCompatActivity
                 finish();
                 break;
             case R.id.nav_about:
-                myIntent = new Intent(BaseActivity.this, MainActivity.class);
+                myIntent = new Intent(BaseActivity.this, MapActivity.class);
                 myIntent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.FRAG_ABOUT);
                 startActivity(myIntent);
                 finish();
                 break;
             case R.id.nav_help:
-                myIntent = new Intent(BaseActivity.this, MainActivity.class);
+                myIntent = new Intent(BaseActivity.this, MapActivity.class);
                 myIntent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.FRAG_HELP);
                 startActivity(myIntent);
                 finish();
