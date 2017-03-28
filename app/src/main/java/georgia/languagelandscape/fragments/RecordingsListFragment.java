@@ -16,11 +16,15 @@ import georgia.languagelandscape.data.Recording;
 import georgia.languagelandscape.database.RecordingDataSource;
 import georgia.languagelandscape.util.RecordingAdaptor;
 
-public class RecordingsListFragment extends Fragment{
+public class RecordingsListFragment extends Fragment {
 
-    private List<Recording> recordings = null;
+    public static final String FRAG_TAG = "recordingListFragment";
     private Context context = null;
     RecordingDataSource dataSource;
+
+    public RecordingsListFragment() {
+
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -40,7 +44,7 @@ public class RecordingsListFragment extends Fragment{
         View view = inflater.inflate(layoutId, container, false);
 
         if (layoutId != R.layout.fragment_empty_recordings_list) {
-            RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.myrecording_list);
+            RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.myrecording_recycler);
             recyclerView.setAdapter(new RecordingAdaptor(context, recordingFromDB));
         }
 

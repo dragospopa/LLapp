@@ -31,6 +31,9 @@ public class Recording implements Parcelable{
     private String filePath = null;
 
     private boolean canPlay = true;
+    public static final String defaultAudioFormat = ".3gp";
+    public static final String defaultRecordingTitle = "New Recording";
+    public static final String PARCEL_KEY = "Recording";
 
     public Recording() {
         if (recordingID == null) {
@@ -39,18 +42,18 @@ public class Recording implements Parcelable{
     }
 
     public Recording(
-                     String ID,
-                     String title,
-                     long duration,
-                     String description,
-                     double latitude,
-                     double longitude,
-                     String location,
-                     ArrayList<String> language,
-                     String date,
-                     User uploader,
-                     ArrayList<String> speakers,
-                     String filePath) {
+            String ID,
+            String title,
+            long duration,
+            String description,
+            double latitude,
+            double longitude,
+            String location,
+            ArrayList<String> language,
+            String date,
+            User uploader,
+            ArrayList<String> speakers,
+            String filePath) {
 
         if (recordingID == null) {
             recordingID = UUID.randomUUID().toString();

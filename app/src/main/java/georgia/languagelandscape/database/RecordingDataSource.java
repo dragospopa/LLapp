@@ -47,6 +47,12 @@ public class RecordingDataSource {
         return DatabaseUtils.queryNumEntries(database, RecordingTableContract.TABLE_NAME);
     }
 
+    public boolean deleteRecording(String recordingID) {
+        String whereClause = RecordingTableContract.COLUMN_ID + "=?";
+        String[] whereArgs = new String[]{recordingID};
+        return database.delete(RecordingTableContract.TABLE_NAME, whereClause, whereArgs) > 0;
+    }
+
     public List<Recording> getAllRecordings() {
         List<Recording> recordings = new ArrayList<>();
         Cursor cursor = database.query(
