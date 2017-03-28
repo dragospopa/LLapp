@@ -54,11 +54,9 @@ public class RecordingActivity extends BaseActivity {
     private static boolean canPlay = true;
     private long recordingTime = 0L;
     private Recording recording = null;
-    private String defaultRecordingTitle = "New Recording";
     private String recordingTitle = null;
     private ArrayList<String> recordingLanguages = null;
     private String audioCacheFilePath = null;
-    private String defaultAudioFormat = ".3gp";
     private String audioInternalFilePath = null;
     private File audioInternalFileDir = null;
     private String recordingDescription = null;
@@ -81,7 +79,7 @@ public class RecordingActivity extends BaseActivity {
     private EditText userDefinedLanguages = null;
     private EditText userDefinedDescription = null;
     private EditText userDefinedSpeakers = null;
-    private Button doneButton = null;
+    private Button saveButton = null;
     private TextInputLayout nameInputLayout = null;
     private TextInputLayout languageInputLayout = null;
 
@@ -116,8 +114,11 @@ public class RecordingActivity extends BaseActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        int numDup = checkDuplication(defaultRecordingTitle);
-        recordingTitle = numDup == 0 ? defaultRecordingTitle : defaultRecordingTitle + " " + numDup;
+        int numDup = checkDuplication(Recording.defaultRecordingTitle);
+        recordingTitle = numDup == 0 ?
+                Recording.defaultRecordingTitle :
+                Recording.defaultRecordingTitle + " " + numDup;
+
         recordingName.setText(recordingTitle);
         nameInputLayout.setHint(recordingTitle);
 
@@ -126,8 +127,8 @@ public class RecordingActivity extends BaseActivity {
         location = updateLocation(longitude, latitude);
         recordingLocation.setText(location);
 
-        doneButton = (Button) findViewById(R.id.button_done);
-        doneButton.setOnClickListener(new View.OnClickListener() {
+        saveButton = (Button) findViewById(R.id.button_save);
+        saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // if nothing has been recorded
@@ -171,22 +172,23 @@ public class RecordingActivity extends BaseActivity {
                 recordingDescription = description.equals("") ? null : description;
 
                 String title = userDefinedName.getText().toString();
-                recordingTitle = title.equals("") ? defaultRecordingTitle : title;
+                recordingTitle = title.equals("") ? Recording.defaultRecordingTitle : title;
                 recordingName.setText(recordingTitle);
 
                 /* copy the file from cache to internal storage */
                 int numDup;
                 String recordingFileName;
-                if (recordingTitle.matches(defaultRecordingTitle + " [0-9]+$")) {
-                    numDup = checkDuplication(defaultRecordingTitle);
-                    recordingFileName =
-                            numDup == 0 ? defaultRecordingTitle : defaultRecordingTitle + " " + numDup;
+                if (recordingTitle.matches(Recording.defaultRecordingTitle + " [0-9]+$")) {
+                    numDup = checkDuplication(Recording.defaultRecordingTitle);
+                    recordingFileName = numDup == 0 ?
+                            Recording.defaultRecordingTitle :
+                            Recording.defaultRecordingTitle + " " + numDup;
                 } else {
                     numDup = checkDuplication(recordingTitle);
                     recordingFileName =
                             numDup == 0 ? recordingTitle : recordingTitle + " " + numDup;
                 }
-                File to = new File(audioInternalFileDir, recordingFileName + defaultAudioFormat);
+                File to = new File(audioInternalFileDir, recordingFileName + Recording.defaultAudioFormat);
                 audioFileName = to.getAbsolutePath();
                 boolean success = from.renameTo(to);
 
@@ -209,6 +211,7 @@ public class RecordingActivity extends BaseActivity {
                     recording.setLongitude(longitude);
                     recording.setLocation(location);
                     recording.setUploader(new User("franktest@gmail.com", "passwd", "frankie"));
+                    recording.setFilePath(audioFileName);
                     // TODO: set the uploader in the future
                     RecordingDataSource dataSource = new RecordingDataSource(RecordingActivity.this);
                     dataSource.open();
@@ -311,7 +314,7 @@ public class RecordingActivity extends BaseActivity {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        audioFileName = audioCacheFilePath + "/" + System.currentTimeMillis() + defaultAudioFormat;
+        audioFileName = audioCacheFilePath + "/" + System.currentTimeMillis() + Recording.defaultAudioFormat;
 
         recordButton = (FloatingActionButton) findViewById(R.id.recorder);
         recordButton.setOnClickListener(new View.OnClickListener() {
@@ -339,7 +342,7 @@ public class RecordingActivity extends BaseActivity {
         String[] recordings = audioInternalFileDir.list(new FilenameFilter() {
             @Override
             public boolean accept(File dir, String name) {
-                return name.endsWith(defaultAudioFormat)
+                return name.endsWith(Recording.defaultAudioFormat)
                         && name.startsWith(recordingTitle);
             }
         });
@@ -360,13 +363,13 @@ public class RecordingActivity extends BaseActivity {
         player.release();
         player = null;
         canPlay = true;
-        doneButton.setClickable(true);
+        saveButton.setClickable(true);
         recordButton.setClickable(true);
     }
 
     private void startPlaying() {
         canPlay = false;
-        doneButton.setClickable(true);
+        saveButton.setClickable(true);
         recordButton.setClickable(false);
 
         player = new MediaPlayer();
@@ -411,7 +414,7 @@ public class RecordingActivity extends BaseActivity {
 
     private void stopRecording() {
         canRecord = true;
-        doneButton.setClickable(true);
+        saveButton.setClickable(true);
         playButton.setClickable(true);
 
         recorder.stop();
@@ -443,7 +446,7 @@ public class RecordingActivity extends BaseActivity {
         }
 
         canRecord = false;
-        doneButton.setClickable(false);
+        saveButton.setClickable(false);
         playButton.setClickable(false);
 
         recorder = new MediaRecorder();

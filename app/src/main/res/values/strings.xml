@@ -13,11 +13,22 @@
     <string name="default_recording_name">New Recording</string>
     <string name="default_title">New Recording</string>
     <string name="default_language">Languages</string>
-    <string name="Done">Done</string>
+    <string name="Save">Save</string>
     <string name="default_description">Recording Description</string>
     <string name="default_speakers">Speakers</string>
     <string name="default_userName">User</string>
     <string name="edit">Edit</string>
     <string name="speaker">Speaker:</string>
-    <string name="language">Languages</string>
+    <string name="language">Languages:</string>
+    <string name="empty_recordings">You don\'t have any recordings yet. \nGo and record one</string>
+    <string name="interpunct">・</string>
+    <string name="example_description">Lucy tells the story of her life. She was born in Papua New Guinea where she lived with her parents and siblings until she went to the University of Papua New Guinea to get a degree in Journalism.</string>
+    <string name="example_location">At Nel\'min Nos</string>
+    <string name="option_upload">Upload</string>
+    <string name="option_rename">Rename</string>
+    <string name="option_delete">Delete</string>
+    <string name="dialog_rename_title">Rename Recording</string>
+    <string name="dialog_rename_positiveButton">RENAME</string>
+    <string name="dialog_rename_negativeButton">CANCEL</string>
+    <string name="dialog_rename_hint">New recording name</string>
 </resources>

@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    android:foreground="@drawable/dim"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/myrecodings_root">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"
@@ -25,22 +27,14 @@
         android:name="georgia.languagelandscape.fragments.MyRecordingsUpper"
         android:id="@+id/myrecodings_profile"
         tools:layout="@layout/fragment_myrecordings_upper"
-        android:layout_marginTop="45dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
+        android:layout_marginTop="45dp" />
 
     <fragment
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:id="@+id/myrecordings_list"
+        android:layout_marginTop="130dp"
         android:name="georgia.languagelandscape.fragments.RecordingsListFragment"
-        android:id="@+id/myrecodings_list"
-        tools:layout="@layout/fragment_recording_list"
-        android:layout_below="@id/myrecodings_profile"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginTop="130dp"/>
+        tools:layout="@layout/fragment_recording_list"/>
 
-</RelativeLayout>
+</FrameLayout>

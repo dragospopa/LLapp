@@ -15,11 +15,12 @@ public final class RecordingTableContract implements BaseColumns {
     public static final String COLUMN_DATE = "date";
     public static final String COLUMN_UPLOADER = "uploader";
     public static final String COLUMN_SPEAKER = "speaker";
+    public static final String COLUMN_FILEPATH = "filepath";
 
     public static final String[] ALL_COLUMNS =
             {COLUMN_ID, COLUMN_TITLE, COLUMN_DURATION, COLUMN_DESCRIPTION, COLUMN_LONGITUDE,
                     COLUMN_LATITUDE, COLUMN_LOCATION, COLUMN_LANGUAGE, COLUMN_DATE, COLUMN_UPLOADER,
-                    COLUMN_SPEAKER};
+                    COLUMN_SPEAKER, COLUMN_FILEPATH};
 
     public static final String SQL_CREATE_ENTRIES =
             "CREATE TABLE " + TABLE_NAME + " ("
@@ -33,7 +34,8 @@ public final class RecordingTableContract implements BaseColumns {
             + COLUMN_LANGUAGE + " TEXT," // the arraylist will be stored as a json string
             + COLUMN_DATE + " TEXT,"
             + COLUMN_UPLOADER + " TEXT,"
-            + COLUMN_SPEAKER + " TEXT" + ");"; // same goes for the arraylist of speakers
+            + COLUMN_SPEAKER + " TEXT,"  // same goes for the arraylist of speakers
+            + COLUMN_FILEPATH + " TEXT" + ");";
 
     public static final String SQL_DELETE_ENTRIES =
             "DROP TABLE IF EXISTS " + TABLE_NAME;

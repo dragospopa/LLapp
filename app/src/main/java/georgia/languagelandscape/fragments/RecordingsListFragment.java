@@ -16,11 +16,15 @@ import georgia.languagelandscape.data.Recording;
 import georgia.languagelandscape.database.RecordingDataSource;
 import georgia.languagelandscape.util.RecordingAdaptor;
 
-public class RecordingsListFragment extends Fragment{
+public class RecordingsListFragment extends Fragment {
 
-    private List<Recording> recordings = null;
+    public static final String FRAG_TAG = "recordingListFragment";
     private Context context = null;
     RecordingDataSource dataSource;
+
+    public RecordingsListFragment() {
+
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -31,13 +35,19 @@ public class RecordingsListFragment extends Fragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_recording_list, container, false);
         dataSource = new RecordingDataSource(context);
         dataSource.open();
         List<Recording> recordingFromDB = dataSource.getAllRecordings();
 
-        RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.myrecording_list);
-        recyclerView.setAdapter(new RecordingAdaptor(context, recordingFromDB));
+        int layoutId = recordingFromDB.size() == 0 ?
+                R.layout.fragment_empty_recordings_list : R.layout.fragment_recording_list;
+        View view = inflater.inflate(layoutId, container, false);
+
+        if (layoutId != R.layout.fragment_empty_recordings_list) {
+            RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.myrecording_recycler);
+            recyclerView.setAdapter(new RecordingAdaptor(context, recordingFromDB));
+        }
+
         return view;
     }
 

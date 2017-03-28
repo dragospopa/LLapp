@@ -1,12 +1,14 @@
 package georgia.languagelandscape.data;
 
 import android.content.ContentValues;
+import android.media.MediaPlayer;
 import android.os.Parcel;
 import android.os.Parcelable;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.UUID;
@@ -26,6 +28,12 @@ public class Recording implements Parcelable{
     private String date = null;
     private User uploader = null;
     private ArrayList<String> speakers = null;
+    private String filePath = null;
+
+    private boolean canPlay = true;
+    public static final String defaultAudioFormat = ".3gp";
+    public static final String defaultRecordingTitle = "New Recording";
+    public static final String PARCEL_KEY = "Recording";
 
     public Recording() {
         if (recordingID == null) {
@@ -34,17 +42,18 @@ public class Recording implements Parcelable{
     }
 
     public Recording(
-                     String ID,
-                     String title,
-                     long duration,
-                     String description,
-                     double latitude,
-                     double longitude,
-                     String location,
-                     ArrayList<String> language,
-                     String date,
-                     User uploader,
-                     ArrayList<String> speakers) {
+            String ID,
+            String title,
+            long duration,
+            String description,
+            double latitude,
+            double longitude,
+            String location,
+            ArrayList<String> language,
+            String date,
+            User uploader,
+            ArrayList<String> speakers,
+            String filePath) {
 
         if (recordingID == null) {
             recordingID = UUID.randomUUID().toString();
@@ -60,6 +69,7 @@ public class Recording implements Parcelable{
         this.date = date;
         this.uploader = uploader;
         this.speakers = speakers;
+        this.filePath = filePath;
     }
 
     public String getRecordingID() {
@@ -154,6 +164,14 @@ public class Recording implements Parcelable{
         this.speakers = speakers;
     }
 
+    public String getFilePath() {
+        return filePath;
+    }
+
+    public void setFilePath(String filePath) {
+        this.filePath = filePath;
+    }
+
     public ContentValues toValues() {
         ContentValues values = new ContentValues();
         Gson gson = new Gson();
@@ -166,6 +184,7 @@ public class Recording implements Parcelable{
         values.put(RecordingTableContract.COLUMN_LONGITUDE, longitude);
         values.put(RecordingTableContract.COLUMN_LOCATION, location);
         values.put(RecordingTableContract.COLUMN_DATE, date);
+        values.put(RecordingTableContract.COLUMN_FILEPATH, filePath);
 
         String languageString = gson.toJson(language);
         values.put(RecordingTableContract.COLUMN_LANGUAGE, languageString);
@@ -192,7 +211,8 @@ public class Recording implements Parcelable{
                 ", language=" + language +
                 ", date='" + date + '\'' +
                 ", uploader='" + uploader + '\'' +
-                ", speakers=" + speakers +
+                ", speakers=" + speakers + '\'' +
+                ", filePath=" + filePath +
                 '}';
     }
 
@@ -216,6 +236,7 @@ public class Recording implements Parcelable{
         dest.writeString(date);
         dest.writeString(gson.toJson(uploader));
         dest.writeStringList(speakers);
+        dest.writeString(filePath);
     }
 
 
@@ -234,6 +255,7 @@ public class Recording implements Parcelable{
         Type type = new TypeToken<User>() {}.getType();
         uploader = gson.fromJson(in.readString(), type);
         speakers = in.createStringArrayList();
+        filePath = in.readString();
     }
 
     public static final Creator<Recording> CREATOR = new Creator<Recording>() {
@@ -247,4 +269,24 @@ public class Recording implements Parcelable{
             return new Recording[size];
         }
     };
+
+    public void play(){
+        if (!canPlay) return;
+        MediaPlayer player = new MediaPlayer();
+        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp.release();
+                canPlay = true;
+            }
+        });
+        try {
+            player.setDataSource(filePath);
+            player.prepare();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        player.start();
+        canPlay = false;
+    }
 }
