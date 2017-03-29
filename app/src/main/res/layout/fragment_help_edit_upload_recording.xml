@@ -1,0 +1,98 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="georgia.languagelandscape.fragments.HelpFragment"
+    android:background="@android:color/background_light"
+    tools:background="@android:color/white">
+
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="Get the recording off your device onto a computer and save it. If you don’t want to upload the whole recording, you can edit it with programs such as Audacity."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView9"
+                android:layout_alignLeft="@+id/textView9"
+                android:layout_alignStart="@+id/textView9"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView10" />
+
+            <TextView
+                android:text="Your audio recording needs to be an MP3 or WAV file to play on Language Landscape. If your file is not one in of these formats, you need to convert it or it won’t play. You can do this in Audacity with an encoding plugin (details of how to install it here).There are also many online services such as Online Convert which will convert your file for free."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView10"
+                android:layout_alignLeft="@+id/textView10"
+                android:layout_alignStart="@+id/textView10"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView11" />
+
+            <TextView
+                android:text="Video recordings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView12"
+                android:layout_alignLeft="@+id/textView12"
+                android:layout_alignStart="@+id/textView12"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView13"
+                android:textStyle="normal|bold"
+                android:textColor="#000" />
+
+            <TextView
+                android:text="Get the video off your device onto a computer and save it.  If you don’t want to upload the whole recording, you can edit it with programs such as Windows Movie Maker or iMovie. The file needs to be saved in one of the following formats: .MOV .MPEG4 .AVI .WMV .MPEGPS .FLV 3GPP WebM"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView13"
+                android:layout_alignLeft="@+id/textView13"
+                android:layout_alignStart="@+id/textView13"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView14" />
+
+            <TextView
+                android:text="Save the video and upload it to YouTube. There is a tutorial on uploading videos to YouTube here. When you’ve added the video to YouTube, copy the URL. Now go to Add Recording and paste the URL into the URL field."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView14"
+                android:layout_alignLeft="@+id/textView14"
+                android:layout_alignStart="@+id/textView14"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/textView15" />
+
+            <TextView
+                android:text="When you’ve edited your recording and converted it to the right format, save it in a folder on your computer’s hard drive where you will remember it. Now go to Add Recording and choose your recording file by pressing the Choose file button in the File field."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView12"
+                android:layout_below="@+id/textView11"
+                android:layout_alignLeft="@+id/textView11"
+                android:layout_alignStart="@+id/textView11" />
+
+            <TextView
+                android:text="Audio recordings"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:id="@+id/textView9"
+                android:layout_marginLeft="14dp"
+                android:layout_marginStart="14dp"
+                android:textStyle="normal|bold"
+                android:textColor="#000"
+                android:layout_below="@+id/textView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

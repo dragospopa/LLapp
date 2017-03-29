@@ -3,35 +3,22 @@ package georgia.languagelandscape.fragments;
 import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
-import georgia.languagelandscape.BaseActivity;
-import georgia.languagelandscape.MainActivity;
-import georgia.languagelandscape.MapActivity;
 import georgia.languagelandscape.R;
 
-//import android.support.v4.app.Fragment;
-
-
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ProfileFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * Created by Dragos on 3/29/2017.
  */
-public class HelpFragment extends Fragment {
+
+public class HelpMakeRecordingFragment {
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -41,9 +28,9 @@ public class HelpFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    private OnFragmentInteractionListener mListener;
+    private HelpFragment.OnFragmentInteractionListener mListener;
 
-    public HelpFragment() {
+    public HelpMakeRecordingFragment() {
         // Required empty public constructor
     }
 
@@ -114,8 +101,8 @@ public class HelpFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        if (context instanceof OnFragmentInteractionListener) {
-            mListener = (OnFragmentInteractionListener) context;
+        if (context instanceof HelpFragment.OnFragmentInteractionListener) {
+            mListener = (HelpFragment.OnFragmentInteractionListener) context;
         } else {
             throw new RuntimeException(context.toString()
                     + " must implement OnFragmentInteractionListener");
@@ -144,4 +131,6 @@ public class HelpFragment extends Fragment {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
+
+
 }

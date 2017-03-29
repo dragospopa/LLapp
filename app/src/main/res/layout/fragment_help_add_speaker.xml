@@ -1,0 +1,184 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="georgia.languagelandscape.fragments.HelpFragment"
+    android:background="@android:color/background_light"
+    tools:background="@android:color/white">
+
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="You can add metadata about the speakers in your recordings by filling in the form which appears when you press the plus icon on the Speaker field in Add Recording. Some of this information won’t be displayed on the site to maintain the speaker’s privacy."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView9"
+                android:layout_alignLeft="@+id/textView9"
+                android:layout_alignStart="@+id/textView9"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView10" />
+
+            <TextView
+                android:text="Full name – The speaker’s full name. This won’t appear on the site."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView10"
+                android:layout_alignLeft="@+id/textView10"
+                android:layout_alignStart="@+id/textView10"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView11" />
+
+            <TextView
+                android:text="Is alive – Choose Yes if the speaker is still alive or No if they have died."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView16"
+                android:layout_alignLeft="@+id/textView16"
+                android:layout_alignStart="@+id/textView16"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView17" />
+
+            <TextView
+                android:text="Gender – The speaker’s gender."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView17"
+                android:layout_alignLeft="@+id/textView17"
+                android:layout_alignStart="@+id/textView17"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView18" />
+
+            <TextView
+                android:text="Nick name – A nickname or anonymised name that will appear on the site."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView12"
+                android:layout_below="@+id/textView11"
+                android:layout_alignLeft="@+id/textView11"
+                android:layout_alignStart="@+id/textView11" />
+
+            <TextView
+                android:text="Native languages – The language(s) the speaker learned to speak when they were young."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView18"
+                android:layout_alignLeft="@+id/textView18"
+                android:layout_alignStart="@+id/textView18"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView21" />
+
+            <TextView
+                android:text="Other languages – Any other languages the speaker knows how to speak."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView21"
+                android:layout_alignLeft="@+id/textView21"
+                android:layout_alignStart="@+id/textView21"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView22" />
+
+
+            <TextView
+                android:text="Parents languages – All the languages the speaker’s parents can speak."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView22"
+                android:layout_alignLeft="@+id/textView22"
+                android:layout_alignStart="@+id/textView22"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView23" />
+
+            <TextView
+                android:text="Cultural background – The speaker’s nationality and/or ethnicity."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView23"
+                android:layout_alignLeft="@+id/textView23"
+                android:layout_alignStart="@+id/textView23"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView24" />
+
+            <TextView
+                android:text="Education – The highest level of educational attainment that the speaker has achieved."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView24"
+                android:layout_alignLeft="@+id/textView24"
+                android:layout_alignStart="@+id/textView24"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView25" />
+
+            <TextView
+                android:text="Occupation – The speaker’s job."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView25"
+                android:layout_alignLeft="@+id/textView25"
+                android:layout_alignStart="@+id/textView25"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView26" />
+
+            <TextView
+                android:text="Contact details – An email address, telephone number or address for the speaker. This won’t appear on the site."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView13"
+                android:layout_below="@+id/textView12"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:text="Residence – The place where the speaker lives."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView14"
+                android:layout_below="@+id/textView13"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:text="Date of birth – The date the speaker was born."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView15"
+                android:layout_below="@+id/textView14"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:text="Other information – Any other information about the speaker, for example a description."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView26"
+                android:layout_alignLeft="@+id/textView26"
+                android:layout_alignStart="@+id/textView26"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/textView27" />
+
+            <TextView
+                android:text="Place of birth – The place where the speaker was born."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView16"
+                android:layout_marginTop="18dp"
+                android:layout_below="@+id/textView15"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

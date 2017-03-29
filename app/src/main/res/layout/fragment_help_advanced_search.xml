@@ -1,0 +1,184 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="georgia.languagelandscape.fragments.HelpFragment"
+    android:background="@android:color/background_light"
+    tools:background="@android:color/white">
+
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="You can search the recordings on Language Landscape using a single search term by entering it into the search field above. If you want to search using several search terms at once, or search for something more specific, go to Advanced Search. Here you can search by many aspects of the metadata which other people have added to their recordings. In most cases it’s possible to search for more than one instance of each type of metadata, for example you can search for more than one language by selecting and adding them one by one."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView9"
+                android:layout_alignLeft="@+id/textView9"
+                android:layout_alignStart="@+id/textView9"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView10" />
+
+            <TextView
+                android:text="Languages – start typing the language you want to search for. "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView10"
+                android:layout_alignLeft="@+id/textView10"
+                android:layout_alignStart="@+id/textView10"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView11" />
+
+            <TextView
+                android:text="Locality – the locality (city, town or region) where the recording was made."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView16"
+                android:layout_alignLeft="@+id/textView16"
+                android:layout_alignStart="@+id/textView16"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView17" />
+
+            <TextView
+                android:text="Gender – the gender of (at least one of) the speaker(s) in the recording."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView17"
+                android:layout_alignLeft="@+id/textView17"
+                android:layout_alignStart="@+id/textView17"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView18" />
+
+            <TextView
+                android:text="Genres -  the style of language used in the recording."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView12"
+                android:layout_below="@+id/textView11"
+                android:layout_alignLeft="@+id/textView11"
+                android:layout_alignStart="@+id/textView11" />
+
+            <TextView
+                android:text="Keyword – words associated with the recording."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView18"
+                android:layout_alignLeft="@+id/textView18"
+                android:layout_alignStart="@+id/textView18"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView21" />
+
+            <TextView
+                android:text="Younger than – type in an age (e.g. 40) to see recordings of people younger than that age."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView21"
+                android:layout_alignLeft="@+id/textView21"
+                android:layout_alignStart="@+id/textView21"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView22" />
+
+
+            <TextView
+                android:text="Older than - type in an age to see recordings of people older than that age."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView22"
+                android:layout_alignLeft="@+id/textView22"
+                android:layout_alignStart="@+id/textView22"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView23" />
+
+            <TextView
+                android:text="After – choose a date to see recordings made after that date."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView23"
+                android:layout_alignLeft="@+id/textView23"
+                android:layout_alignStart="@+id/textView23"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView24" />
+
+            <TextView
+                android:text="Before - choose a date to see recordings made before that date."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView24"
+                android:layout_alignLeft="@+id/textView24"
+                android:layout_alignStart="@+id/textView24"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView25" />
+
+            <TextView
+                android:text="Match all – tick this box to see only recordings that match all your search terms. Untick it to see recordings that match any of your search terms."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView25"
+                android:layout_alignLeft="@+id/textView25"
+                android:layout_alignStart="@+id/textView25"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView26" />
+
+            <TextView
+                android:text="Speakers – the people talking in the recording."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView13"
+                android:layout_below="@+id/textView12"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:text="Topics - the theme or subject matter of the recording."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView14"
+                android:layout_below="@+id/textView13"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:text="Projects – the projects that the recording has been tagged in."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView15"
+                android:layout_below="@+id/textView14"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:text="Country – the country where the recording was made."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView16"
+                android:layout_below="@+id/textView15"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:text="Press Search to see the results of your search on the map. You can see which recordings match which of your terms by clicking on one of the terms. The recordings which match that term be marked in red. The other recordings will be marked in grey. You can also see a list of the recordings matching your search terms by clicking on the Recordings tab."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView26"
+                android:layout_alignLeft="@+id/textView26"
+                android:layout_alignStart="@+id/textView26"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/textView27" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

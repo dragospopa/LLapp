@@ -1,0 +1,186 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="georgia.languagelandscape.fragments.HelpFragment"
+    android:background="@android:color/background_light"
+    tools:background="@android:color/white">
+
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="On this page each of the categories in Add Recording is explained to help you understand what kind of information to put there."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView9"
+                android:layout_alignLeft="@+id/textView9"
+                android:layout_alignStart="@+id/textView9"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView10" />
+
+            <TextView
+                android:text="Basic metadata"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView10"
+                android:layout_alignLeft="@+id/textView10"
+                android:layout_alignStart="@+id/textView10"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView11"
+                android:textStyle="normal|bold"
+                android:textColor="#000" />
+
+            <TextView
+                android:text="Place - the location where the recording was made. Once you’ve entered the placename, you can pick up the marker and move it around on the map to get the location just right. If you don’t know the exact place or you can’t find it on the map, choose somewhere nearby."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView16"
+                android:layout_alignLeft="@+id/textView16"
+                android:layout_alignStart="@+id/textView16"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView17" />
+
+            <TextView
+                android:text="Speakers - the people talking in your recording. You need to add them one by one. If they have already been added to website, you can search for them by typing in the first few letters of their name. If you want to add a new speaker, click the icon and a new window will open where you can add information about the speaker. For help with filling in this form, see the Add Speaker Help page."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView17"
+                android:layout_alignLeft="@+id/textView17"
+                android:layout_alignStart="@+id/textView17"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView18" />
+
+            <TextView
+                android:text="Title - a name for your recording. There are no rules here, be creative! Once you’ve saved your recording we’ll use the title to create the recording’s permanent URL, so make sure you’re happy with it."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView12"
+                android:layout_below="@+id/textView11"
+                android:layout_alignLeft="@+id/textView11"
+                android:layout_alignStart="@+id/textView11" />
+
+            <TextView
+                android:text="Languages - the languages or language varieties which are used in your recording. Start typing the language name and the system will search the database to see if the language is already on Language Landscape. If the language isn’t on the site already, you can add it here by pressing the icon. A new window will appear. For help with filling in this form, see the Add Language Help page."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView18"
+                android:layout_alignLeft="@+id/textView18"
+                android:layout_alignStart="@+id/textView18"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView21" />
+
+            <TextView
+                android:text="Topics - the theme or subject matter of the recording. The answer to the question: “What are they talking about?” Start typing the topic. You can choose from existing topics or add new ones by pressing theicon."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView21"
+                android:layout_alignLeft="@+id/textView21"
+                android:layout_alignStart="@+id/textView21"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView22" />
+
+
+            <TextView
+                android:text="Genres - the style of language used in the recording. Some common genres are conversation, monologue, story, song, poem, joke, riddle or tongue twister. Start typing the genre. You can choose from existing genres or add new ones by pressing the icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView22"
+                android:layout_alignLeft="@+id/textView22"
+                android:layout_alignStart="@+id/textView22"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView23" />
+
+            <TextView
+                android:text="Projects - you can group together your and other peoples’ recordings as a project. If you’ve already created the project you can add your recording to it here. If you want to know more about creating projects please see the Add Project Help page."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView23"
+                android:layout_alignLeft="@+id/textView23"
+                android:layout_alignStart="@+id/textView23"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView24" />
+
+            <TextView
+                android:text="Keywords - some words about your recording which will help people to find it when they use the Search bar. It’s a good idea to separate the words with a semi colon (;) for example cheese; nightmares; story."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView24"
+                android:layout_alignLeft="@+id/textView24"
+                android:layout_alignStart="@+id/textView24"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView25" />
+
+            <TextView
+                android:text="Description - an introduction to the recording. You could include information about the speakers, where the recording happened, what they’re talking about and why it’s an interesting or unusual recording. This will help other users to understand what your recording is about, especially if it’s in a language which not many people understand."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView25"
+                android:layout_alignLeft="@+id/textView25"
+                android:layout_alignStart="@+id/textView25"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView26" />
+
+            <TextView
+                android:text="Audio File - your MP3 or WAV file (for audio recordings). "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView13"
+                android:layout_below="@+id/textView12"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:text="YouTube URL - your YouTube URL (for video recordings)."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView14"
+                android:layout_below="@+id/textView13"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:text="Photo - a photo for your recording. This could also be the recording itself, for example if you have a photo or scan of some writing."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView15"
+                android:layout_below="@+id/textView14"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:text="Time - the time and date when the recording was made. If you don’t know this exactly, put an estimated time and date."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView16"
+                android:layout_below="@+id/textView15"
+                android:layout_marginTop="20dp"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+
+            <TextView
+                android:text="Other people can edit this recording - tick this box if you don’t mind other people editing the metadata for your recording. For example, you might have a recording in a language you don’t speak. A speaker of that language will be able to add a description, transcription or translation to make the recording more accessible to other people. Ticking this box also means other people can add your recording to their projects."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView26"
+                android:layout_alignLeft="@+id/textView26"
+                android:layout_alignStart="@+id/textView26"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/textView27" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
