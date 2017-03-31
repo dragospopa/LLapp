@@ -30,7 +30,7 @@ import georgia.languagelandscape.R;
  * Use the {@link ProfileFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HelpMakeRecordingFragment extends Fragment implements MyProjectsFragment.OnFragmentInteractionListener, View.OnClickListener {
+public class HelpAddSpeakerFragment extends Fragment implements MyProjectsFragment.OnFragmentInteractionListener, View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -45,7 +45,7 @@ public class HelpMakeRecordingFragment extends Fragment implements MyProjectsFra
 
     private OnFragmentInteractionListener mListener;
 
-    public HelpMakeRecordingFragment() {
+    public HelpAddSpeakerFragment() {
         // Required empty public constructor
     }
 
@@ -58,8 +58,8 @@ public class HelpMakeRecordingFragment extends Fragment implements MyProjectsFra
      * @return A new instance of fragment ProfileFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static HelpMakeRecordingFragment newInstance(String param1, String param2) {
-        HelpMakeRecordingFragment fragment = new HelpMakeRecordingFragment();
+    public static HelpAddSpeakerFragment newInstance(String param1, String param2) {
+        HelpAddSpeakerFragment fragment = new HelpAddSpeakerFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -117,7 +117,7 @@ public class HelpMakeRecordingFragment extends Fragment implements MyProjectsFra
     @Override
     public void onClick(View v) {
 
-      }
+    }
 
 
     /**

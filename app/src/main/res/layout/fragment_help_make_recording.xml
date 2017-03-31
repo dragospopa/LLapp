@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="georgia.languagelandscape.fragments.HelpFragment"
+    tools:context="georgia.languagelandscape.fragments.HelpMakeRecordingFragment"
     android:background="@android:color/background_light"
     tools:background="@android:color/white">
 
@@ -16,16 +16,6 @@
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <TextView
-                android:text="Language Landscape is a not-for-profit organisation based in London, UK  which aims to raise awareness of language diversity."
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView9"
-                android:layout_alignLeft="@+id/textView9"
-                android:layout_alignStart="@+id/textView9"
-                android:layout_marginTop="20dp"
-                android:id="@+id/textView10" />
 
             <TextView
                 android:text="What you need:"
@@ -114,8 +104,7 @@
                 android:layout_alignLeft="@+id/textView23"
                 android:layout_alignStart="@+id/textView23"
                 android:layout_marginTop="20dp"
-                android:id="@+id/textView24"
-                android:textStyle="normal|bold" />
+                android:id="@+id/textView24" />
 
             <TextView
                 android:text="Step 4 – making the recording"
@@ -141,13 +130,25 @@
                 android:id="@+id/textView26" />
 
             <TextView
+                android:text="Language Landscape is a not-for-profit organisation based in London, UK  which aims to raise awareness of language diversity."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:id="@+id/textView10"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp" />
+
+            <TextView
                 android:text="2. A recording metadata sheet so you can note down the details about the recording."
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/textView13"
                 android:layout_below="@+id/textView12"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignLeft="@+id/textView12"
+                android:layout_alignStart="@+id/textView12" />
 
             <TextView
                 android:text="3. A speaker metadata sheet so you can note down the details about the person you’re recording (if it’s not you). "
@@ -155,8 +156,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/textView14"
                 android:layout_below="@+id/textView13"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignLeft="@+id/textView13"
+                android:layout_alignStart="@+id/textView13" />
 
             <TextView
                 android:text="4. A consent form so you can get the people’s consent for the recording to be put online (you could also do this by recording them giving consent)."
@@ -164,8 +165,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/textView15"
                 android:layout_below="@+id/textView14"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignLeft="@+id/textView14"
+                android:layout_alignStart="@+id/textView14" />
 
             <TextView
                 android:text="5. Someone to record (this can be yourself)."
@@ -173,8 +174,8 @@
                 android:layout_height="wrap_content"
                 android:id="@+id/textView16"
                 android:layout_below="@+id/textView15"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
+                android:layout_alignLeft="@+id/textView15"
+                android:layout_alignStart="@+id/textView15" />
 
 
         </RelativeLayout>

@@ -18,16 +18,6 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:text="On this page each of the categories in Add Recording is explained to help you understand what kind of information to put there."
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView9"
-                android:layout_alignLeft="@+id/textView9"
-                android:layout_alignStart="@+id/textView9"
-                android:layout_marginTop="20dp"
-                android:id="@+id/textView10" />
-
-            <TextView
                 android:text="Basic metadata"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -131,46 +121,6 @@
                 android:id="@+id/textView26" />
 
             <TextView
-                android:text="Audio File - your MP3 or WAV file (for audio recordings). "
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView13"
-                android:layout_below="@+id/textView12"
-                android:layout_marginTop="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <TextView
-                android:text="YouTube URL - your YouTube URL (for video recordings)."
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView14"
-                android:layout_below="@+id/textView13"
-                android:layout_marginTop="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <TextView
-                android:text="Photo - a photo for your recording. This could also be the recording itself, for example if you have a photo or scan of some writing."
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView15"
-                android:layout_below="@+id/textView14"
-                android:layout_marginTop="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <TextView
-                android:text="Time - the time and date when the recording was made. If you don’t know this exactly, put an estimated time and date."
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView16"
-                android:layout_below="@+id/textView15"
-                android:layout_marginTop="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <TextView
                 android:text="Other people can edit this recording - tick this box if you don’t mind other people editing the metadata for your recording. For example, you might have a recording in a language you don’t speak. A speaker of that language will be able to add a description, transcription or translation to make the recording more accessible to other people. Ticking this box also means other people can add your recording to their projects."
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -180,6 +130,58 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:id="@+id/textView27" />
+
+            <TextView
+                android:text="On this page each of the categories in Add Recording is explained to help you understand what kind of information to put there."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView10"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="15dp"
+                android:layout_marginStart="15dp" />
+
+            <TextView
+                android:text="Audio File - your MP3 or WAV file (for audio recordings). "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView13"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/textView12"
+                android:layout_alignLeft="@+id/textView12"
+                android:layout_alignStart="@+id/textView12" />
+
+            <TextView
+                android:text="YouTube URL - your YouTube URL (for video recordings)."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView14"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/textView13"
+                android:layout_alignRight="@+id/textView13"
+                android:layout_alignEnd="@+id/textView13" />
+
+            <TextView
+                android:text="Photo - a photo for your recording. This could also be the recording itself, for example if you have a photo or scan of some writing."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView15"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/textView14"
+                android:layout_alignLeft="@+id/textView13"
+                android:layout_alignStart="@+id/textView13" />
+
+            <TextView
+                android:text="Time - the time and date when the recording was made. If you don’t know this exactly, put an estimated time and date."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView16"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/textView15"
+                android:layout_alignLeft="@+id/textView15"
+                android:layout_alignStart="@+id/textView15" />
         </RelativeLayout>
     </ScrollView>
 

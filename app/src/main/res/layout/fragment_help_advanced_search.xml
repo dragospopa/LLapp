@@ -18,16 +18,6 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:text="You can search the recordings on Language Landscape using a single search term by entering it into the search field above. If you want to search using several search terms at once, or search for something more specific, go to Advanced Search. Here you can search by many aspects of the metadata which other people have added to their recordings. In most cases it’s possible to search for more than one instance of each type of metadata, for example you can search for more than one language by selecting and adding them one by one."
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_below="@+id/textView9"
-                android:layout_alignLeft="@+id/textView9"
-                android:layout_alignStart="@+id/textView9"
-                android:layout_marginTop="20dp"
-                android:id="@+id/textView10" />
-
-            <TextView
                 android:text="Languages – start typing the language you want to search for. "
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -129,46 +119,6 @@
                 android:id="@+id/textView26" />
 
             <TextView
-                android:text="Speakers – the people talking in the recording."
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView13"
-                android:layout_below="@+id/textView12"
-                android:layout_marginTop="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <TextView
-                android:text="Topics - the theme or subject matter of the recording."
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView14"
-                android:layout_below="@+id/textView13"
-                android:layout_marginTop="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <TextView
-                android:text="Projects – the projects that the recording has been tagged in."
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView15"
-                android:layout_below="@+id/textView14"
-                android:layout_marginTop="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <TextView
-                android:text="Country – the country where the recording was made."
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/textView16"
-                android:layout_below="@+id/textView15"
-                android:layout_marginTop="20dp"
-                android:layout_alignParentLeft="true"
-                android:layout_alignParentStart="true" />
-
-            <TextView
                 android:text="Press Search to see the results of your search on the map. You can see which recordings match which of your terms by clicking on one of the terms. The recordings which match that term be marked in red. The other recordings will be marked in grey. You can also see a list of the recordings matching your search terms by clicking on the Recordings tab."
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -178,6 +128,58 @@
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
                 android:id="@+id/textView27" />
+
+            <TextView
+                android:text="You can search the recordings on Language Landscape using a single search term by entering it into the search field above. If you want to search using several search terms at once, or search for something more specific, go to Advanced Search. Here you can search by many aspects of the metadata which other people have added to their recordings. In most cases it’s possible to search for more than one instance of each type of metadata, for example you can search for more than one language by selecting and adding them one by one."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView10"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp" />
+
+            <TextView
+                android:text="Speakers – the people talking in the recording."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView13"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/textView12"
+                android:layout_alignLeft="@+id/textView12"
+                android:layout_alignStart="@+id/textView12" />
+
+            <TextView
+                android:text="Topics - the theme or subject matter of the recording."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView14"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/textView13"
+                android:layout_alignLeft="@+id/textView13"
+                android:layout_alignStart="@+id/textView13" />
+
+            <TextView
+                android:text="Projects – the projects that the recording has been tagged in."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView15"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/textView14"
+                android:layout_alignLeft="@+id/textView14"
+                android:layout_alignStart="@+id/textView14" />
+
+            <TextView
+                android:text="Country – the country where the recording was made."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView16"
+                android:layout_marginTop="20dp"
+                android:layout_below="@+id/textView15"
+                android:layout_alignRight="@+id/textView14"
+                android:layout_alignEnd="@+id/textView14" />
         </RelativeLayout>
     </ScrollView>
 
