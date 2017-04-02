@@ -23,7 +23,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="17dp"
-                android:id="@+id/textView8"
+                android:id="@+id/textView"
                 android:textSize="30sp"
                 android:textStyle="normal|bold"
                 android:textColor="#000"
@@ -139,7 +139,7 @@
                 android:layout_marginStart="14dp"
                 android:textStyle="normal|bold"
                 android:textColor="#000"
-                android:layout_below="@+id/textView8"
+                android:layout_below="@+id/textView"
                 android:layout_alignParentLeft="true"
                 android:layout_alignParentStart="true" />
         </RelativeLayout>

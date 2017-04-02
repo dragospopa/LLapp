@@ -1,4 +1,0 @@
-RecordingActivity is integrated with navigation drawer;
-A BaseActivity is constructed to be extended by other activity that needs navigation drawer;
-NavigationDrawerAcitivity is renamed to MapActivity;
-Geolocation code is moved to Mapactivity and location is passed to RecordingActivity as Extras;
