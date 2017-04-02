@@ -1,0 +1,184 @@
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="georgia.languagelandscape.fragments.HelpMakeRecordingFragment"
+    android:background="@android:color/background_light"
+    tools:background="@android:color/white">
+
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="What you need:"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView10"
+                android:layout_alignLeft="@+id/textView10"
+                android:layout_alignStart="@+id/textView10"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView11"
+                android:textStyle="normal|bold"
+                android:textColor="#000" />
+
+            <TextView
+                android:text="Step 1 – test recording"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView16"
+                android:layout_alignLeft="@+id/textView16"
+                android:layout_alignStart="@+id/textView16"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView17"
+                android:textStyle="normal|bold"
+                android:textColor="#000" />
+
+            <TextView
+                android:text="Make a test recording of yourself. Find the best distance for recording by talking and moving the microphone around. If you’re making a video, get the person you record clearly in the centre of the frame and make sure that if they make a gesture it won’t be cut off by the edges of the frame. Make sure your fingers aren’t in the picture."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView17"
+                android:layout_alignLeft="@+id/textView17"
+                android:layout_alignStart="@+id/textView17"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView18" />
+
+            <TextView
+                android:text="1. A recorder – this can be: smartphone video camera still camera dictaphone audio recorder webcam/microphone on your computer"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView12"
+                android:layout_below="@+id/textView11"
+                android:layout_alignLeft="@+id/textView11"
+                android:layout_alignStart="@+id/textView11" />
+
+            <TextView
+                android:text="Step 2 – finding someone to record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView18"
+                android:layout_alignLeft="@+id/textView18"
+                android:layout_alignStart="@+id/textView18"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView21"
+                android:textStyle="normal|bold"
+                android:textColor="#000" />
+
+            <TextView
+                android:text="If you don’t want to add a recording of yourself, you can find someone else to record. You could record a friend or family member, or a member of the public. Find someone who looks friendly and isn’t in a hurry, explain what you’re doing, and allow them to get used to the idea of their recording being on the internet before asking for their consent. You can record their consent or get them to sign a consent form."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView21"
+                android:layout_alignLeft="@+id/textView21"
+                android:layout_alignStart="@+id/textView21"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView22" />
+
+
+            <TextView
+                android:text="Step 3 – deciding what to record"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView22"
+                android:layout_alignLeft="@+id/textView22"
+                android:layout_alignStart="@+id/textView22"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView23"
+                android:textStyle="normal|bold"
+                android:textColor="#000" />
+
+            <TextView
+                android:text="Think of something you can do in the time you’ve got available. Single recordings are quick and easy to do. If you want to start a project you might need to devote more time to it. If the person that you’re recording doesn’t know what to say, you could suggest something like a story, a song, a joke or a riddle."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView23"
+                android:layout_alignLeft="@+id/textView23"
+                android:layout_alignStart="@+id/textView23"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView24" />
+
+            <TextView
+                android:text="Step 4 – making the recording"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView24"
+                android:layout_alignLeft="@+id/textView24"
+                android:layout_alignStart="@+id/textView24"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView25"
+                android:textStyle="normal|bold"
+                android:textColor="#000" />
+
+            <TextView
+                android:text="Do a test and listen back to it. When you’re happy that everything is working, start recording. Let the person know that the recorder is on and listen or watch. While the recording is going, try to make sure that throughout the sound and picture are clear and even, and (if possible) that there aren’t any loud noises which will drown out the person’s voice. Once they’ve finished, stop recording and write down the details about the recording and the person. Respect their privacy if they don’t want to tell you something about themselves. Give them your contact details and our URL so they can see what you’ve done and get in touch if they want it to be removed in the future."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView25"
+                android:layout_alignLeft="@+id/textView25"
+                android:layout_alignStart="@+id/textView25"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:id="@+id/textView26" />
+
+            <TextView
+                android:text="Language Landscape is a not-for-profit organisation based in London, UK  which aims to raise awareness of language diversity."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="22dp"
+                android:id="@+id/textView10"
+                android:layout_alignParentTop="true"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginStart="16dp" />
+
+            <TextView
+                android:text="2. A recording metadata sheet so you can note down the details about the recording."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView13"
+                android:layout_below="@+id/textView12"
+                android:layout_alignLeft="@+id/textView12"
+                android:layout_alignStart="@+id/textView12" />
+
+            <TextView
+                android:text="3. A speaker metadata sheet so you can note down the details about the person you’re recording (if it’s not you). "
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView14"
+                android:layout_below="@+id/textView13"
+                android:layout_alignLeft="@+id/textView13"
+                android:layout_alignStart="@+id/textView13" />
+
+            <TextView
+                android:text="4. A consent form so you can get the people’s consent for the recording to be put online (you could also do this by recording them giving consent)."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView15"
+                android:layout_below="@+id/textView14"
+                android:layout_alignLeft="@+id/textView14"
+                android:layout_alignStart="@+id/textView14" />
+
+            <TextView
+                android:text="5. Someone to record (this can be yourself)."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/textView16"
+                android:layout_below="@+id/textView15"
+                android:layout_alignLeft="@+id/textView15"
+                android:layout_alignStart="@+id/textView15" />
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>
