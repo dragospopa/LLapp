@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/background_light"
+    android:padding="10dp" >
+
+    <TextView
+        android:id="@+id/more_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:text="Seagull song"
+        android:textColor="@color/cast_expanded_controller_background_color"
+        android:textSize="20sp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/more_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/more_dot"
+        android:layout_alignBottom="@+id/more_dot"
+        android:layout_marginLeft="1dp"
+        android:layout_marginStart="1dp"
+        android:layout_toEndOf="@+id/more_dot"
+        android:layout_toRightOf="@+id/more_dot"
+        android:text="15/07/2004" />
+
+    <TextView
+        android:id="@+id/more_duration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/more_language"
+        android:layout_marginTop="5dp"
+        android:text="02:38" />
+
+    <TextView
+        android:id="@+id/more_dot"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/more_duration"
+        android:layout_alignBottom="@+id/more_duration"
+        android:layout_marginLeft="1dp"
+        android:layout_marginStart="1dp"
+        android:layout_toEndOf="@+id/more_duration"
+        android:layout_toRightOf="@+id/more_duration"
+        android:text="@string/interpunct" />
+
+    <TextView
+        android:id="@+id/more_speaker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/more_title"
+        android:layout_marginLeft="7dp"
+        android:layout_marginStart="7dp"
+        android:layout_toEndOf="@+id/more_title"
+        android:layout_toRightOf="@+id/more_title"
+        android:text="By Olga Tajbarej" />
+
+    <TextView
+        android:id="@+id/more_language_heading"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignTop="@+id/more_language"
+        android:text="@string/recordingList_language" />
+
+    <TextView
+        android:id="@+id/more_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/more_title"
+        android:layout_marginLeft="5dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="5dp"
+        android:layout_toEndOf="@id/more_language_heading"
+        android:layout_toRightOf="@id/more_language_heading"
+        android:text="Tundra Nenets" />
+
+    <TextView
+        android:id="@+id/more_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/more_date"
+        android:layout_marginTop="10dp"
+        android:text="@string/example_description" />
+
+    <TextView
+        android:id="@+id/more_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/more_edit"
+        android:layout_alignBottom="@+id/more_edit"
+        android:layout_marginEnd="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_toLeftOf="@+id/more_edit"
+        android:layout_toStartOf="@+id/more_edit"
+        android:text="@string/example_location" />
+
+    <TextView
+        android:id="@+id/more_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/more_description"
+        android:layout_marginTop="3dp"
+        android:text="Edit" />
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/option_upload"
+        android:layout_below="@+id/more_location"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/option_icon_upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/places_ic_clear" />
+
+        <TextView
+            android:id="@+id/upload"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="1dp"
+            android:text="@string/option_upload"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/option_rename"
+        android:layout_below="@+id/option_upload"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/option_icon_rename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/places_ic_clear" />
+
+        <TextView
+            android:id="@+id/rename"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="1dp"
+            android:text="@string/option_rename"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/option_delete"
+        android:layout_below="@+id/option_rename"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="10dp">
+
+        <ImageView
+            android:id="@+id/option_icon_delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:srcCompat="@drawable/places_ic_clear" />
+
+        <TextView
+            android:id="@+id/delete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="1dp"
+            android:text="@string/option_delete"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

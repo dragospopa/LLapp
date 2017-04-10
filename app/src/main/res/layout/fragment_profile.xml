@@ -1,0 +1,59 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="georgia.languagelandscape.fragments.ProfileFragment"
+    android:background="@android:color/background_light"
+    tools:background="@android:color/white">
+
+    <TextView
+        android:text="Profile"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:textAlignment="center"
+        android:layout_marginTop="20px"
+        android:textSize="60px"
+        android:textStyle="bold"
+        android:id="@+id/textView5" />
+
+    <TextView
+        android:text="Username"
+        android:layout_width="match_parent"
+        android:layout_height="100px"
+        android:layout_marginTop="120px"
+        android:textSize="40px"
+        android:id="@+id/textView3" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="250px"
+        android:layout_marginLeft="420px"
+        android:id="@+id/button3" />
+
+    <TextView
+        android:text="Recordings uploaded"
+        android:layout_width="550px"
+        android:layout_height="100px"
+        android:layout_marginTop="260px"
+        android:textSize="40px"
+        android:id="@+id/textView4" />
+
+    <TextView
+        android:text="My projects"
+        android:layout_width="250px"
+        android:layout_height="100px"
+        android:layout_marginTop="400px"
+        android:textSize="40px"
+        android:id="@+id/textView6" />
+
+    <Button
+        android:text="Button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="380px"
+        android:layout_marginLeft="250px"
+        android:id="@+id/button4" />;
+
+</FrameLayout>

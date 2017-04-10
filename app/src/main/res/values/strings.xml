@@ -1,0 +1,56 @@
+<resources>
+    <string name="app_name">LanguageLandscape</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <string name="default_duration">00:00.00</string>
+    <string name="default_recording_name">New Recording</string>
+    <string name="default_title">New Recording</string>
+    <string name="default_language">Languages</string>
+    <string name="Save">Save</string>
+    <string name="default_description">Recording Description</string>
+    <string name="default_speakers">Speakers</string>
+    <string name="default_userName">User</string>
+    <string name="edit">Edit</string>
+    <string name="speaker">Speaker:</string>
+    <string name="recordingList_language">Languages:</string>
+    <string name="empty_recordings">You don\'t have any recordings yet. \nGo and record one</string>
+    <string name="interpunct">・</string>
+    <string name="example_description">Lucy tells the story of her life. She was born in Papua New Guinea where she lived with her parents and siblings until she went to the University of Papua New Guinea to get a degree in Journalism.</string>
+    <string name="example_location">At Nel\'min Nos</string>
+    <string name="option_upload">Upload</string>
+    <string name="option_rename">Rename</string>
+    <string name="option_delete">Delete</string>
+    <string name="dialog_rename_title">Rename Recording</string>
+    <string name="dialog_rename_positiveButton">RENAME</string>
+    <string name="dialog_rename_negativeButton">CANCEL</string>
+    <string name="dialog_rename_hint">New recording name</string>
+    <string name="language">Languages</string>
+    <string name="entry1">Make Recording Help ></string>
+    <string name="entry2">Edit and Upload Recording Help ></string>
+    <string name="entry3">Add Recording Help ></string>
+    <string name="entry4">Add Speaker Help ></string>
+    <string name="entry5">Add Language Help ></string>
+    <string name="entry6">Add Project Help ></string>
+    <string name="entry7">Advanced Search Help ></string>
+    <string name="entry8">Language Page Help ></string>
+    <string name="entry9">Registration and Password Reset Help ></string>
+
+    <string-array name="entries">
+        <item>@string/entry1</item>
+        <item>@string/entry2</item>
+        <item>@string/entry3</item>
+        <item>@string/entry4</item>
+        <item>@string/entry5</item>
+        <item>@string/entry6</item>
+        <item>@string/entry7</item>
+        <item>@string/entry8</item>
+        <item>@string/entry9</item>
+    </string-array>
+</resources>

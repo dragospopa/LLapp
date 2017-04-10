@@ -1,0 +1,147 @@
+
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="georgia.languagelandscape.fragments.AboutFragment"
+    android:background="@android:color/background_light"
+    tools:background="@android:color/white">
+
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:text="About"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="17dp"
+                android:id="@+id/textView"
+                android:textSize="30sp"
+                android:textStyle="normal|bold"
+                android:textColor="#000"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true" />
+
+            <TextView
+                android:text="Language Landscape is a not-for-profit organisation based in London, UK  which aims to raise awareness of language diversity."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView9"
+                android:layout_alignLeft="@+id/textView9"
+                android:layout_alignStart="@+id/textView9"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView10" />
+
+            <TextView
+                android:text="What do we do?"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView10"
+                android:layout_alignLeft="@+id/textView10"
+                android:layout_alignStart="@+id/textView10"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView11"
+                android:textStyle="normal|bold"
+                android:textColor="#000" />
+
+            <TextView
+                android:text="How does the website work?"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView12"
+                android:layout_alignLeft="@+id/textView12"
+                android:layout_alignStart="@+id/textView12"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView13"
+                android:textStyle="normal|bold"
+                android:textColor="#000" />
+
+            <TextView
+                android:text="The website enables everyone with an internet connection to add language recordings to a world map (this includes you!) By mapping your recordings where you made them, you will be helping to build a better picture of the current geographical spread of languages. Other users can then access your recordings by browsing or searching the map."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView13"
+                android:layout_alignLeft="@+id/textView13"
+                android:layout_alignStart="@+id/textView13"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView14" />
+
+            <TextView
+                android:text="What are the outreach programmes?"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView14"
+                android:layout_alignLeft="@+id/textView14"
+                android:layout_alignStart="@+id/textView14"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView15"
+                android:textStyle="normal|bold"
+                android:textColor="#000" />
+
+            <TextView
+                android:text="In order to encourage more people to get involved in the project, we have initiated outreach work with several communities and completed a pilot educational programme with a school in east London. The programme provided students with practical training in recording techniques and helped them to learn about issues such as multilingualism and language endangerment, using the website as a starting point for discussion and activities."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView15"
+                android:layout_alignLeft="@+id/textView15"
+                android:layout_alignStart="@+id/textView15"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView16" />
+
+            <TextView
+                android:text="Why are we doing this?"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView16"
+                android:layout_alignLeft="@+id/textView16"
+                android:layout_alignStart="@+id/textView16"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView17"
+                android:textStyle="normal|bold"
+                android:textColor="#000" />
+
+            <TextView
+                android:text="We want to help to increase awareness and understanding of language diversity. Every recording added to the map helps to improve understanding of where languages are really spoken around the world. With around half of the world’s 6000 languages threatened with extinction by the end of the 21st century, we hope that the website will also be a powerful tool for the promotion and development of minority and endangered languages."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/textView17"
+                android:layout_alignLeft="@+id/textView17"
+                android:layout_alignStart="@+id/textView17"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="24dp"
+                android:id="@+id/textView18" />
+
+            <TextView
+                android:text="We run this website and outreach programmes to bring together language communities online, to help people to better understand the languages spoken around them and to help to raise the profile of minority and endangered languages."
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:id="@+id/textView12"
+                android:layout_below="@+id/textView11"
+                android:layout_alignLeft="@+id/textView11"
+                android:layout_alignStart="@+id/textView11" />
+
+            <TextView
+                android:text="Who are we?"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="21dp"
+                android:id="@+id/textView9"
+                android:layout_marginLeft="14dp"
+                android:layout_marginStart="14dp"
+                android:textStyle="normal|bold"
+                android:textColor="#000"
+                android:layout_below="@+id/textView"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true" />
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>

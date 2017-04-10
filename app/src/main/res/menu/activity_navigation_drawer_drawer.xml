@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/nav_browse_the_map"
+            android:icon="@mipmap/ic_browse_the_map"
+            android:title="Browse the map" />
+        <item
+            android:id="@+id/nav_feed"
+            android:icon="@mipmap/ic_feed"
+            android:title="Feed" />
+        <item
+            android:id="@+id/nav_my_profile"
+            android:icon="@mipmap/ic_my_profile"
+            android:title="My profile" />
+        <item
+            android:id="@+id/nav_my_recordings"
+            android:icon="@mipmap/ic_my_projects"
+            android:title="My Recordings" />
+
+        <item
+            android:id="@+id/nav_new_project"
+            android:icon="@mipmap/ic_new_project"
+            android:title="Add a project" />
+
+        <item
+            android:id="@+id/nav_my_projects"
+            android:icon="@mipmap/ic_my_projects"
+            android:title="My projects" />
+        <item
+            android:id="@+id/nav_seetings"
+            android:icon="@mipmap/ic_settings"
+            android:title="Seetings" />
+        <item
+            android:id="@+id/nav_help"
+            android:icon="@mipmap/ic_settings"
+            android:title="Help" />
+        <item
+            android:id="@+id/nav_about"
+            android:icon="@mipmap/ic_my_projects"
+            android:title="About" />
+        <item
+            android:id="@+id/nav_log_out"
+            android:icon="@mipmap/ic_log_out"
+            android:title="Log out"/>
+
+    </group>
+
+</menu>
