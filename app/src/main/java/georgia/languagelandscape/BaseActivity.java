@@ -17,16 +17,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 
 import georgia.languagelandscape.fragments.AboutFragment;
-import georgia.languagelandscape.fragments.HelpAddLanguageFragment;
-import georgia.languagelandscape.fragments.HelpAddProjectFragment;
-import georgia.languagelandscape.fragments.HelpAddRecordingFragment;
-import georgia.languagelandscape.fragments.HelpAddSpeakerFragment;
-import georgia.languagelandscape.fragments.HelpAdvancedSearchFragment;
-import georgia.languagelandscape.fragments.HelpEditUploadRecordingFragment;
 import georgia.languagelandscape.fragments.HelpFragment;
-import georgia.languagelandscape.fragments.HelpLanguagePageFragment;
-import georgia.languagelandscape.fragments.HelpMakeRecordingFragment;
-import georgia.languagelandscape.fragments.HelpRegistrationPassFragment;
 import georgia.languagelandscape.fragments.MapFragment;
 import georgia.languagelandscape.fragments.MyProjectsFragment;
 import georgia.languagelandscape.fragments.NewProjectFragment;
@@ -38,16 +29,7 @@ public class BaseActivity extends AppCompatActivity
         MyProjectsFragment.OnFragmentInteractionListener ,
         NewProjectFragment.OnFragmentInteractionListener,
         AboutFragment.OnFragmentInteractionListener,
-        HelpFragment.OnFragmentInteractionListener,
-        HelpMakeRecordingFragment.OnFragmentInteractionListener,
-        HelpAddLanguageFragment.OnFragmentInteractionListener,
-        HelpAddProjectFragment.OnFragmentInteractionListener,
-        HelpAddRecordingFragment.OnFragmentInteractionListener,
-        HelpAddSpeakerFragment.OnFragmentInteractionListener,
-        HelpAdvancedSearchFragment.OnFragmentInteractionListener,
-        HelpEditUploadRecordingFragment.OnFragmentInteractionListener,
-        HelpLanguagePageFragment.OnFragmentInteractionListener,
-        HelpRegistrationPassFragment.OnFragmentInteractionListener{
+        HelpFragment.OnFragmentInteractionListener{
 
     private ActionBarDrawerToggle toggle = null;
     private DrawerLayout drawer = null;
