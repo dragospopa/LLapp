@@ -41,7 +41,7 @@
 
     <TextView
         android:id="@+id/recordingList_languages"
-        android:text="@string/recordingList_language"
+        android:text="@string/language"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/recordingList_speakers"
