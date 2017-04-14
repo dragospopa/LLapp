@@ -29,10 +29,6 @@
             android:icon="@mipmap/ic_my_projects"
             android:title="My projects" />
         <item
-            android:id="@+id/nav_seetings"
-            android:icon="@mipmap/ic_settings"
-            android:title="Seetings" />
-        <item
             android:id="@+id/nav_help"
             android:icon="@mipmap/ic_settings"
             android:title="Help" />

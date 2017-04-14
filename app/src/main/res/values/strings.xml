@@ -53,4 +53,5 @@
         <item>@string/entry8</item>
         <item>@string/entry9</item>
     </string-array>
+    <string name="title_activity_dialog">DialogActivity</string>
 </resources>

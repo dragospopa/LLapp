@@ -21,13 +21,14 @@
         android:layout_height="120px"
         android:layout_marginTop="180px"
         android:textSize="50px"
-        android:text="Full name" />
+        android:text="Full name"
+        android:layout_marginLeft="30dp"/>
 
     <EditText
         android:layout_width="500px"
         android:layout_height="120px"
         android:layout_marginTop="160px"
-        android:layout_marginLeft="280px"
+        android:layout_marginLeft="370px"
         android:text="Add full name"
         android:id="@+id/editText_new_project"/>
 
@@ -37,13 +38,14 @@
         android:layout_height="120px"
         android:layout_marginTop="300px"
         android:textSize="50px"
-        android:text="Short name"/>
+        android:text="Short name"
+        android:layout_marginLeft="30dp"/>
 
     <EditText
         android:layout_width="500px"
         android:layout_height="120px"
         android:layout_marginTop="280px"
-        android:layout_marginLeft="280px"
+        android:layout_marginLeft="370px"
         android:text="Add short name"/>
 
     <TextView
@@ -51,13 +53,14 @@
         android:layout_height="120px"
         android:layout_marginTop="410px"
         android:textSize="50px"
-        android:text="Desription"/>
+        android:text="Desription"
+        android:layout_marginLeft="30dp"/>
 
     <EditText
         android:layout_width="500px"
         android:layout_height="220px"
         android:layout_marginTop="400px"
-        android:layout_marginLeft="280px"
+        android:layout_marginLeft="370px"
         android:gravity="start"
         android:textAlignment="textStart"
         android:text="Add description"/>
@@ -67,13 +70,14 @@
         android:layout_height="120px"
         android:layout_marginTop="610px"
         android:textSize="50px"
-        android:text="Users"/>
+        android:text="Users"
+        android:layout_marginLeft="30dp"/>
 
     <EditText
         android:layout_width="500px"
         android:layout_height="120px"
         android:layout_marginTop="600px"
-        android:layout_marginLeft="280px"
+        android:layout_marginLeft="370px"
         android:gravity="start"
         android:textAlignment="textStart"
         android:text="Search for users"/>
@@ -83,13 +87,14 @@
         android:layout_height="120px"
         android:layout_marginTop="720px"
         android:textSize="50px"
-        android:text="Languages"/>
+        android:text="Languages"
+        android:layout_marginLeft="30dp"/>
 
     <EditText
         android:layout_width="500px"
         android:layout_height="120px"
         android:layout_marginTop="710px"
-        android:layout_marginLeft="280px"
+        android:layout_marginLeft="370px"
         android:gravity="start"
         android:textAlignment="textStart"
         android:text="Add languages"/>
@@ -98,7 +103,7 @@
         android:id="@+id/button_add_project"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="280px"
+        android:layout_marginLeft="370px"
         android:layout_marginTop="900px"
         android:clickable="true"
         android:text="Add project" />
