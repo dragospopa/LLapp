@@ -68,8 +68,8 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         longitudes=Markers.getLongitudes();
         ArrayList<Double> latitudes = new ArrayList<>();
         latitudes=Markers.getLongitudes();
-        ArrayList<String> titles= new ArrayList<>();
-        titles=Markers.getTitles();
+      //  ArrayList<String> titles= new ArrayList<>();
+     //   titles=Markers.getTitles();
 
         String string = longitudes.toString();
         Log.d("cf", string);
@@ -86,7 +86,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                     .position(loc)
                     .title("da"));
            // recording_title=marker.getTitle();
-            Log.d("cf", recording_title);
+           // Log.d("cf", recording_title);
             Log.d("d", "1");
         }
 
@@ -94,7 +94,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
             @Override
             public boolean onMarkerClick(Marker marker) {
                 Intent intent = new Intent(getActivity(), DialogActivity.class);
-                intent.putExtra("recording_title", recording_title);
+               // intent.putExtra("recording_title", recording_title);
                 startActivity(intent);
                 return true;
             }

@@ -30,7 +30,7 @@
         android:layout_marginTop="160px"
         android:layout_marginLeft="370px"
         android:text="Add full name"
-        android:id="@+id/editText_new_project"/>
+        android:id="@+id/editText_full_name"/>
 
 
     <TextView
@@ -46,7 +46,8 @@
         android:layout_height="120px"
         android:layout_marginTop="280px"
         android:layout_marginLeft="370px"
-        android:text="Add short name"/>
+        android:text="Add short name"
+        android:id="@+id/editText_short_name"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -63,7 +64,8 @@
         android:layout_marginLeft="370px"
         android:gravity="start"
         android:textAlignment="textStart"
-        android:text="Add description"/>
+        android:text="Add description"
+        android:id="@+id/editText_description"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -80,7 +82,8 @@
         android:layout_marginLeft="370px"
         android:gravity="start"
         android:textAlignment="textStart"
-        android:text="Search for users"/>
+        android:text="Search for users"
+        android:id="@+id/editText_users"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -97,7 +100,8 @@
         android:layout_marginLeft="370px"
         android:gravity="start"
         android:textAlignment="textStart"
-        android:text="Add languages"/>
+        android:text="Add languages"
+        android:id="@+id/editText_languages"/>
 
     <Button
         android:id="@+id/button_add_project"

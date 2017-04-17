@@ -4,6 +4,8 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,7 +25,7 @@ import georgia.languagelandscape.data.Projects;
  * Use the {@link NewProjectFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class NewProjectFragment extends Fragment {
+public class NewProjectFragment extends Fragment implements MyProjectsFragment.OnFragmentInteractionListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -35,9 +37,21 @@ public class NewProjectFragment extends Fragment {
 
     LinearLayout container;
 
-    EditText new_project;
-    String tv_project_name;
-    final Projects project=new Projects();
+    private FragmentManager fm = null;
+    private FragmentTransaction ft = null;
+
+    EditText full_name;
+    EditText short_name;
+    EditText description;
+    EditText users;
+    EditText languages;
+    String tv_project_full_name;
+    String tv_project_short_name;
+    String tv_project_description;
+    String tv_project_users;
+    String tv_project_languages;
+    String string;
+    final Projects projects=new Projects();
 
     private OnFragmentInteractionListener mListener;
 
@@ -72,8 +86,6 @@ public class NewProjectFragment extends Fragment {
             mParam1 = getArguments().getString(ARG_PARAM1);
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
-
-
     }
 
     Button addButton;
@@ -85,7 +97,11 @@ public class NewProjectFragment extends Fragment {
 
         View view = inflater.inflate(R.layout.fragment_new_project, container, false);
 
-        new_project=(EditText) view.findViewById(R.id.editText_new_project);
+        full_name=(EditText) view.findViewById(R.id.editText_full_name);
+        short_name=(EditText) view.findViewById(R.id.editText_short_name);
+        description=(EditText) view.findViewById(R.id.editText_description);
+        users=(EditText) view.findViewById(R.id.editText_users);
+        languages=(EditText) view.findViewById(R.id.editText_languages);
 
 
         addButton= (Button) view.findViewById(R.id.button_add_project);
@@ -93,7 +109,12 @@ public class NewProjectFragment extends Fragment {
         addButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                addItem(tv_project_name);
+                addItem(string);
+                MyProjectsFragment myProjectsFragment= new MyProjectsFragment();
+                fm = getFragmentManager();
+                ft = fm.beginTransaction();
+                ft.replace(R.id.content_replace, myProjectsFragment);
+                ft.commit();
             }
         });
 
@@ -124,6 +145,11 @@ public class NewProjectFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
+
     /**
      * This interface must be implemented by activities that contain this
      * fragment to allow an interaction in this fragment to be communicated
@@ -140,9 +166,13 @@ public class NewProjectFragment extends Fragment {
     }
 
     public void addItem(String name) {
-        tv_project_name= String.valueOf(new_project.getText());
-        project.addItem(tv_project_name);
-        System.out.println(tv_project_name);
+        tv_project_full_name= String.valueOf(full_name.getText());
+        tv_project_short_name= String.valueOf(short_name.getText());
+        tv_project_description= String.valueOf(description.getText());
+        tv_project_users= String.valueOf(users.getText());
+        tv_project_languages= String.valueOf(languages.getText());
+        string="Full name: " + tv_project_full_name +"\n" + "Short name: "+ tv_project_short_name+ "\n" + "Description: " + tv_project_description + "\n" + "Users: " + tv_project_users +  "\n" + "Languages: "+ tv_project_languages;
+        projects.addItem(string);
     }
 
 }
