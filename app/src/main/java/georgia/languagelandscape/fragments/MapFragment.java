@@ -14,9 +14,9 @@ import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
-import com.google.gson.internal.bind.ArrayTypeAdapter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import georgia.languagelandscape.DialogActivity;
 import georgia.languagelandscape.MapActivity;
@@ -37,7 +37,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     private double longitude = 0.0;
     private double latitude = 0.0;
 
-    String recording_title;
+    HashMap<String, String> markerMap = new HashMap<String, String>();
 
     @Override
     public void onResume() {
@@ -63,13 +63,9 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                 .newCameraPosition(cameraPosition));
 
 
-
-        ArrayList<Double> longitudes = new ArrayList<>();
-        longitudes=Markers.getLongitudes();
-        ArrayList<Double> latitudes = new ArrayList<>();
-        latitudes=Markers.getLongitudes();
-      //  ArrayList<String> titles= new ArrayList<>();
-     //   titles=Markers.getTitles();
+        final ArrayList<Double> longitudes =Markers.getLongitudes();
+        final ArrayList<Double> latitudes=Markers.getLongitudes();
+        final ArrayList<String> titles=Markers.getTitles();
 
         String string = longitudes.toString();
         Log.d("cf", string);
@@ -78,23 +74,27 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         for (int i = 0; i < longitudes.size(); i++) {
             LatLng loc = new LatLng(latitudes.get(i), longitudes.get(i));
             String title;
-           /* if(titles.get(i)!=null)
+            if(titles.get(i)!=null)
                 title=titles.get(i);
             else
-                title="da";*/
+                title="da";
             final Marker marker=googleMap.addMarker(new MarkerOptions()
                     .position(loc)
-                    .title("da"));
-           // recording_title=marker.getTitle();
-           // Log.d("cf", recording_title);
+                    .title(title));
+            Log.d("cfd", title);
+            String id;
+            id=marker.getId();
+            markerMap.put(id,title);
             Log.d("d", "1");
         }
 
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+                LatLng latlng=marker.getPosition();
+                String title=marker.getTitle();
+                Markers.setCurrent_Title(title);
                 Intent intent = new Intent(getActivity(), DialogActivity.class);
-               // intent.putExtra("recording_title", recording_title);
                 startActivity(intent);
                 return true;
             }

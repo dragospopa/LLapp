@@ -12,6 +12,8 @@ public class Markers {
     public static ArrayList<Double> latitudes=new ArrayList<>();
     public static ArrayList<String> titles=new ArrayList<>();
 
+    public static String current_title;
+
     public static void AddLatitude(double latitude)
     {
         latitudes.add(latitude);
@@ -41,6 +43,16 @@ public class Markers {
     public static ArrayList<String> getTitles()
     {
         return titles;
+    }
+
+    public static void setCurrent_Title(String title)
+    {
+        current_title=title;
+    }
+
+    public static String getCurrent_title()
+    {
+        return current_title;
     }
 
 }
