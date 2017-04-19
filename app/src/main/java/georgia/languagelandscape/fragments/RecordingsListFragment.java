@@ -38,6 +38,7 @@ public class RecordingsListFragment extends Fragment {
         dataSource = new RecordingDataSource(context);
         dataSource.open();
         List<Recording> recordingFromDB = dataSource.getAllRecordings();
+        dataSource.close();
 
         int layoutId = recordingFromDB.size() == 0 ?
                 R.layout.fragment_empty_recordings_list : R.layout.fragment_recording_list;

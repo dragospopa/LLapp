@@ -16,11 +16,13 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import georgia.languagelandscape.MyRecordingsActivity;
 import georgia.languagelandscape.R;
 import georgia.languagelandscape.data.Recording;
+import georgia.languagelandscape.fragments.DeleteDialogFragment;
 import georgia.languagelandscape.fragments.RenameDialogFragment;
 
-public class RecordingAdaptor extends RecyclerView.Adapter<RecordingAdaptor.ViewHolder>{
+public class RecordingAdaptor extends RecyclerView.Adapter<RecordingAdaptor.ViewHolder> {
 
     private Context context;
     private List<Recording> recordings;
@@ -31,7 +33,7 @@ public class RecordingAdaptor extends RecyclerView.Adapter<RecordingAdaptor.View
         this.recordings = recordings;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         public View itemView;
         public TextView rlTitle;
         public TextView rlLocation;
@@ -101,7 +103,9 @@ public class RecordingAdaptor extends RecyclerView.Adapter<RecordingAdaptor.View
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                if (MyRecordingsActivity.recordingPlaying) return;
                 recording.play();
+                MyRecordingsActivity.recordingPlaying = true;
             }
         });
         holder.moreButton.setOnClickListener(new View.OnClickListener() {
@@ -137,8 +141,20 @@ public class RecordingAdaptor extends RecyclerView.Adapter<RecordingAdaptor.View
                     public void onClick(View v) {
                         RenameDialogFragment dialog = RenameDialogFragment
                                 .newInstance(recording, holder.getAdapterPosition());
-                        dialog.show(((FragmentActivity)context).getSupportFragmentManager(),
+                        dialog.show(((FragmentActivity) context).getSupportFragmentManager(),
                                 "rename dialog");
+                        popupWindow.dismiss();
+                    }
+                });
+                popupViewHolder.deleteLayout.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        DeleteDialogFragment dialog = DeleteDialogFragment
+                                .newInstance(recording.getRecordingID(),
+                                        recording.getTitle(),
+                                        holder.getAdapterPosition());
+                        dialog.show(((FragmentActivity) context).getSupportFragmentManager(),
+                                "delete dialog");
                         popupWindow.dismiss();
                     }
                 });
@@ -154,5 +170,10 @@ public class RecordingAdaptor extends RecyclerView.Adapter<RecordingAdaptor.View
     @Override
     public int getItemCount() {
         return recordings.size();
+    }
+
+    public void removeRecording(int index) {
+        recordings.remove(index);
+        notifyItemRemoved(index);
     }
 }

@@ -12,12 +12,17 @@ import java.io.IOException;
 
 import georgia.languagelandscape.data.Recording;
 import georgia.languagelandscape.database.RecordingDataSource;
+import georgia.languagelandscape.fragments.DeleteDialogFragment;
 import georgia.languagelandscape.fragments.RenameDialogFragment;
+import georgia.languagelandscape.util.RecordingAdaptor;
 
 public class MyRecordingsActivity extends BaseActivity
-        implements RenameDialogFragment.RenameDialogListener{
+        implements RenameDialogFragment.RenameDialogListener,
+        DeleteDialogFragment.DeleteDialogListener{
 
+    public static boolean recordingPlaying = false;
     private FrameLayout rootLayout = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -28,7 +33,7 @@ public class MyRecordingsActivity extends BaseActivity
     }
 
     @Override
-    public void onPositiveClick(Recording recording, String toName, int adaptorPosition) {
+    public void onRenameClick(Recording recording, String toName, int adaptorPosition) {
         Log.i("dialog", "changing recording: " + recording.getTitle());
         Log.i("dialog", recording.getFilePath());
 
@@ -104,7 +109,29 @@ public class MyRecordingsActivity extends BaseActivity
         return recordings.length;
     }
 
-    public static void dim(float alpah) {
+    @Override
+    public void onDeleteClick(String id, String title, int index) {
 
+        String audioInternalFilePath = null;
+        File audioInternalFileDir = null;
+        try {
+            audioInternalFilePath = getFilesDir().getCanonicalPath() + "/recordings";
+            audioInternalFileDir = new File(audioInternalFilePath);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        File fileToDelete = new File(audioInternalFileDir, title + Recording.defaultAudioFormat);
+        boolean deleted = fileToDelete.delete();
+
+        if (deleted) {
+            RecordingDataSource dataSource = new RecordingDataSource(this);
+            dataSource.open();
+            dataSource.deleteRecording(id);
+            dataSource.close();
+
+            RecyclerView recyclerView = (RecyclerView) findViewById(R.id.myrecording_recycler);
+            RecordingAdaptor adapter = (RecordingAdaptor) recyclerView.getAdapter();
+            adapter.removeRecording(index);
+        }
     }
 }

@@ -13,6 +13,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.UUID;
 
+import georgia.languagelandscape.MyRecordingsActivity;
 import georgia.languagelandscape.database.RecordingTableContract;
 
 public class Recording implements Parcelable{
@@ -33,7 +34,9 @@ public class Recording implements Parcelable{
     private boolean canPlay = true;
     public static final String defaultAudioFormat = ".3gp";
     public static final String defaultRecordingTitle = "New Recording";
-    public static final String PARCEL_KEY = "Recording";
+    public static final String PARCEL_KEY = "parcel";
+    public static final String PARCEL_ID_KEY = "parcel id";
+    public static final String PARCEL_TITLE_KEY = "parcel title";
 
     public Recording() {
         if (recordingID == null) {
@@ -278,6 +281,7 @@ public class Recording implements Parcelable{
             public void onCompletion(MediaPlayer mp) {
                 mp.release();
                 canPlay = true;
+                MyRecordingsActivity.recordingPlaying = false;
             }
         });
         try {

@@ -9,6 +9,7 @@ import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.FrameLayout;
@@ -26,7 +27,7 @@ public class RenameDialogFragment extends DialogFragment {
     }
 
     public interface RenameDialogListener {
-        public void onPositiveClick(Recording recording, String toName, int adaptorPosition);
+        public void onRenameClick(Recording recording, String toName, int adaptorPosition);
     }
     @Override
     public void onAttach(Context context) {
@@ -39,7 +40,11 @@ public class RenameDialogFragment extends DialogFragment {
         super.onDismiss(dialog);
         InputMethodManager imm = (InputMethodManager)
                 context.getSystemService(Context.INPUT_METHOD_SERVICE);
-        imm.toggleSoftInput(InputMethodManager.HIDE_IMPLICIT_ONLY, 0);
+        View view = getActivity().getCurrentFocus();
+        if (view == null) {
+            view = new View(getActivity());
+        }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         FrameLayout root = (FrameLayout) getActivity().findViewById(R.id.myrecodings_root);
         root.getForeground().setAlpha(0);
     }
@@ -71,13 +76,14 @@ public class RenameDialogFragment extends DialogFragment {
                                 if (!isNameValid(toName)) {
                                     renameField.setError("Title is not valid");
                                 } else {
-                                    RenameDialogListener listener = (RenameDialogListener) getActivity();
-                                    listener.onPositiveClick(recording, toName, adaptorPosition);
+                                    RenameDialogListener listener =
+                                            (RenameDialogListener) getActivity();
+                                    listener.onRenameClick(recording, toName, adaptorPosition);
                                     dialog.dismiss();
                                 }
                             }
                         })
-                .setNegativeButton(R.string.dialog_rename_negativeButton,
+                .setNegativeButton(R.string.dialog_negativeButton,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

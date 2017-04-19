@@ -169,7 +169,8 @@ public class RecordingActivity extends BaseActivity {
                 }
 
                 String description = userDefinedDescription.getText().toString();
-                recordingDescription = description.equals("") ? null : description;
+                // TODO: what happens if description is null?
+                recordingDescription = description.equals("") ? "" : description;
 
                 String title = userDefinedName.getText().toString();
                 recordingTitle = title.equals("") ? Recording.defaultRecordingTitle : title;
@@ -203,16 +204,15 @@ public class RecordingActivity extends BaseActivity {
                     recording.setDuration(duration);
                     recording.setTitle(recordingTitle);
                     recording.setDate(recordingDate.getText().toString());
-                    recording.setDescription("nmb");
-//                    recording.setDescription(recordingDescription);
+                    recording.setDescription(recordingDescription);
                     recording.setLanguage(recordingLanguages);
                     recording.setSpeakers(recordingSpeaker);
                     recording.setLatitude(latitude);
                     recording.setLongitude(longitude);
                     recording.setLocation(location);
+                    // TODO: set the uploader in the future
                     recording.setUploader(new User("franktest@gmail.com", "passwd", "frankie"));
                     recording.setFilePath(audioFileName);
-                    // TODO: set the uploader in the future
                     RecordingDataSource dataSource = new RecordingDataSource(RecordingActivity.this);
                     dataSource.open();
                     dataSource.insertRecording(recording);

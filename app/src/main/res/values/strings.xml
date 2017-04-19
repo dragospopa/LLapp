@@ -29,7 +29,7 @@
     <string name="option_delete">Delete</string>
     <string name="dialog_rename_title">Rename Recording</string>
     <string name="dialog_rename_positiveButton">RENAME</string>
-    <string name="dialog_rename_negativeButton">CANCEL</string>
+    <string name="dialog_negativeButton">CANCEL</string>
     <string name="dialog_rename_hint">New recording name</string>
     <string name="language">Languages</string>
     <string name="entry1">Make Recording Help ></string>
@@ -54,4 +54,5 @@
         <item>@string/entry9</item>
     </string-array>
     <string name="title_activity_dialog">DialogActivity</string>
+    <string name="dialog_delete_positiveButton">DELETE</string>
 </resources>

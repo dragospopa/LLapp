@@ -86,19 +86,19 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                     .position(loc)
                     .title("da"));
            // recording_title=marker.getTitle();
-            Log.d("cf", recording_title);
-            Log.d("d", "1");
+//            Log.d("cf", recording_title);
+//            Log.d("d", "1");
         }
 
-        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
-            @Override
-            public boolean onMarkerClick(Marker marker) {
-                Intent intent = new Intent(getActivity(), DialogActivity.class);
-                intent.putExtra("recording_title", recording_title);
-                startActivity(intent);
-                return true;
-            }
-        });
+//        googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
+//            @Override
+//            public boolean onMarkerClick(Marker marker) {
+//                Intent intent = new Intent(getActivity(), DialogActivity.class);
+//                intent.putExtra("recording_title", recording_title);
+//                startActivity(intent);
+//                return true;
+//            }
+//        });
     }
 
     @Override
