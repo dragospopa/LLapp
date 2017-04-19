@@ -9,17 +9,17 @@
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="100px"
+        android:layout_height="200px"
         android:textAlignment="center"
-        android:text="My projects" />
-
+        android:text="My projects"
+        android:textColor="@color/red"
+        android:textSize="40dp"/>
 
 
     <ListView
         android:id="@+id/listview_projects"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-
+        android:layout_height="match_parent"
+        android:layout_marginTop="70dp"/>
 
 </FrameLayout>

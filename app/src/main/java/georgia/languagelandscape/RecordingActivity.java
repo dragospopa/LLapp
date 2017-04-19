@@ -216,22 +216,25 @@ public class RecordingActivity extends BaseActivity {
                     RecordingDataSource dataSource = new RecordingDataSource(RecordingActivity.this);
                     dataSource.open();
                     dataSource.insertRecording(recording);
+                    Log.d("n", String.valueOf(longitude));
+                    Log.d("n", String.valueOf(latitude));
+
                     dataSource.close();
-                    if(latitude!=0.0&&longitude!=0.0&&recordingTitle!=null)
-                    {
+
                         Markers.AddLatitude(latitude);
                         Markers.AddLongitude(longitude);
                         Markers.AddTitle(recordingTitle);
-                    }
-                    ArrayList<Double> dumb= Markers.getLatitudes();
-                    ArrayList<Double> dumb1= Markers.getLongitudes();
-                    ArrayList<String> dumb2= Markers.getTitles();
 
-                    for(double i: dumb)
+
+                    ArrayList<Double> du= Markers.getLatitudes();
+                    ArrayList<Double> du1= Markers.getLongitudes();
+                    ArrayList<String> du2= Markers.getTitles();
+
+                    for(double i: du)
                         Log.d("cf",Double.toString(i));
-                    for(double i:dumb1)
+                    for(double i:du1)
                         Log.d("cf",Double.toString(i));
-                    for(String i:dumb2)
+                    for(String i:du2)
                         Log.d("cf",i);
                     Intent intent = new Intent(RecordingActivity.this, MyRecordingsActivity.class);
                     startActivity(intent);
