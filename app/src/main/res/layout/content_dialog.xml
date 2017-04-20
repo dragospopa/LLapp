@@ -2,33 +2,169 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_width="330dp"
+    android:layout_height="200dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context="georgia.languagelandscape.DialogActivity"
     tools:showIn="@layout/activity_dialog_markers">
 
+    <!--TODO: create better theme when polishing the UI-->
+    <!--android:background="@color/cast_libraries_material_featurehighlight_text_body_color"-->
+
+
     <TextView
-        android:id="@+id/tv_name_recording"
-        android:layout_width="150dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="30dp"
-        android:layout_marginLeft="20dp"
-        android:text="Title"
-        tools:layout_editor_absoluteX="179dp"
-        tools:layout_editor_absoluteY="187dp"
-        android:textSize="15dp"/>
+        android:id="@+id/marker_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="15dp"
+        android:layout_marginTop="17dp"
+        android:text="TextView"
+        android:textSize="16sp"
+        android:textStyle="bold" />
 
+    <TextView
+        android:id="@+id/marker_more"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignTop="@+id/marker_title"
+        android:layout_marginRight="15dp"
+        android:text="@string/marker_more"
+        android:gravity="right"/>
 
-    <Button
-        android:id="@+id/button_play_recording"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginLeft="50dp"
-        android:background="@drawable/play"
-        tools:layout_editor_absoluteX="96dp"
-        tools:layout_editor_absoluteY="231dp"
-        android:clickable="true"/>
+    <TextView
+        android:id="@+id/marker_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/marker_title"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="5dp"
+        android:text="@string/default_date" />
+
+    <TextView
+        android:id="@+id/marker_language"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/marker_date"
+        android:layout_alignStart="@+id/marker_date"
+        android:layout_below="@+id/marker_location"
+        android:layout_marginTop="5dp"
+        android:text="@string/default_language" />
+
+    <TextView
+        android:id="@+id/marker_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/marker_language"
+        android:layout_alignStart="@+id/marker_language"
+        android:layout_below="@+id/marker_speaker"
+        android:layout_marginTop="5dp"
+        android:text="@string/default_location" />
+
+    <TextView
+        android:id="@+id/marker_speaker"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/marker_location"
+        android:layout_alignStart="@+id/marker_location"
+        android:layout_below="@+id/marker_date"
+        android:layout_marginTop="5dp"
+        android:text="@string/default_speakers" />
+
+    <TextView
+        android:id="@+id/marker_date_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:layout_alignTop="@+id/marker_date"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/marker_speaker_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_alignTop="@+id/marker_speaker"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"/>
+
+    <TextView
+        android:id="@+id/marker_location_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/marker_location"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:gravity="end"
+        android:textAlignment="textEnd"
+        android:text="TextView" />
+
+    <TextView
+        android:id="@+id/marker_language_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/marker_language"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:text="TextView" />
+
+    <LinearLayout
+        android:id="@+id/playBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/marker_language"
+        android:layout_marginTop="16dp"
+        android:layout_marginLeft="11dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="15dp"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/marker_play"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:background="@drawable/play" />
+
+        <TextView
+            android:id="@+id/marker_playtime"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:layout_marginRight="3dp"
+            android:text="@string/default_playtime" />
+
+        <SeekBar
+            android:id="@+id/marker_playProgress"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/marker_duration"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="3dp"
+            android:text="TextView" />
+    </LinearLayout>
+
+    <TextView
+        android:id="@+id/desiredPlaytime"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="TextView"
+        android:layout_below="@+id/marker_language"
+        android:layout_marginTop="3dp"
+        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

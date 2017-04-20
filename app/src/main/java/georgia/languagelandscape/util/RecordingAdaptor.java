@@ -104,7 +104,7 @@ public class RecordingAdaptor extends RecyclerView.Adapter<RecordingAdaptor.View
             @Override
             public void onClick(View v) {
                 if (MyRecordingsActivity.recordingPlaying) return;
-                recording.play();
+                recording.play(0);
                 MyRecordingsActivity.recordingPlaying = true;
             }
         });

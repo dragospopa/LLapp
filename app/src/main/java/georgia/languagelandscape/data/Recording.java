@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.media.MediaPlayer;
 import android.os.Parcel;
 import android.os.Parcelable;
+import android.util.Log;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -31,7 +32,11 @@ public class Recording implements Parcelable{
     private ArrayList<String> speakers = null;
     private String filePath = null;
 
-    private boolean canPlay = true;
+    private boolean paused = true;
+    private boolean completed = false;
+    private boolean released = false;
+    private MediaPlayer player = null;
+
     public static final String defaultAudioFormat = ".3gp";
     public static final String defaultRecordingTitle = "New Recording";
     public static final String PARCEL_KEY = "parcel";
@@ -175,6 +180,14 @@ public class Recording implements Parcelable{
         this.filePath = filePath;
     }
 
+    public boolean isPaused() {
+        return paused;
+    }
+
+    public boolean isCompleted() {
+        return completed;
+    }
+
     public ContentValues toValues() {
         ContentValues values = new ContentValues();
         Gson gson = new Gson();
@@ -273,24 +286,77 @@ public class Recording implements Parcelable{
         }
     };
 
-    public void play(){
-        if (!canPlay) return;
-        MediaPlayer player = new MediaPlayer();
+
+    public void play(int at){
+        if (paused) {
+            // start/resume playing the recording
+            prepare();
+            player.seekTo(at);
+            player.start();
+            completed = false;
+            paused = false;
+        } else if (!paused) {
+            // pause the recording
+            player.pause();
+            paused = true;
+        }
+    }
+
+    private void prepare() {
+        if (player != null) return;
+        player = new MediaPlayer();
         player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
+                released = true;
                 mp.release();
-                canPlay = true;
+                player = null;
+                Log.d("markers", "onCompletion");
+                paused = true;
+                completed = true;
                 MyRecordingsActivity.recordingPlaying = false;
             }
         });
         try {
             player.setDataSource(filePath);
             player.prepare();
+            released = false;
         } catch (IOException e) {
             e.printStackTrace();
         }
-        player.start();
-        canPlay = false;
+    }
+
+    public void stop() {
+        if (player == null) return;
+        if (player.isPlaying()) {
+            player.pause();
+        }
+        player.stop();
+        player.release();
+        paused = true;
+        completed = true;
+        MyRecordingsActivity.recordingPlaying = false;
+        player = null;
+    }
+
+    public boolean isUploaded() {
+        return true;
+    }
+
+    public int getCurrentPlaytime() {
+        if (player == null) {
+            return 0;
+        } else if (!released) {
+            return player.getCurrentPosition();
+        } else {
+            return -1;
+        }
+    }
+
+    public void setCurrentPlaytime(int milisec) {
+        if (player == null) {
+            prepare();
+        }
+        player.seekTo(milisec);
     }
 }

@@ -21,7 +21,7 @@
     <string name="speaker">Speaker:</string>
     <string name="recordingList_language">Languages:</string>
     <string name="empty_recordings">You don\'t have any recordings yet. \nGo and record one</string>
-    <string name="interpunct">・</string>
+    <string name="interpunct">·</string>
     <string name="example_description">Lucy tells the story of her life. She was born in Papua New Guinea where she lived with her parents and siblings until she went to the University of Papua New Guinea to get a degree in Journalism.</string>
     <string name="example_location">At Nel\'min Nos</string>
     <string name="option_upload">Upload</string>
@@ -55,4 +55,8 @@
     </string-array>
     <string name="title_activity_dialog">DialogActivity</string>
     <string name="dialog_delete_positiveButton">DELETE</string>
+    <string name="marker_more">MORE</string>
+    <string name="default_date">Date</string>
+    <string name="default_location">Location</string>
+    <string name="default_playtime">00:00</string>
 </resources>
