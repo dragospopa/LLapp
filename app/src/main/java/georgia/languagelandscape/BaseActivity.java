@@ -161,6 +161,16 @@ public class BaseActivity extends AppCompatActivity
                 startActivity(myIntent);
                 finish();
                 break;
+            case R.id.nav_add_recording:
+                if (!RecordingActivity.isActive()) {
+                    myIntent = new Intent(BaseActivity.this, RecordingActivity.class);
+                    myIntent.putExtra(MapActivity.GEO_LATITUDE, MapActivity.getLatitude());
+                    myIntent.putExtra(MapActivity.GEO_LONGITUDE, MapActivity.getLongitude());
+                    startActivity(myIntent);
+                    finish();
+                }
+                drawer.closeDrawer(GravityCompat.START);
+                break;
             case R.id.nav_my_projects:
                 myIntent = new Intent(BaseActivity.this, MapActivity.class);
                 myIntent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.FRAG_MY_PROJECT);

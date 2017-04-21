@@ -1,11 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="330dp"
     android:layout_height="200dp"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context="georgia.languagelandscape.DialogActivity"
+    tools:context="georgia.languagelandscape.MarkerDialogActivity"
     tools:showIn="@layout/activity_dialog_markers">
 
     <!--TODO: create better theme when polishing the UI-->
@@ -157,14 +158,5 @@
             android:layout_marginLeft="3dp"
             android:text="TextView" />
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/desiredPlaytime"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="TextView"
-        android:layout_below="@+id/marker_language"
-        android:layout_marginTop="3dp"
-        android:layout_centerHorizontal="true" />
 
 </RelativeLayout>

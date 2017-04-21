@@ -1,116 +1,149 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="georgia.languagelandscape.fragments.NewProjectFragment"
     tools:background="@android:color/white"
-    android:background="@android:color/background_light">
+    android:background="@android:color/background_light"
+    android:focusableInTouchMode="true">
 
     <!-- TODO: Update blank fragment layout -->
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="150px"
-        android:layout_marginTop="20px"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="9dp"
         android:textAlignment="center"
-        android:textSize="70px"
+        android:textSize="32sp"
         android:textStyle="bold"
-        android:text="Add a new project" />
+        android:text="Add a new project"
+        android:id="@+id/project_welcome" />
 
     <TextView
+        android:id="@+id/textView19"
         android:layout_width="wrap_content"
-        android:layout_height="120px"
-        android:layout_marginTop="180px"
-        android:textSize="50px"
-        android:text="Full name"
-        android:layout_marginLeft="30dp"/>
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        android:text="Full Name"
+        android:textSize="23sp"
+        android:layout_below="@+id/project_welcome"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dp"/>
 
     <EditText
-        android:layout_width="500px"
-        android:layout_height="120px"
-        android:layout_marginTop="160px"
-        android:layout_marginLeft="370px"
-        android:text="Add full name"
-        android:id="@+id/editText_full_name"/>
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Add full name"
+        android:inputType="text|textAutoCorrect"
+        android:imeOptions="actionNext"
+        android:id="@+id/editText_full_name"
+        android:layout_alignBaseline="@+id/textView19"
+        android:layout_alignBottom="@+id/textView19"
+        android:layout_alignParentRight="true"
+        android:layout_toRightOf="@+id/textView19"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="15dp"/>
 
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="120px"
-        android:layout_marginTop="300px"
-        android:textSize="50px"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView19"
+        android:layout_marginTop="30dp"
+        android:textSize="23sp"
         android:text="Short name"
-        android:layout_marginLeft="30dp"/>
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dp"
+        android:id="@+id/textView28" />
 
     <EditText
-        android:layout_width="500px"
-        android:layout_height="120px"
-        android:layout_marginTop="280px"
-        android:layout_marginLeft="370px"
-        android:text="Add short name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView28"
+        android:layout_alignBottom="@+id/textView28"
+        android:layout_alignParentRight="true"
+        android:layout_alignLeft="@+id/editText_full_name"
+        android:layout_marginRight="15dp"
+        android:hint="Add short name"
+        android:inputType="text|textAutoCorrect"
+        android:imeOptions="actionNext"
         android:id="@+id/editText_short_name"/>
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="120px"
-        android:layout_marginTop="410px"
-        android:textSize="50px"
-        android:text="Desription"
-        android:layout_marginLeft="30dp"/>
-
     <EditText
-        android:layout_width="500px"
-        android:layout_height="220px"
-        android:layout_marginTop="400px"
-        android:layout_marginLeft="370px"
-        android:gravity="start"
-        android:textAlignment="textStart"
-        android:text="Add description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignLeft="@+id/editText_full_name"
+        android:layout_marginRight="15dp"
+        android:layout_marginLeft="15dp"
+        android:layout_below="@+id/textView32"
+        android:layout_marginTop="30dp"
+        android:hint="Add description"
+        android:inputType="textMultiLine"
+        android:gravity="top|left"
+        android:lines="5"
+        android:scrollbars="vertical"
+        android:imeOptions="actionDone"
         android:id="@+id/editText_description"/>
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="120px"
-        android:layout_marginTop="610px"
-        android:textSize="50px"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView28"
+        android:layout_marginTop="30dp"
+        android:textSize="23sp"
         android:text="Users"
-        android:layout_marginLeft="30dp"/>
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dp"
+        android:id="@+id/textView31"/>
 
     <EditText
-        android:layout_width="500px"
-        android:layout_height="120px"
-        android:layout_marginTop="600px"
-        android:layout_marginLeft="370px"
-        android:gravity="start"
-        android:textAlignment="textStart"
-        android:text="Search for users"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView31"
+        android:layout_alignBottom="@+id/textView31"
+        android:layout_alignParentRight="true"
+        android:layout_alignLeft="@+id/editText_full_name"
+        android:layout_marginRight="15dp"
+        android:hint="Search for users"
+        android:imeOptions="actionNext"
+        android:inputType="text|textAutoCorrect"
         android:id="@+id/editText_users"/>
 
     <TextView
         android:layout_width="wrap_content"
-        android:layout_height="120px"
-        android:layout_marginTop="720px"
-        android:textSize="50px"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView31"
+        android:layout_marginTop="30dp"
+        android:textSize="23sp"
         android:text="Languages"
-        android:layout_marginLeft="30dp"/>
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="15dp"
+        android:id="@+id/textView32"/>
 
     <EditText
-        android:layout_width="500px"
-        android:layout_height="120px"
-        android:layout_marginTop="710px"
-        android:layout_marginLeft="370px"
-        android:gravity="start"
-        android:textAlignment="textStart"
-        android:text="Add languages"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBaseline="@+id/textView32"
+        android:layout_alignBottom="@+id/textView32"
+        android:layout_alignParentRight="true"
+        android:layout_alignLeft="@+id/editText_full_name"
+        android:layout_marginRight="15dp"
+        android:hint="Add languages"
+        android:imeOptions="actionNext"
+        android:inputType="text|textAutoCorrect"
         android:id="@+id/editText_languages"/>
 
     <Button
         android:id="@+id/button_add_project"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="370px"
-        android:layout_marginTop="900px"
+        android:layout_alignLeft="@+id/editText_description"
+        android:layout_alignRight="@+id/editText_description"
+        android:layout_below="@+id/editText_description"
+        android:layout_marginTop="10dp"
         android:clickable="true"
         android:text="Add project" />
 
-
-</FrameLayout>
+</RelativeLayout>

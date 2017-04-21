@@ -18,7 +18,7 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.List;
 import java.util.WeakHashMap;
 
-import georgia.languagelandscape.DialogActivity;
+import georgia.languagelandscape.MarkerDialogActivity;
 import georgia.languagelandscape.MapActivity;
 import georgia.languagelandscape.data.Recording;
 import georgia.languagelandscape.database.RecordingDataSource;
@@ -76,7 +76,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
                 Recording recordingFromMarker = recordingMap.get(marker.getTag());
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(Recording.PARCEL_KEY, recordingFromMarker);
-                Intent intent = new Intent(context, DialogActivity.class);
+                Intent intent = new Intent(context, MarkerDialogActivity.class);
                 intent.putExtras(bundle);
                 startActivity(intent);
 

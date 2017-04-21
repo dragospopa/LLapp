@@ -6,25 +6,20 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.inputmethod.EditorInfo;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import georgia.languagelandscape.R;
 import georgia.languagelandscape.data.Projects;
 
-
-/**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link NewProjectFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link NewProjectFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
 public class NewProjectFragment extends Fragment implements MyProjectsFragment.OnFragmentInteractionListener {
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -51,22 +46,15 @@ public class NewProjectFragment extends Fragment implements MyProjectsFragment.O
     String tv_project_users;
     String tv_project_languages;
     String string;
-    final Projects projects=new Projects();
+    final Projects projects = new Projects();
 
     private OnFragmentInteractionListener mListener;
+    private Context context;
 
     public NewProjectFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment NewProjectFragment.
-     */
     // TODO: Rename and change types and number of parameters
     public static NewProjectFragment newInstance(String param1, String param2) {
         NewProjectFragment fragment = new NewProjectFragment();
@@ -76,7 +64,6 @@ public class NewProjectFragment extends Fragment implements MyProjectsFragment.O
         fragment.setArguments(args);
         return fragment;
     }
-
 
 
     @Override
@@ -97,20 +84,80 @@ public class NewProjectFragment extends Fragment implements MyProjectsFragment.O
 
         View view = inflater.inflate(R.layout.fragment_new_project, container, false);
 
-        full_name=(EditText) view.findViewById(R.id.editText_full_name);
-        short_name=(EditText) view.findViewById(R.id.editText_short_name);
-        description=(EditText) view.findViewById(R.id.editText_description);
-        users=(EditText) view.findViewById(R.id.editText_users);
-        languages=(EditText) view.findViewById(R.id.editText_languages);
+        full_name = (EditText) view.findViewById(R.id.editText_full_name);
+        short_name = (EditText) view.findViewById(R.id.editText_short_name);
+        description = (EditText) view.findViewById(R.id.editText_description);
+        users = (EditText) view.findViewById(R.id.editText_users);
+        languages = (EditText) view.findViewById(R.id.editText_languages);
 
+        full_name.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                switch (actionId) {
+                    case EditorInfo.IME_ACTION_NEXT:
+                        return short_name.requestFocus();
+                    default:
+                        return false;
+                }
+            }
+        });
 
-        addButton= (Button) view.findViewById(R.id.button_add_project);
+        short_name.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                switch (actionId) {
+                    case EditorInfo.IME_ACTION_NEXT:
+                        return users.requestFocus();
+                    default:
+                        return false;
+                }
+            }
+        });
 
+        users.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                switch (actionId) {
+                    case EditorInfo.IME_ACTION_NEXT:
+                        return languages.requestFocus();
+                    default:
+                        return false;
+                }
+            }
+        });
+
+        languages.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                switch (actionId) {
+                    case EditorInfo.IME_ACTION_NEXT:
+                        return description.requestFocus();
+                    default:
+                        return false;
+                }
+            }
+        });
+
+        description.setOnEditorActionListener(new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
+                switch (actionId) {
+                    case EditorInfo.IME_ACTION_DONE:
+                        description.clearFocus();
+                        InputMethodManager imm = (InputMethodManager)
+                                context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.hideSoftInputFromWindow(description.getWindowToken(), 0);
+                    default:
+                        return false;
+                }
+            }
+        });
+
+        addButton = (Button) view.findViewById(R.id.button_add_project);
         addButton.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v)
-            {
+            public void onClick(View v) {
                 addItem(string);
-                MyProjectsFragment myProjectsFragment= new MyProjectsFragment();
+                MyProjectsFragment myProjectsFragment = new MyProjectsFragment();
                 fm = getFragmentManager();
                 ft = fm.beginTransaction();
                 ft.replace(R.id.content_replace, myProjectsFragment);
@@ -131,6 +178,7 @@ public class NewProjectFragment extends Fragment implements MyProjectsFragment.O
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        this.context = context;
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
@@ -150,28 +198,18 @@ public class NewProjectFragment extends Fragment implements MyProjectsFragment.O
 
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
     public void addItem(String name) {
-        tv_project_full_name= String.valueOf(full_name.getText());
-        tv_project_short_name= String.valueOf(short_name.getText());
-        tv_project_description= String.valueOf(description.getText());
-        tv_project_users= String.valueOf(users.getText());
-        tv_project_languages= String.valueOf(languages.getText());
-        string="Full name: " + tv_project_full_name +"\n" + "Short name: "+ tv_project_short_name+ "\n" + "Description: " + tv_project_description + "\n" + "Users: " + tv_project_users +  "\n" + "Languages: "+ tv_project_languages;
+        tv_project_full_name = String.valueOf(full_name.getText());
+        tv_project_short_name = String.valueOf(short_name.getText());
+        tv_project_description = String.valueOf(description.getText());
+        tv_project_users = String.valueOf(users.getText());
+        tv_project_languages = String.valueOf(languages.getText());
+        string = "Full name: " + tv_project_full_name + "\n" + "Short name: " + tv_project_short_name + "\n" + "Description: " + tv_project_description + "\n" + "Users: " + tv_project_users + "\n" + "Languages: " + tv_project_languages;
         projects.addItem(string);
     }
 

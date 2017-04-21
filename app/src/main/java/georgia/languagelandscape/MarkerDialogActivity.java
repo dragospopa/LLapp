@@ -14,7 +14,7 @@ import android.widget.TextView;
 import georgia.languagelandscape.data.Recording;
 
 
-public class DialogActivity extends AppCompatActivity {
+public class MarkerDialogActivity extends AppCompatActivity {
 
     private long duration = 0L;
     private Recording recording;
@@ -31,7 +31,7 @@ public class DialogActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         supportRequestWindowFeature(Window.FEATURE_NO_TITLE);
-        setContentView(R.layout.content_dialog);
+        setContentView(R.layout.content_marker_dialog);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
@@ -44,10 +44,8 @@ public class DialogActivity extends AppCompatActivity {
         TextView marker_speaker_content = (TextView) findViewById(R.id.marker_speaker_content);
         final Button playButton = (Button) findViewById(R.id.marker_play);
         final SeekBar playProgressBar = (SeekBar) findViewById(R.id.marker_playProgress);
-        final TextView desiredPlaytime = (TextView) findViewById(R.id.desiredPlaytime);
 
         playProgressBar.setMax(1000);
-        desiredPlaytime.setVisibility(View.INVISIBLE);
 
         recording = getIntent().getExtras().getParcelable(Recording.PARCEL_KEY);
 

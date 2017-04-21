@@ -109,12 +109,16 @@ public class MapActivity extends BaseActivity{
         };
         locationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER, 0, 0, locationListener);
 
-        /* check to see which fragment to replace */
-//        Frags fragId = (Frags) getIntent().getExtras().getSerializable(FRAGMENT_ID);
-//        switch (fragId) {
-//            case MAP:
-//
-//        }
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.homeFab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MapActivity.this, RecordingActivity.class);
+                intent.putExtra(GEO_LONGITUDE, longitude);
+                intent.putExtra(GEO_LATITUDE, latitude);
+                startActivity(intent);
+            }
+        });
 
         int fragId = getIntent().getIntExtra(FRAGMENT_ID, FRAG_MAP);
         switch (fragId) {
@@ -133,6 +137,8 @@ public class MapActivity extends BaseActivity{
                 fm = getSupportFragmentManager();
                 ft = fm.beginTransaction();
                 ft.replace(R.id.content_replace, newProjectFragment);
+                fab.setVisibility(View.INVISIBLE);
+                fab.setClickable(false);
                 ft.commit();
                 break;
             case FRAG_PROFILE:
@@ -166,17 +172,6 @@ public class MapActivity extends BaseActivity{
             default:
                 break;
         }
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.homeFab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MapActivity.this, RecordingActivity.class);
-                intent.putExtra(GEO_LONGITUDE, longitude);
-                intent.putExtra(GEO_LATITUDE, latitude);
-                startActivity(intent);
-            }
-        });
     }
 
     @Override

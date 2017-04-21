@@ -25,6 +25,11 @@
             android:title="Add a project" />
 
         <item
+            android:id="@+id/nav_add_recording"
+            android:icon="@color/colorPrimary"
+            android:title="Add a Recording"/>
+
+        <item
             android:id="@+id/nav_my_projects"
             android:icon="@mipmap/ic_my_projects"
             android:title="My projects" />

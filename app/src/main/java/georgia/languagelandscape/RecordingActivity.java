@@ -64,6 +64,7 @@ public class RecordingActivity extends BaseActivity {
     private double longitude = 0.0;
     private double latitude = 0.0;
     private static String location = null;
+    private static boolean active = false;
 
     private FloatingActionButton recordButton = null;
     private MediaRecorder recorder = null;
@@ -89,6 +90,7 @@ public class RecordingActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_nav_drawer);
         super.onDrawerCreated();
+        active = true;
 
         recordingTimer = (TextView) findViewById(R.id.timer);
         recordingName = (TextView) findViewById(R.id.recording_name);
@@ -385,20 +387,6 @@ public class RecordingActivity extends BaseActivity {
         player.start();
     }
 
-    @Override
-    public void onStop() {
-        super.onStop();
-        if (recorder != null) {
-            recorder.release();
-            recorder = null;
-        }
-
-        if (player != null) {
-            player.release();
-            player = null;
-        }
-    }
-
     private void onRecord(boolean canRecord) {
         if (canRecord) {
             startRecording();
@@ -484,6 +472,10 @@ public class RecordingActivity extends BaseActivity {
         }
     }
 
+    public static boolean isActive() {
+        return active;
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
@@ -545,5 +537,38 @@ public class RecordingActivity extends BaseActivity {
 //                    finish();
                 }
         }
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        active = false;
+    }
+
+    @Override
+    public void onStop() {
+        super.onStop();
+        active = false;
+        if (recorder != null) {
+            recorder.release();
+            recorder = null;
+        }
+
+        if (player != null) {
+            player.release();
+            player = null;
+        }
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        active = true;
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        active = true;
     }
 }

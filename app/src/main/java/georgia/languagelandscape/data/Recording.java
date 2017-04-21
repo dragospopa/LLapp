@@ -286,6 +286,12 @@ public class Recording implements Parcelable{
         }
     };
 
+    public String getDurationString() {
+        int seconds = (int) (duration / 1000);
+        int minutes = seconds / 60;
+        seconds = seconds % 60;
+        return String.format("%02d:%02d", minutes, seconds);
+    }
 
     public void play(int at){
         if (paused) {
