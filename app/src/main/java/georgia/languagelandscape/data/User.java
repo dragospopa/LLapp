@@ -6,6 +6,8 @@ public class User {
     String password;
     String email;
 
+    public static String user;
+
     public String getEmail() {
         return email;
     }
@@ -46,5 +48,15 @@ public class User {
                 ", username='" + username + '\'' +
                 ", password='" + password + '\'' +
                 '}';
+    }
+
+    public static void  addUser(String usern)
+    {
+        user=usern;
+    }
+
+    public static String getUser()
+    {
+        return user;
     }
 }

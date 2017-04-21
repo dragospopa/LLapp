@@ -90,6 +90,10 @@ public class MainActivity extends AppCompatActivity {
                 JSONObject json = new JSONObject(map);
 
 
+                String getUser= userText.getText().toString();
+                User.addUser(getUser);
+
+
                 sendMessage(json);
                 Toast.makeText(MainActivity.this, "Username: "+ user.getUsername() + " Password: " + user.getPassword() , Toast.LENGTH_SHORT).show();
 

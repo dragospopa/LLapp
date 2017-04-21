@@ -11,8 +11,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.TextView;
 
 import georgia.languagelandscape.R;
+import georgia.languagelandscape.data.User;
 
 //import android.support.v4.app.Fragment;
 
@@ -39,6 +41,8 @@ public class ProfileFragment extends Fragment implements MyProjectsFragment.OnFr
     private FragmentTransaction ft = null;
 
     private OnFragmentInteractionListener mListener;
+
+    TextView username;
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -70,6 +74,7 @@ public class ProfileFragment extends Fragment implements MyProjectsFragment.OnFr
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
 
+
     }
 
     @Override
@@ -86,6 +91,8 @@ public class ProfileFragment extends Fragment implements MyProjectsFragment.OnFr
         Button button_recordings=(Button) rootview.findViewById(R.id.button_recordings);
         button_recordings.setFocusableInTouchMode(false);
         button_recordings.setOnClickListener(this);
+        username=(TextView) rootview.findViewById(R.id.userName);
+        username.setText(User.getUser());
 
         return rootview;
     }

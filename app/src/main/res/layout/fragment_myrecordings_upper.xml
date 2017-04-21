@@ -46,6 +46,7 @@
         android:layout_toRightOf="@+id/avatar"
         android:layout_toEndOf="@+id/avatar" />
 
+
     <View
         android:layout_width="350dp"
         android:layout_height="1dp"

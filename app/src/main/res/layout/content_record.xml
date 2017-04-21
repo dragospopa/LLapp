@@ -1,4 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -15,17 +16,28 @@
     tools:context=".RecordingActivity"
     tools:showIn="@layout/activity_record_nav_drawer">
 
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/player"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        app:srcCompat="@android:drawable/btn_star"
-        android:layout_marginRight="55dp"
-        android:layout_marginEnd="55dp"
-        android:layout_alignTop="@+id/recorder"
-        android:layout_toLeftOf="@+id/recorder"
-        android:layout_toStartOf="@+id/recorder" />
+
+    <ScrollView
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.design.widget.FloatingActionButton
+                android:id="@+id/player"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom|end"
+                app:srcCompat="@android:drawable/btn_star"
+                android:layout_marginRight="55dp"
+                android:layout_marginEnd="55dp"
+                android:layout_alignTop="@+id/recorder"
+                android:layout_toLeftOf="@+id/recorder"
+                android:layout_toStartOf="@+id/recorder" />
 
     <TextView
         android:text="         "
@@ -158,4 +170,146 @@
         android:layout_alignStart="@+id/userDefined_languages_textInput_layout"
         android:layout_marginTop="10dp" />
 
+            <EditText
+                android:id="@+id/userDefined_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete|textAutoCorrect|textMultiLine"
+                android:maxLines="3"
+                android:textSize="16sp"
+                android:ems="18"
+                android:hint="When did you make the recording?"
+                android:imeOptions="actionDone"
+                android:layout_below="@+id/userDefined_description"
+                android:layout_alignLeft="@+id/userDefined_description"
+                android:layout_alignStart="@+id/userDefined_description"
+                android:layout_marginTop="10dp" />
+
+            <EditText
+                android:id="@+id/userDefined_location"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete|textAutoCorrect|textMultiLine"
+                android:maxLines="3"
+                android:textSize="16sp"
+                android:ems="18"
+                android:hint="Where did you make the recording?"
+                android:imeOptions="actionDone"
+                android:layout_below="@+id/userDefined_time"
+                android:layout_alignLeft="@+id/userDefined_time"
+                android:layout_alignStart="@+id/userDefined_time"
+                android:layout_marginTop="10dp" />
+
+            <EditText
+                android:id="@+id/userDefined_person"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete|textAutoCorrect|textMultiLine"
+                android:maxLines="3"
+                android:textSize="16sp"
+                android:ems="18"
+                android:hint="Who's in the recording?"
+                android:imeOptions="actionDone"
+                android:layout_below="@+id/userDefined_location"
+                android:layout_alignLeft="@+id/userDefined_location"
+                android:layout_alignStart="@+id/userDefined_location"
+                android:layout_marginTop="10dp" />
+
+            <EditText
+                android:id="@+id/userDefined_subject"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete|textAutoCorrect|textMultiLine"
+                android:maxLines="3"
+                android:textSize="16sp"
+                android:ems="18"
+                android:hint="What are you talking about in the recording?"
+                android:imeOptions="actionDone"
+                android:layout_below="@+id/userDefined_person"
+                android:layout_alignLeft="@+id/userDefined_person"
+                android:layout_alignStart="@+id/userDefined_person"
+                android:layout_marginTop="10dp" />
+
+            <EditText
+                android:id="@+id/userDefined_style"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete|textAutoCorrect|textMultiLine"
+                android:maxLines="3"
+                android:textSize="16sp"
+                android:ems="18"
+                android:hint="What style or genre is in the recording?"
+                android:imeOptions="actionDone"
+                android:layout_below="@+id/userDefined_subject"
+                android:layout_alignLeft="@+id/userDefined_subject"
+                android:layout_alignStart="@+id/userDefined_subject"
+                android:layout_marginTop="10dp" />
+
+            <EditText
+                android:id="@+id/userDefined_part_project"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete|textAutoCorrect|textMultiLine"
+                android:maxLines="3"
+                android:textSize="16sp"
+                android:ems="18"
+                android:hint="Is your recording part of a project?"
+                android:imeOptions="actionDone"
+                android:layout_below="@+id/userDefined_style"
+                android:layout_alignLeft="@+id/userDefined_style"
+                android:layout_alignStart="@+id/userDefined_style"
+                android:layout_marginTop="10dp" />
+
+            <EditText
+                android:id="@+id/userDefined_keywords"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete|textAutoCorrect|textMultiLine"
+                android:maxLines="3"
+                android:textSize="16sp"
+                android:ems="18"
+                android:hint="Add some keywords for your recording?"
+                android:imeOptions="actionDone"
+                android:layout_below="@+id/userDefined_part_project"
+                android:layout_alignLeft="@+id/userDefined_part_project"
+                android:layout_alignStart="@+id/userDefined_part_project"
+                android:layout_marginTop="10dp" />
+
+            <EditText
+                android:id="@+id/userDefined_edit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete|textAutoCorrect|textMultiLine"
+                android:maxLines="3"
+                android:textSize="16sp"
+                android:ems="18"
+                android:hint="Can other people edit the info about this recording?"
+                android:imeOptions="actionDone"
+                android:layout_below="@+id/userDefined_keywords"
+                android:layout_alignLeft="@+id/userDefined_keywords"
+                android:layout_alignStart="@+id/userDefined_keywords"
+                android:layout_marginTop="10dp" />
+
+            <EditText
+                android:id="@+id/userDefined_more_detail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:inputType="textAutoComplete|textAutoCorrect|textMultiLine"
+                android:maxLines="3"
+                android:textSize="16sp"
+                android:ems="18"
+                android:hint="Add more detailed info about your recording"
+                android:imeOptions="actionDone"
+                android:layout_below="@+id/userDefined_edit"
+                android:layout_alignLeft="@+id/userDefined_edit"
+                android:layout_alignStart="@+id/userDefined_edit"
+                android:layout_marginTop="10dp" />
+
+
+
+
+
+
+        </RelativeLayout>
+    </ScrollView>
 </RelativeLayout>
