@@ -50,7 +50,7 @@
                 android:id="@+id/textView18" />
 
             <TextView
-                android:text="Title - a name for your recording. There are no rules here, be creative! Once you’ve saved your recording we’ll use the title to create the recording’s permanent URL, so make sure you’re happy with it."
+                android:text="Title - a name for your recording. There are no rules here, be creative! Once you’ve saved your recording we’ll use the fullName to create the recording’s permanent URL, so make sure you’re happy with it."
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"

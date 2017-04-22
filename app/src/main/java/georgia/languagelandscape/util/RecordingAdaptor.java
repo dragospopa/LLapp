@@ -41,16 +41,18 @@ public class RecordingAdaptor extends RecyclerView.Adapter<RecordingAdaptor.View
         public TextView rlLanguages;
         public TextView rlDate;
         public Button moreButton;
+        public TextView rlCount;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             this.itemView = itemView;
             rlTitle = (TextView) itemView.findViewById(R.id.recordingList_title);
-            rlLocation = (TextView) itemView.findViewById(R.id.recordingList_location);
+            rlLocation = (TextView) itemView.findViewById(R.id.recordingList_location_content);
             rlSpeakers = (TextView) itemView.findViewById(R.id.recordingList_speakers_content);
             rlLanguages = (TextView) itemView.findViewById(R.id.recordingList_languages_content);
             rlDate = (TextView) itemView.findViewById(R.id.recordingList_date);
+            rlCount = (TextView) itemView.findViewById(R.id.recordingList_count);
             moreButton = (Button) itemView.findViewById(R.id.recordingList_more);
         }
     }
@@ -99,11 +101,16 @@ public class RecordingAdaptor extends RecyclerView.Adapter<RecordingAdaptor.View
         holder.rlSpeakers.setText(recording.getSpeakers().get(0));
         holder.rlLocation.setText(recording.getLocation());
         holder.rlDate.setText(recording.getDate());
+        holder.rlCount.setText(String.format("%d - ", position + 1));
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (MyRecordingsActivity.recordingPlaying) return;
+                if (MyRecordingsActivity.recordingPlaying){
+                    if (recording.isPaused()) {
+                        return;
+                    }
+                }
                 recording.play(0);
                 MyRecordingsActivity.recordingPlaying = true;
             }

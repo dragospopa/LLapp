@@ -1,6 +1,5 @@
 package georgia.languagelandscape.data;
 
-import android.content.ContentValues;
 import android.media.MediaPlayer;
 import android.os.Parcel;
 import android.os.Parcelable;
@@ -15,7 +14,6 @@ import java.util.ArrayList;
 import java.util.UUID;
 
 import georgia.languagelandscape.MyRecordingsActivity;
-import georgia.languagelandscape.database.RecordingTableContract;
 
 public class Recording implements Parcelable{
 
@@ -63,8 +61,10 @@ public class Recording implements Parcelable{
             ArrayList<String> speakers,
             String filePath) {
 
-        if (recordingID == null) {
+        if (ID == null) {
             recordingID = UUID.randomUUID().toString();
+        } else {
+            recordingID = ID;
         }
 
         this.title = title;
@@ -186,32 +186,6 @@ public class Recording implements Parcelable{
 
     public boolean isCompleted() {
         return completed;
-    }
-
-    public ContentValues toValues() {
-        ContentValues values = new ContentValues();
-        Gson gson = new Gson();
-
-        values.put(RecordingTableContract.COLUMN_ID, recordingID);
-        values.put(RecordingTableContract.COLUMN_TITLE, title);
-        values.put(RecordingTableContract.COLUMN_DURATION, duration);
-        values.put(RecordingTableContract.COLUMN_DESCRIPTION, description);
-        values.put(RecordingTableContract.COLUMN_LATITUDE, latitude);
-        values.put(RecordingTableContract.COLUMN_LONGITUDE, longitude);
-        values.put(RecordingTableContract.COLUMN_LOCATION, location);
-        values.put(RecordingTableContract.COLUMN_DATE, date);
-        values.put(RecordingTableContract.COLUMN_FILEPATH, filePath);
-
-        String languageString = gson.toJson(language);
-        values.put(RecordingTableContract.COLUMN_LANGUAGE, languageString);
-
-        String uploaderString = gson.toJson(uploader);
-        values.put(RecordingTableContract.COLUMN_UPLOADER, uploaderString);
-
-        String speakerString = gson.toJson(speakers);
-        values.put(RecordingTableContract.COLUMN_SPEAKER, speakerString);
-
-        return values;
     }
 
     @Override

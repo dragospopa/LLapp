@@ -20,7 +20,7 @@ public class RecordingsListFragment extends Fragment {
 
     public static final String FRAG_TAG = "recordingListFragment";
     private Context context = null;
-    RecordingDataSource dataSource;
+    RecordingDataSource dataSource = null;
 
     public RecordingsListFragment() {
 
@@ -48,7 +48,7 @@ public class RecordingsListFragment extends Fragment {
             RecyclerView recyclerView = (RecyclerView) view.findViewById(R.id.myrecording_recycler);
             recyclerView.setAdapter(new RecordingAdaptor(context, recordingFromDB));
         }
-
+        dataSource = null;
         return view;
     }
 

@@ -1,6 +1,7 @@
 package georgia.languagelandscape.fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -13,6 +14,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
+import georgia.languagelandscape.MyRecordingsActivity;
 import georgia.languagelandscape.R;
 import georgia.languagelandscape.data.User;
 
@@ -43,19 +45,12 @@ public class ProfileFragment extends Fragment implements MyProjectsFragment.OnFr
     private OnFragmentInteractionListener mListener;
 
     TextView username;
+    private Context context;
 
     public ProfileFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment ProfileFragment.
-     */
     // TODO: Rename and change types and number of parameters
     public static ProfileFragment newInstance(String param1, String param2) {
         ProfileFragment fragment = new ProfileFragment();
@@ -107,6 +102,7 @@ public class ProfileFragment extends Fragment implements MyProjectsFragment.OnFr
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
+        this.context = context;
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
@@ -133,13 +129,9 @@ public class ProfileFragment extends Fragment implements MyProjectsFragment.OnFr
                 ft.replace(R.id.content_replace, myProjectsFragment);
                 ft.commit();
                 break;
-                case R.id.button_recordings:
-                    RecordingsListFragment recordingsListFragment = new RecordingsListFragment();
-                    fm = getFragmentManager();
-                    ft = fm.beginTransaction();
-                    ft.replace(R.id.content_replace, recordingsListFragment);
-                    ft.commit();
-                    break;
+            case R.id.button_recordings:
+                Intent intent = new Intent(context, MyRecordingsActivity.class);
+                break;
 
         }
 
@@ -151,16 +143,6 @@ public class ProfileFragment extends Fragment implements MyProjectsFragment.OnFr
 
     }
 
-    /**
-     * This interface must be implemented by activities that contain this
-     * fragment to allow an interaction in this fragment to be communicated
-     * to the activity and potentially other fragments contained in that
-     * activity.
-     * <p>
-     * See the Android Training lesson <a href=
-     * "http://developer.android.com/training/basics/fragments/communicating.html"
-     * >Communicating with Other Fragments</a> for more information.
-     */
     public interface OnFragmentInteractionListener {
         // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);

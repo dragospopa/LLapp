@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.view.KeyEvent;
@@ -14,73 +15,37 @@ import android.view.inputmethod.EditorInfo;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import georgia.languagelandscape.R;
-import georgia.languagelandscape.data.Projects;
+import georgia.languagelandscape.data.Project;
+import georgia.languagelandscape.data.User;
+import georgia.languagelandscape.database.ProjectDataSource;
 
 public class NewProjectFragment extends Fragment implements MyProjectsFragment.OnFragmentInteractionListener {
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    LinearLayout container;
 
     private FragmentManager fm = null;
     private FragmentTransaction ft = null;
-
-    EditText full_name;
-    EditText short_name;
-    EditText description;
-    EditText users;
-    EditText languages;
-    String tv_project_full_name;
-    String tv_project_short_name;
-    String tv_project_description;
-    String tv_project_users;
-    String tv_project_languages;
-    String string;
-    final Projects projects = new Projects();
+    private EditText full_name;
+    private EditText short_name;
+    private EditText description;
+    private EditText users;
+    private EditText languages;
+    private Button addButton;
 
     private OnFragmentInteractionListener mListener;
     private Context context;
+    private Project project = null;
 
     public NewProjectFragment() {
-        // Required empty public constructor
     }
-
-    // TODO: Rename and change types and number of parameters
-    public static NewProjectFragment newInstance(String param1, String param2) {
-        NewProjectFragment fragment = new NewProjectFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
-
-    Button addButton;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
 
         View view = inflater.inflate(R.layout.fragment_new_project, container, false);
 
@@ -156,7 +121,57 @@ public class NewProjectFragment extends Fragment implements MyProjectsFragment.O
         addButton = (Button) view.findViewById(R.id.button_add_project);
         addButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
-                addItem(string);
+                // check mandatory fields: full name and short name
+                String fullName = full_name.getText().toString();
+                if (fullName.equals("")) {
+                    full_name.requestFocus();
+                    View view = ((FragmentActivity) context).getCurrentFocus();
+                    if (view != null) {
+                        InputMethodManager imm = (InputMethodManager)
+                                context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.showSoftInput(view, 0);
+                    }
+                    return;
+                }
+
+                // TODO: check for replicated short names
+                String shortName = short_name.getText().toString();
+                if (shortName.equals("")) {
+                    short_name.requestFocus();
+                    View view = ((FragmentActivity) context).getCurrentFocus();
+                    if (view != null) {
+                        InputMethodManager imm = (InputMethodManager)
+                                context.getSystemService(Context.INPUT_METHOD_SERVICE);
+                        imm.showSoftInput(view, 0);
+                    }
+                    return;
+                }
+
+                // TODO: search for users in the future
+                String userName = users.getText().toString();
+                List<User> contributor = new ArrayList<>();
+
+                // TODO: split the languages into separate individuals
+                String languageInput = languages.getText().toString();
+                List<String> projectLanguage = new ArrayList<>();
+                projectLanguage.add(languageInput);
+                String descriptionInput = description.getText().toString();
+
+                project = new Project();
+                project.setFullName(fullName);
+                project.setShortName(shortName);
+                project.setDescription(descriptionInput);
+                project.setOwner(new User(null, null, "Frankie")); // dummy user
+                project.setContributors(contributor);
+                project.setLanguages(projectLanguage);
+                project.setDescription(descriptionInput);
+                project.setRecordings(null);
+
+                ProjectDataSource dataSource = new ProjectDataSource(context);
+                dataSource.open();
+                dataSource.createProject(project);
+                dataSource.close();
+
                 MyProjectsFragment myProjectsFragment = new MyProjectsFragment();
                 fm = getFragmentManager();
                 ft = fm.beginTransaction();
@@ -166,13 +181,6 @@ public class NewProjectFragment extends Fragment implements MyProjectsFragment.O
         });
 
         return view;
-    }
-
-    // TODO: Rename method, update argument and hook method into UI event
-    public void onButtonPressed(Uri uri) {
-        if (mListener != null) {
-            mListener.onFragmentInteraction(uri);
-        }
     }
 
     @Override
@@ -188,29 +196,12 @@ public class NewProjectFragment extends Fragment implements MyProjectsFragment.O
     }
 
     @Override
-    public void onDetach() {
-        super.onDetach();
-        mListener = null;
-    }
-
-    @Override
     public void onFragmentInteraction(Uri uri) {
 
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
-    }
-
-    public void addItem(String name) {
-        tv_project_full_name = String.valueOf(full_name.getText());
-        tv_project_short_name = String.valueOf(short_name.getText());
-        tv_project_description = String.valueOf(description.getText());
-        tv_project_users = String.valueOf(users.getText());
-        tv_project_languages = String.valueOf(languages.getText());
-        string = "Full name: " + tv_project_full_name + "\n" + "Short name: " + tv_project_short_name + "\n" + "Description: " + tv_project_description + "\n" + "Users: " + tv_project_users + "\n" + "Languages: " + tv_project_languages;
-        projects.addItem(string);
     }
 
 }

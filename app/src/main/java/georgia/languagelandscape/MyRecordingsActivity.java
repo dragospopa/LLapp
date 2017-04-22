@@ -22,6 +22,7 @@ public class MyRecordingsActivity extends BaseActivity
 
     public static boolean recordingPlaying = false;
     private FrameLayout rootLayout = null;
+    private RecyclerView recyclerView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,7 +74,7 @@ public class MyRecordingsActivity extends BaseActivity
             recording.setTitle(toName);
             recording.setFilePath(to.getAbsolutePath());
 
-            RecyclerView recyclerView = (RecyclerView) findViewById(R.id.myrecording_recycler);
+            recyclerView = (RecyclerView) findViewById(R.id.myrecording_recycler);
             RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
             TextView title = (TextView) layoutManager
                     .findViewByPosition(adaptorPosition)
@@ -110,7 +111,7 @@ public class MyRecordingsActivity extends BaseActivity
     }
 
     @Override
-    public void onDeleteClick(String id, String title, int index) {
+    public void onDeleteClick(String id, String title, final int index) {
 
         String audioInternalFilePath = null;
         File audioInternalFileDir = null;
@@ -131,7 +132,16 @@ public class MyRecordingsActivity extends BaseActivity
 
             RecyclerView recyclerView = (RecyclerView) findViewById(R.id.myrecording_recycler);
             RecordingAdaptor adapter = (RecordingAdaptor) recyclerView.getAdapter();
+            int recordingCount = adapter.getItemCount();
             adapter.removeRecording(index);
+
+            RecyclerView.LayoutManager layoutManager = recyclerView.getLayoutManager();
+            for (int position = index + 1; position < recordingCount; position++) {
+                TextView count = (TextView) layoutManager
+                        .findViewByPosition(position)
+                        .findViewById(R.id.recordingList_count);
+                count.setText(String.format("%s - ", String.valueOf(position)));
+            }
         }
     }
 }

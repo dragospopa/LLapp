@@ -28,7 +28,7 @@
                 android:id="@+id/textView10" />
 
             <TextView
-                android:text="Full name – the full title of your project"
+                android:text="Full name – the full fullName of your project"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/textView10"
@@ -98,7 +98,7 @@
                 android:id="@+id/textView18" />
 
             <TextView
-                android:text="Short name – a URL-friendly version of your project title (no spaces, no non-Roman characters)"
+                android:text="Short name – a URL-friendly version of your project fullName (no spaces, no non-Roman characters)"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"

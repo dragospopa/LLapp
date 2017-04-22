@@ -10,6 +10,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
@@ -20,6 +21,7 @@ import java.util.WeakHashMap;
 
 import georgia.languagelandscape.MarkerDialogActivity;
 import georgia.languagelandscape.MapActivity;
+import georgia.languagelandscape.R;
 import georgia.languagelandscape.data.Recording;
 import georgia.languagelandscape.database.RecordingDataSource;
 
@@ -63,7 +65,8 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         for (Recording recording : recordingsFromDB) {
             if (recording.isUploaded()) {
                 Marker marker = googleMap.addMarker(new MarkerOptions()
-                        .position(new LatLng(recording.getLatitude(), recording.getLongitude())));
+                        .position(new LatLng(recording.getLatitude(), recording.getLongitude()))
+                        .icon(BitmapDescriptorFactory.fromResource(R.drawable.ll_logo_marker)));
                 marker.setTag(recording.getRecordingID());
                 recordingMap.put(recording.getRecordingID(), recording);
             }

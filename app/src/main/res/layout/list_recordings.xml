@@ -6,13 +6,23 @@
     android:paddingTop="5dp">
 
     <TextView
-        android:id="@+id/recordingList_title"
-        android:text="Seagull song"
+        android:id="@+id/recordingList_count"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
         android:layout_marginTop="3dp"
+        android:textSize="18sp"
+        android:text="1 - " />
+
+    <TextView
+        android:id="@+id/recordingList_title"
+        android:text="Seagull song"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toRightOf="@+id/recordingList_count"
+        android:layout_alignBottom="@+id/recordingList_count"
+        android:layout_marginLeft="3dp"
         android:textSize="18sp"
         android:textStyle="normal|bold"
         android:textColor="@color/cast_expanded_controller_background_color" />
@@ -22,9 +32,8 @@
         android:text="@string/speaker"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/recordingList_title"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_below="@+id/recordingList_location"
+        android:layout_alignLeft="@+id/recordingList_count"
         android:layout_marginTop="5dp" />
 
     <TextView
@@ -32,7 +41,6 @@
         android:text="OLGA TAJBAREJ"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/recordingList_speakers_content"
         android:layout_alignTop="@+id/recordingList_speakers"
         android:layout_toRightOf="@+id/recordingList_speakers"
         android:layout_toEndOf="@+id/recordingList_speakers"
@@ -45,8 +53,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/recordingList_speakers"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
+        android:layout_alignLeft="@+id/recordingList_count"
         android:layout_marginTop="5dp" />
 
     <TextView
@@ -56,22 +63,27 @@
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/recordingList_languages"
         android:layout_alignBottom="@+id/recordingList_languages"
-        android:layout_alignLeft="@+id/recordingList_speakers_content"
-        android:layout_alignStart="@+id/recordingList_speakers_content"
+        android:layout_toRightOf="@+id/recordingList_languages"
         android:layout_marginLeft="12dp"
         android:layout_marginStart="12dp"/>
 
     <TextView
         android:id="@+id/recordingList_location"
+        android:text="@string/recordingList_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/recordingList_title"
+        android:layout_alignLeft="@+id/recordingList_count"
+        android:layout_marginTop="5dp" />
+
+    <TextView
+        android:id="@+id/recordingList_location_content"
         android:text="NEL'MIN NOS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignBaseline="@+id/recordingList_title"
-        android:layout_alignBottom="@+id/recordingList_title"
-        android:layout_toRightOf="@+id/recordingList_title"
-        android:layout_toEndOf="@+id/recordingList_title"
-        android:layout_marginLeft="10dp"
-        android:layout_marginStart="10dp" />
+        android:layout_alignBottom="@+id/recordingList_location"
+        android:layout_toRightOf="@+id/recordingList_location"
+        android:layout_marginLeft="12dp"/>
 
     <Button
         android:id="@+id/recordingList_more"
@@ -79,8 +91,8 @@
         android:layout_width="44dp"
         android:layout_height="36dp"
         android:textSize="9sp"
-        android:layout_alignBottom="@id/recordingList_location"
-        android:layout_alignBaseline="@id/recordingList_location"
+        android:layout_alignBottom="@+id/recordingList_title"
+        android:layout_alignBaseline="@+id/recordingList_title"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true" />
 

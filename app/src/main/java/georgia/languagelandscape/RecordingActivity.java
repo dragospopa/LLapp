@@ -38,7 +38,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import georgia.languagelandscape.data.Markers;
 import georgia.languagelandscape.data.Recording;
 import georgia.languagelandscape.data.User;
 import georgia.languagelandscape.database.RecordingDataSource;
@@ -171,7 +170,6 @@ public class RecordingActivity extends BaseActivity {
                 }
 
                 String description = userDefinedDescription.getText().toString();
-                // TODO: what happens if description is null?
                 recordingDescription = description.equals("") ? "" : description;
 
                 String title = userDefinedName.getText().toString();
@@ -220,12 +218,9 @@ public class RecordingActivity extends BaseActivity {
                     dataSource.insertRecording(recording);
                     dataSource.close();
 
-                    Markers.AddLatitude(latitude);
-                    Markers.AddLongitude(longitude);
-                    Markers.AddTitle(recordingTitle);
-
                     Intent intent = new Intent(RecordingActivity.this, MyRecordingsActivity.class);
                     startActivity(intent);
+                    finish();
 
                 } else {
                     if (!canPlay){

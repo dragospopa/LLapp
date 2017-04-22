@@ -64,7 +64,7 @@
         android:layout_alignParentRight="true"
         android:layout_alignLeft="@+id/editText_full_name"
         android:layout_marginRight="15dp"
-        android:hint="Add short name"
+        android:hint="URL friendly short name"
         android:inputType="text|textAutoCorrect"
         android:imeOptions="actionNext"
         android:id="@+id/editText_short_name"/>
