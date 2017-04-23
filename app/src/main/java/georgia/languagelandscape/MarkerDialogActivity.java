@@ -103,6 +103,7 @@ public class MarkerDialogActivity extends AppCompatActivity {
                     playButton.setBackgroundResource(R.drawable.play);
                     playtimeHandler.removeCallbacks(playtimeRunnable);
                     progressBarThread.interrupt();
+                    completionHandler.removeCallbacks(this);
                 } else {
                     completionHandler.postDelayed(this, 0);
                 }
@@ -170,7 +171,6 @@ public class MarkerDialogActivity extends AppCompatActivity {
     @Override
     protected void onPause() {
         super.onPause();
-        Log.d(LOG_MARKERS, "onPause");
         if (progressBarThread != null) {
             progressBarThread.interrupt();
         }

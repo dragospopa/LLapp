@@ -167,7 +167,6 @@ public class BaseActivity extends AppCompatActivity
                     myIntent.putExtra(MapActivity.GEO_LATITUDE, MapActivity.getLatitude());
                     myIntent.putExtra(MapActivity.GEO_LONGITUDE, MapActivity.getLongitude());
                     startActivity(myIntent);
-                    finish();
                 }
                 drawer.closeDrawer(GravityCompat.START);
                 break;

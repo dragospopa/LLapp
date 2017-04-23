@@ -5,6 +5,7 @@ package georgia.languagelandscape.fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -19,8 +20,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import java.util.List;
 import java.util.WeakHashMap;
 
-import georgia.languagelandscape.MarkerDialogActivity;
 import georgia.languagelandscape.MapActivity;
+import georgia.languagelandscape.MarkerDialogActivity;
 import georgia.languagelandscape.R;
 import georgia.languagelandscape.data.Recording;
 import georgia.languagelandscape.database.RecordingDataSource;
@@ -31,6 +32,16 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     private GoogleMap mGoogleMap;
     private Context context;
     private WeakHashMap<String, Recording> recordingMap = new WeakHashMap<>();
+
+    public interface mapListener {
+        public void onMapClick(LatLng latLng);
+
+        public void onMapFragmentReady();
+
+        public void onCameraMove();
+
+        public void onMarkerClick(Marker marker);
+    }
 
     @Override
     public void onAttach(Context context) {
@@ -50,6 +61,9 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     public void onMapReady(GoogleMap googleMap) {
         mGoogleMap = googleMap;
 
+        if (context instanceof mapListener) {
+            ((mapListener) context).onMapFragmentReady();
+        }
         double longitude = getArguments().getDouble(MapActivity.GEO_LONGITUDE);
         double latitude = getArguments().getDouble(MapActivity.GEO_LATITUDE);
 
@@ -76,17 +90,43 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         googleMap.setOnMarkerClickListener(new GoogleMap.OnMarkerClickListener() {
             @Override
             public boolean onMarkerClick(Marker marker) {
+
                 Recording recordingFromMarker = recordingMap.get(marker.getTag());
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(Recording.PARCEL_KEY, recordingFromMarker);
                 Intent intent = new Intent(context, MarkerDialogActivity.class);
                 intent.putExtras(bundle);
+
+                if (context instanceof mapListener) {
+                    ((mapListener) context).onMarkerClick(marker);
+                }
+
                 startActivity(intent);
 
-                /*
-                * default behavior is to show the info window and centre the focus to the marker
-                * */
                 return true;
+            }
+        });
+
+        mGoogleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
+            @Override
+            public void onMapClick(LatLng latLng) {
+                if (context instanceof mapListener) {
+                    ((mapListener) context).onMapClick(latLng);
+                } else {
+                    Toast.makeText(
+                            context,
+                            "mapListener not implemented!",
+                            Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
+        mGoogleMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
+            @Override
+            public void onCameraMove() {
+                if (context instanceof mapListener) {
+                    ((mapListener) context).onCameraMove();
+                }
             }
         });
     }

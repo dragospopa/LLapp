@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -53,6 +52,7 @@ public class RecordingActivity extends BaseActivity {
     private static boolean canPlay = true;
     private long recordingTime = 0L;
     private Recording recording = null;
+    private Recording tempRecording = null;
     private String recordingTitle = null;
     private ArrayList<String> recordingLanguages = null;
     private String audioCacheFilePath = null;
@@ -65,9 +65,9 @@ public class RecordingActivity extends BaseActivity {
     private static String location = null;
     private static boolean active = false;
 
-    private FloatingActionButton recordButton = null;
+    private Button recordButton = null;
     private MediaRecorder recorder = null;
-    private FloatingActionButton playButton = null;
+    private Button playButton = null;
     private MediaPlayer player = null;
     private TextView recordingTimer = null;
     private Handler handler = null;
@@ -82,6 +82,8 @@ public class RecordingActivity extends BaseActivity {
     private Button saveButton = null;
     private TextInputLayout nameInputLayout = null;
     private TextInputLayout languageInputLayout = null;
+    private Handler completionHandler;
+    private Runnable completionRunnable;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -132,6 +134,8 @@ public class RecordingActivity extends BaseActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                completionHandler.removeCallbacks(completionRunnable);
                 // if nothing has been recorded
                 File from = new File(audioFileName);
                 if (!from.exists()) {
@@ -222,10 +226,6 @@ public class RecordingActivity extends BaseActivity {
                     startActivity(intent);
                     finish();
 
-                } else {
-                    if (!canPlay){
-                        stopPlaying();
-                    }
                 }
             }
         });
@@ -308,7 +308,7 @@ public class RecordingActivity extends BaseActivity {
         }
         audioFileName = audioCacheFilePath + "/" + System.currentTimeMillis() + Recording.defaultAudioFormat;
 
-        recordButton = (FloatingActionButton) findViewById(R.id.recorder);
+        recordButton = (Button) findViewById(R.id.recorder);
         recordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -316,11 +316,38 @@ public class RecordingActivity extends BaseActivity {
             }
         });
 
-        playButton = (FloatingActionButton) findViewById(R.id.player);
+        playButton = (Button) findViewById(R.id.player);
+        completionHandler = new Handler();
+        completionRunnable = new Runnable() {
+            @Override
+            public void run() {
+                if (tempRecording.isCompleted()) {
+                    playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
+                    completionHandler.removeCallbacks(this);
+                    canRecord = true;
+                    saveButton.setClickable(true);
+                    recordButton.setClickable(true);
+                } else {
+                    completionHandler.postDelayed(this, 0);
+                }
+            }
+        };
         playButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onPlay(canPlay);
+                tempRecording.play(tempRecording.getCurrentPlaytime());
+                if (!tempRecording.isPaused()) {
+                    playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
+                    canRecord = false;
+                    recordButton.setClickable(false);
+                    saveButton.setClickable(false);
+                } else if (tempRecording.isPaused()) {
+                    playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
+                    canRecord = true;
+                    saveButton.setClickable(true);
+                    recordButton.setClickable(true);
+                }
+                completionHandler.postDelayed(completionRunnable, 0);
             }
         });
 
@@ -344,44 +371,6 @@ public class RecordingActivity extends BaseActivity {
         return recordings.length;
     }
 
-    private void onPlay(boolean canPlay) {
-        if (canPlay)
-            startPlaying();
-        else
-            stopPlaying();
-    }
-
-    private void stopPlaying() {
-        player.release();
-        player = null;
-        canPlay = true;
-        saveButton.setClickable(true);
-        recordButton.setClickable(true);
-    }
-
-    private void startPlaying() {
-        canPlay = false;
-        saveButton.setClickable(true);
-        recordButton.setClickable(false);
-
-        player = new MediaPlayer();
-        player.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
-            @Override
-            public void onCompletion(MediaPlayer mp) {
-                canPlay = true;
-                recordButton.setClickable(true);
-            }
-        });
-
-        try {
-            player.setDataSource(audioFileName);
-            player.prepare();
-        } catch (IOException e) {
-            Log.i(LOG_TAG, "playing failed");
-        }
-        player.start();
-    }
-
     private void onRecord(boolean canRecord) {
         if (canRecord) {
             startRecording();
@@ -399,6 +388,9 @@ public class RecordingActivity extends BaseActivity {
         handler.removeCallbacks(timerRunnable);
         recorder.release();
         recorder = null;
+
+        tempRecording = new Recording();
+        tempRecording.setFilePath(audioFileName);
         /*
         * Animation:
         *   -the screen contracts to the top
@@ -538,6 +530,13 @@ public class RecordingActivity extends BaseActivity {
     protected void onPause() {
         super.onPause();
         active = false;
+
+        if (tempRecording != null) {
+            tempRecording.stop();
+        }
+        if (completionHandler != null) {
+            completionHandler.removeCallbacks(completionRunnable);
+        }
     }
 
     @Override

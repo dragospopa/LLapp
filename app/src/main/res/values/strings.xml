@@ -61,4 +61,14 @@
     <string name="default_playtime">00:00</string>
     <string name="recordingList_location">Location:</string>
     <string name="project_list_no_recording">No recording</string>
+    <string name="drawer_browse_the_map">Browse the map</string>
+    <string name="drawer_feed">Feed</string>
+    <string name="drawer_my_profile">My profile</string>
+    <string name="drawer_my_recordings">My Recordings</string>
+    <string name="drawer_add_a_project">Add a project</string>
+    <string name="drawer_add_a_recording">Add a Recording</string>
+    <string name="drawer_my_projects">My projects</string>
+    <string name="drawer_help">Help</string>
+    <string name="drawer_about">About</string>
+    <string name="drawer_log_out">Log out</string>
 </resources>
