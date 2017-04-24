@@ -71,4 +71,17 @@
     <string name="drawer_help">Help</string>
     <string name="drawer_about">About</string>
     <string name="drawer_log_out">Log out</string>
+    <string name="create_account">CREATE ACCOUNT</string>
+    <string name="log_in">LOG IN</string>
+    <string name="have_an_account">Have an account?</string>
+    <string name="Dont_have_an_account">Doesn\'t have an account yet?</string>
+    <string name="login_prompt">Username or email</string>
+    <string name="login_password_prompt">password</string>
+    <string name="forgot_password">Forgot your password?</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="button_sign_up">Sign Up</string>
+    <string name="already_have_account">Already have an account?</string>
+    <string name="terms_of_service">By proceeding you also agree to Language Landscape\'s Terms of Service.</string>
+    <string name="forgot_pass_send">send</string>
+    <string name="forgot_pass_instruction">Enter your Language Landscape username or email address that you used to register. We\'ll send you an email with a link to reset your password.</string>
 </resources>

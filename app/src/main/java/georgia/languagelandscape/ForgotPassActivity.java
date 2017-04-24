@@ -61,7 +61,7 @@ public class ForgotPassActivity extends AppCompatActivity {
         }
 
 
-        Button button = (Button) findViewById(R.id.button);
+        Button button = (Button) findViewById(R.id.signUp);
         button.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){

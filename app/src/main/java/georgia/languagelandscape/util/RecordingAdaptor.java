@@ -9,7 +9,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.PopupWindow;
 import android.widget.TextView;
@@ -93,8 +92,6 @@ public class RecordingAdaptor extends RecyclerView.Adapter<RecordingAdaptor.View
     @Override
     public void onBindViewHolder(final RecordingAdaptor.ViewHolder holder, int position) {
         final Recording recording = recordings.get(position);
-        final FrameLayout rootLayout = (FrameLayout)
-                ((FragmentActivity) context).findViewById(R.id.myrecodings_root);
 
         holder.rlTitle.setText(recording.getTitle());
         holder.rlLanguages.setText(recording.getLanguage().get(0));
@@ -122,12 +119,6 @@ public class RecordingAdaptor extends RecyclerView.Adapter<RecordingAdaptor.View
                 LayoutInflater inflator = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 ViewGroup layout = (ViewGroup) inflator.inflate(R.layout.popup_edit_recording, null);
                 final PopupWindow popupWindow = new PopupWindow(layout, 600, 850, true);
-                popupWindow.setOnDismissListener(new PopupWindow.OnDismissListener() {
-                    @Override
-                    public void onDismiss() {
-                        rootLayout.getForeground().setAlpha(0);
-                    }
-                });
                 PopupViewHolder popupViewHolder = new PopupViewHolder(layout);
                 popupViewHolder.title.setText(recording.getTitle());
                 popupViewHolder.date.setText(recording.getDate());
@@ -169,7 +160,6 @@ public class RecordingAdaptor extends RecyclerView.Adapter<RecordingAdaptor.View
                     popupWindow.setElevation(8);
                 }
                 popupWindow.showAtLocation(layout, Gravity.CENTER, 0, 0);
-                rootLayout.getForeground().setAlpha(120);
             }
         });
     }

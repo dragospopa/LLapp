@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@drawable/list_item_selector"
     android:paddingBottom="5dp"
     android:paddingTop="5dp">
 
@@ -13,11 +15,11 @@
         android:layout_alignParentStart="true"
         android:layout_marginTop="3dp"
         android:textSize="18sp"
-        android:text="1 - " />
+        tools:text="1 - " />
 
     <TextView
         android:id="@+id/recordingList_title"
-        android:text="Seagull song"
+        tools:text="Seagull song"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_toRightOf="@+id/recordingList_count"
@@ -42,7 +44,7 @@
 
     <TextView
         android:id="@+id/recordingList_speakers_content"
-        android:text="OLGA TAJBAREJ"
+        tools:text="OLGA TAJBAREJ"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/recordingList_speakers"
@@ -62,7 +64,7 @@
 
     <TextView
         android:id="@+id/recordingList_languages_content"
-        android:text="TUNDRA NENETS"
+        tools:text="TUNDRA NENETS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBaseline="@+id/recordingList_languages"
@@ -82,7 +84,7 @@
 
     <TextView
         android:id="@+id/recordingList_location_content"
-        android:text="NEL'MIN NOS"
+        tools:text="NEL'MIN NOS"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignBottom="@+id/recordingList_location"
@@ -99,7 +101,7 @@
 
     <TextView
         android:id="@+id/recordingList_date"
-        android:text="15/07/2004"
+        tools:text="15/07/2004"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignTop="@+id/recordingList_languages_content"

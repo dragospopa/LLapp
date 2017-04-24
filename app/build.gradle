@@ -5,7 +5,7 @@ android {
     buildToolsVersion "25.0.2"
     defaultConfig {
         applicationId "georgia.languagelandscape"
-        minSdkVersion 15
+        minSdkVersion 17
         targetSdkVersion 25
         multiDexEnabled true
         versionCode 1
@@ -19,6 +19,7 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    dataBinding.enabled = true;
 }
 
 dependencies {

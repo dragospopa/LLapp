@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:foreground="@drawable/dim"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/myrecodings_root">
 
@@ -22,19 +22,19 @@
     </android.support.design.widget.AppBarLayout>
 
     <fragment
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:name="georgia.languagelandscape.fragments.MyRecordingsUpper"
-        android:id="@+id/myrecodings_profile"
-        tools:layout="@layout/fragment_myrecordings_upper"
-        android:layout_marginTop="45dp" />
-
-    <fragment
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/myrecordings_list"
         android:layout_marginTop="130dp"
         android:name="georgia.languagelandscape.fragments.RecordingsListFragment"
         tools:layout="@layout/fragment_recording_list"/>
+
+    <fragment
+        android:id="@+id/myrecodings_profile"
+        android:name="georgia.languagelandscape.fragments.MyRecordingsUpper"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="45dp"
+        tools:layout="@layout/fragment_myrecordings_upper" />
 
 </FrameLayout>

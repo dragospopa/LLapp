@@ -4,16 +4,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,32 +18,32 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.VolleyLog;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.HashMap;
-import java.util.Map;
+import georgia.languagelandscape.fragments.ForgotPassFragment;
+import georgia.languagelandscape.fragments.OnBoardFragment;
+import georgia.languagelandscape.fragments.SignUpFragment;
 
-import georgia.languagelandscape.data.User;
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity
+        implements OnBoardFragment.OnBoardFragmentListener,
+        SignUpFragment.SignUpFragmentListener, ForgotPassFragment.ForgotPassFragmentListener{
 
     public static final int REQUEST_LOCATION = 1002;
     TextView content;
 
     RequestQueue mRequestQueue;
 
+    private FragmentManager fm;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        //setSupportActionBar(toolbar);
-        content = (TextView) findViewById(R.id.content);
 
+        fm = getSupportFragmentManager();
+        fm.beginTransaction().replace(R.id.container, new OnBoardFragment()).commit();
         // ask for fine location access
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
@@ -56,87 +52,6 @@ public class MainActivity extends AppCompatActivity {
                     new String[]{android.Manifest.permission.ACCESS_FINE_LOCATION},
                     REQUEST_LOCATION);
         }
-
-
-        Button button = (Button) findViewById(R.id.button);
-        button.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-
-
-                EditText userText = (EditText) findViewById(R.id.nameText);
-                EditText passwordText = (EditText) findViewById(R.id.passText);
-
-
-
-                if (mRequestQueue == null) {
-                    mRequestQueue = Volley.newRequestQueue(getApplicationContext());
-                }
-
-
-                String name = userText.getText().toString();
-                String pass = passwordText.getText().toString();
-
-                User user = new User();
-
-                user.setUsername(name);
-                user.setPassword(pass);
-
-                Map<String, String> map = new HashMap<>();
-
-                map.put("username", user.getUsername());
-                map.put("password", user.getPassword());
-
-                JSONObject json = new JSONObject(map);
-
-
-                String getUser= userText.getText().toString();
-                User.addUser(getUser);
-
-
-                sendMessage(json);
-                Toast.makeText(MainActivity.this, "Username: "+ user.getUsername() + " Password: " + user.getPassword() , Toast.LENGTH_SHORT).show();
-
-                Intent myIntent = new Intent(MainActivity.this, MapActivity.class);
-//                myIntent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.Frags.MAP);
-                myIntent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.FRAG_MAP);
-                startActivity(myIntent);
-                finish();
-            }
-        });
-
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.mainFab);
-        fab.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Snackbar.make(view, "what ", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
-            }
-        });
-
-
-        TextView signup = (TextView) findViewById(R.id.signUp);
-        signup.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent intent = new Intent(MainActivity.this, SignUpActivity.class);
-                // intent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.FRAG_MAP);
-                startActivity(intent);
-                finish();
-            }
-        });
-
-        TextView forgotpass = (TextView) findViewById(R.id.forgotPass);
-        forgotpass.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View view){
-                Intent intent = new Intent(MainActivity.this, ForgotPassActivity.class);
-                // intent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.FRAG_MAP);
-                startActivity(intent);
-                finish();
-            }
-        });
-
     }
 
     public void sendMessage(JSONObject object){
@@ -172,6 +87,58 @@ public class MainActivity extends AppCompatActivity {
         content.setText(object.toString());
     }
 
+    @Override
+    public void onLoginClick(JSONObject jsonObject) {
+        sendMessage(jsonObject);
+        Intent myIntent = new Intent(MainActivity.this, MapActivity.class);
+        myIntent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.FRAG_MAP);
+        startActivity(myIntent);
+        finish();
+    }
+
+    @Override
+    public void onCreateAccountClick() {
+        fm.beginTransaction()
+                .replace(R.id.container, new SignUpFragment())
+                .addToBackStack(null)
+                .commit();
+    }
+
+    @Override
+    public void onForgotPassClick() {
+        fm.beginTransaction()
+                .replace(R.id.container, new ForgotPassFragment())
+                .commit();
+    }
+
+    @Override
+    public void onSignUpClick() {
+        // TODO: should create a user here
+        Intent myIntent = new Intent(MainActivity.this, MapActivity.class);
+        myIntent.putExtra(MapActivity.FRAGMENT_ID, MapActivity.FRAG_MAP);
+        startActivity(myIntent);
+        finish();
+    }
+
+    @Override
+    public void onLoginTextClick() {
+        fm.beginTransaction()
+                .replace(R.id.container, new OnBoardFragment())
+                .commit();
+    }
+
+    @Override
+    public void onTermsClick() {
+        Toast.makeText(this, "terms", Toast.LENGTH_SHORT).show();
+    }
+
+    @Override
+    public void onSendClick() {
+        // TODO: send the email
+        fm.beginTransaction()
+                .replace(R.id.container, new OnBoardFragment())
+                .commit();
+    }
 
 
     class MyRequest {

@@ -136,8 +136,8 @@ public class MapActivity extends BaseActivity
                     getResources(),
                     Bitmap.createScaledBitmap(
                             bm,
-                            (int) Math.round(bm.getWidth() * 0.8),
-                            (int) Math.round(bm.getHeight() * 0.8),
+                            (int) Math.round(bm.getWidth() * 0.5),
+                            (int) Math.round(bm.getHeight() * 0.5),
                             true));
 
             projectIcon = getResources().getDrawable(R.drawable.ic_queue_white_24dp, null);

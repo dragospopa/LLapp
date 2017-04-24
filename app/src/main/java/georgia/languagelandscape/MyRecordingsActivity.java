@@ -28,8 +28,6 @@ public class MyRecordingsActivity extends BaseActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_myrecordings_nav_drawer);
-        rootLayout = (FrameLayout) findViewById(R.id.myrecodings_root);
-        rootLayout.getForeground().setAlpha(0);
         super.onDrawerCreated();
     }
 
