@@ -12,7 +12,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 
 import georgia.languagelandscape.R;
@@ -45,8 +44,6 @@ public class RenameDialogFragment extends DialogFragment {
             view = new View(getActivity());
         }
         imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        FrameLayout root = (FrameLayout) getActivity().findViewById(R.id.myrecodings_root);
-        root.getForeground().setAlpha(0);
     }
 
     @NonNull
