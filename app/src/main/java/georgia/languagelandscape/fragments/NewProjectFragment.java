@@ -25,6 +25,20 @@ import georgia.languagelandscape.data.Project;
 import georgia.languagelandscape.data.User;
 import georgia.languagelandscape.database.ProjectDataSource;
 
+/**
+ * The data entry Fragment for a new Project.
+ *
+ * It has edittext for data entry of a Project object,
+ * and by checking the mandatory fields and validity of the inputs it creates
+ * a new Project object and insert it into the database.
+ *
+ * The new Project created will not be associated with any recording,
+ * but user can choose to add any recording into a Project.
+ *
+ * Since the Project created will be inserted into database directly,
+ * this fragment class is handling all the user input on its own
+ * without the need for a listener.
+ */
 public class NewProjectFragment extends Fragment implements MyProjectsFragment.OnFragmentInteractionListener {
 
     private FragmentManager fm = null;
@@ -121,6 +135,7 @@ public class NewProjectFragment extends Fragment implements MyProjectsFragment.O
         addButton = (Button) view.findViewById(R.id.button_add_project);
         addButton.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+
                 // check mandatory fields: full name and short name
                 String fullName = full_name.getText().toString();
                 if (fullName.equals("")) {
@@ -167,6 +182,7 @@ public class NewProjectFragment extends Fragment implements MyProjectsFragment.O
                 project.setDescription(descriptionInput);
                 project.setRecordings(null);
 
+                // insert into internal database
                 ProjectDataSource dataSource = new ProjectDataSource(context);
                 dataSource.open();
                 dataSource.createProject(project);

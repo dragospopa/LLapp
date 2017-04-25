@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
@@ -18,6 +17,11 @@ import georgia.languagelandscape.R;
 import georgia.languagelandscape.data.Recording;
 import georgia.languagelandscape.util.RecordingAdaptor;
 
+/**
+ * A more complex {@link DialogFragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link RenameDialogListener} interface to handle interaction events.
+ */
 public class RenameDialogFragment extends DialogFragment {
 
     private Context context;
@@ -37,6 +41,7 @@ public class RenameDialogFragment extends DialogFragment {
     @Override
     public void onDismiss(DialogInterface dialog) {
         super.onDismiss(dialog);
+        // force to close the soft keyboard whenever the dialog is dismissed
         InputMethodManager imm = (InputMethodManager)
                 context.getSystemService(Context.INPUT_METHOD_SERVICE);
         View view = getActivity().getCurrentFocus();
@@ -52,6 +57,8 @@ public class RenameDialogFragment extends DialogFragment {
 
         final Recording recording = getArguments().getParcelable(Recording.PARCEL_KEY);
         final int adaptorPosition = getArguments().getInt(RecordingAdaptor.ADAPTOR_POSITION);
+
+        // need the layout to set the custom view for the dialog
         final LinearLayout dialogLayout = (LinearLayout) LayoutInflater
                 .from(context)
                 .inflate(R.layout.dialog_rename_recording, null);
@@ -69,7 +76,6 @@ public class RenameDialogFragment extends DialogFragment {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
                                 String toName = renameField.getText().toString().trim();
-                                Log.i("dialog", "toName: " + toName);
                                 if (!isNameValid(toName)) {
                                     renameField.setError("Title is not valid");
                                 } else {
@@ -87,6 +93,8 @@ public class RenameDialogFragment extends DialogFragment {
                                 dialog.dismiss();
                             }
                         });
+
+        // automatically focus the edittext on create dialog
         renameField.requestFocus();
         InputMethodManager imm = (InputMethodManager)
                 context.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -94,6 +102,13 @@ public class RenameDialogFragment extends DialogFragment {
         return builder.create();
     }
 
+    /**
+     * The factory method that creates new instance of this fragment
+     * @param recording the recording to be renamed; needed for inserting the renamed recording into
+     *                  database
+     * @param position adaptor position
+     * @return an instance of this fragment
+     */
     public static RenameDialogFragment newInstance(Recording recording, int position){
         RenameDialogFragment dialog = new RenameDialogFragment();
 

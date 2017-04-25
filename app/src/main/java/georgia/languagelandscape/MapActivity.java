@@ -17,6 +17,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.content.ContextCompat;
+import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
 
@@ -30,12 +31,18 @@ import georgia.languagelandscape.fragments.MyProjectsFragment;
 import georgia.languagelandscape.fragments.NewProjectFragment;
 import georgia.languagelandscape.fragments.ProfileFragment;
 
+/**
+ * MapActivity is where we control all the fragment transactions
+ * based on navigation drawer selection.
+ *
+ * It also handles events from {@link MapFragment}.
+ */
 public class MapActivity extends BaseActivity
         implements MapFragment.mapListener {
 
     private static boolean active = false;
-    private static double longitude = 0.0;
-    private static double latitude = 0.0;
+    private static double longitude = 27.0;
+    private static double latitude = 25.0;
     public final static String GEO_LONGITUDE = "geo_longitude";
     public final static String GEO_LATITUDE = "geo_latitude";
     public final static String FRAGMENT_ID = "fragment_id";
@@ -72,6 +79,10 @@ public class MapActivity extends BaseActivity
         active = true;
 
         mapFragment = new MapFragment();
+//        Bundle bundle = new Bundle();
+//        bundle.putDouble(GEO_LONGITUDE, longitude);
+//        bundle.putDouble(GEO_LATITUDE, latitude);
+//        mapFragment.setArguments(bundle);
         if (ContextCompat.checkSelfPermission(this, android.Manifest.permission.ACCESS_FINE_LOCATION)
                 != PackageManager.PERMISSION_GRANTED) {
             ActivityCompat.requestPermissions(
@@ -83,6 +94,7 @@ public class MapActivity extends BaseActivity
         locationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
         currentLocation = locationManager.getLastKnownLocation(LocationManager.NETWORK_PROVIDER);
         if (currentLocation != null) {
+            Log.d("location", "getting last known location");
             longitude = currentLocation.getLongitude();
             latitude = currentLocation.getLatitude();
         }
@@ -90,8 +102,9 @@ public class MapActivity extends BaseActivity
             @Override
             public void onLocationChanged(Location location) {
                 if (isBetterLocation(location)){
-                    longitude = currentLocation.getLongitude();
-                    latitude = currentLocation.getLatitude();
+                    Log.d("location", "better location find");
+                    longitude = location.getLongitude();
+                    latitude = location.getLatitude();
 
                     Bundle bundle = new Bundle();
                     bundle.putDouble(GEO_LONGITUDE, longitude);
@@ -129,37 +142,35 @@ public class MapActivity extends BaseActivity
         fragId = getIntent().getIntExtra(FRAGMENT_ID, FRAG_MAP);
         switchFragment(fragId);
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            addIcon = getResources().getDrawable(R.drawable.ic_add_white_24dp, null);
-            Bitmap bm = ((BitmapDrawable) addIcon).getBitmap();
-            addIcon = new BitmapDrawable(
-                    getResources(),
-                    Bitmap.createScaledBitmap(
-                            bm,
-                            (int) Math.round(bm.getWidth() * 0.5),
-                            (int) Math.round(bm.getHeight() * 0.5),
-                            true));
+        addIcon = getResources().getDrawable(R.drawable.ic_add_white_24dp);
+        Bitmap bm = ((BitmapDrawable) addIcon).getBitmap();
+        addIcon = new BitmapDrawable(
+                getResources(),
+                Bitmap.createScaledBitmap(
+                        bm,
+                        (int) Math.round(bm.getWidth() * 0.5),
+                        (int) Math.round(bm.getHeight() * 0.5),
+                        true));
 
-            projectIcon = getResources().getDrawable(R.drawable.ic_queue_white_24dp, null);
-            bm = ((BitmapDrawable) projectIcon).getBitmap();
-            projectIcon = new BitmapDrawable(
-                    getResources(),
-                    Bitmap.createScaledBitmap(
-                            bm,
-                            (int) Math.round(bm.getWidth() * 0.3),
-                            (int) Math.round(bm.getHeight() * 0.3),
-                            true));
+        projectIcon = getResources().getDrawable(R.drawable.ic_queue_white_24dp);
+        bm = ((BitmapDrawable) projectIcon).getBitmap();
+        projectIcon = new BitmapDrawable(
+                getResources(),
+                Bitmap.createScaledBitmap(
+                        bm,
+                        (int) Math.round(bm.getWidth() * 0.3),
+                        (int) Math.round(bm.getHeight() * 0.3),
+                        true));
 
-            recordIcon = getResources().getDrawable(R.drawable.ic_mic_none_white_24dp, null);
-            bm = ((BitmapDrawable) recordIcon).getBitmap();
-            recordIcon = new BitmapDrawable(
-                    getResources(),
-                    Bitmap.createScaledBitmap(
-                            bm,
-                            (int) Math.round(bm.getWidth() * 0.4),
-                            (int) Math.round(bm.getHeight() * 0.4),
-                            true));
-        }
+        recordIcon = getResources().getDrawable(R.drawable.ic_mic_none_white_24dp);
+        bm = ((BitmapDrawable) recordIcon).getBitmap();
+        recordIcon = new BitmapDrawable(
+                getResources(),
+                Bitmap.createScaledBitmap(
+                        bm,
+                        (int) Math.round(bm.getWidth() * 0.4),
+                        (int) Math.round(bm.getHeight() * 0.4),
+                        true));
 
         addFab.setImageDrawable(addIcon);
         addFab.setOnClickListener(new View.OnClickListener() {

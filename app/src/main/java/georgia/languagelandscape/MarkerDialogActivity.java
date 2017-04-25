@@ -13,7 +13,15 @@ import android.widget.TextView;
 
 import georgia.languagelandscape.data.Recording;
 
-
+/**
+ * MarkerDialogActivity uses DialogActivity style and will be created
+ * when a marker is clicked.
+ *
+ * It displays detailed information about a recording with the ability to play.
+ * This fragment contains a seekbar which we used to visually track the progress
+ * of playing the recording.
+ * User may drag seekbar to change playing progress.
+ */
 public class MarkerDialogActivity extends AppCompatActivity {
 
     private long duration = 0L;

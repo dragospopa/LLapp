@@ -34,7 +34,11 @@ import georgia.languagelandscape.database.RecordingDataSource;
 import georgia.languagelandscape.fragments.MetaDataFieldFragment;
 import georgia.languagelandscape.fragments.MetaDataFragment;
 import georgia.languagelandscape.fragments.RecordFragment;
+import georgia.languagelandscape.util.MetaDataPagerAdaptor;
 
+/**
+ * The listener for {@link RecordFragment}, {@link MetaDataFragment}.
+ */
 public class RecordingActivity extends BaseActivity
         implements RecordFragment.RecordFragmentListener,
         MetaDataFragment.MetaDataFragmentListener,
@@ -108,6 +112,7 @@ public class RecordingActivity extends BaseActivity
                 .replace(R.id.container, recordFragment, RecordFragment.TAG)
                 .commit();
 
+        // the handler that check whether or not a recording has finished playing yet
         completionHandler = new Handler();
         completionRunnable = new Runnable() {
             @Override
@@ -131,6 +136,12 @@ public class RecordingActivity extends BaseActivity
         audioFileName = audioCacheFilePath + "/" + System.currentTimeMillis() + Recording.defaultAudioFormat;
     }
 
+    /**
+     * Helper for checking recording name duplication in internal storage.
+     *
+     * @param recordingTitle the recording name to be checked
+     * @return number of duplicated file name
+     */
     private int checkDuplication(final String recordingTitle) {
         Log.d(LOG_TAG, "Duplicated files: ");
         String[] recordings = audioInternalFileDir.list(new FilenameFilter() {
@@ -164,6 +175,13 @@ public class RecordingActivity extends BaseActivity
         return true;
     }
 
+    /**
+     * Prepare the MediaRecorder and record.
+     * First check permission to record audio.
+     *
+     * @return true if recorder started recording
+     *         false otherwise
+     */
     private boolean startRecording() {
         if (!audioPermissionGranted) {
             int permissionCheck = ContextCompat.checkSelfPermission(
@@ -195,6 +213,14 @@ public class RecordingActivity extends BaseActivity
         return true;
     }
 
+    /**
+     * Given the longitude and latitude, uses Geocoder to calculate location.
+     *
+     * @param longitude geo-longitude
+     * @param latitude geo-latitude
+     * @return a string representing the location
+     *         in the form of "city name, country name".
+     */
     private String updateLocation(double longitude, double latitude) {
         Geocoder gcd = new Geocoder(this.getBaseContext(), Locale.getDefault());
         String cityName = null;
@@ -220,6 +246,7 @@ public class RecordingActivity extends BaseActivity
     }
 
     public static boolean isActive() {
+        // called by other activities to see if this one is alive
         return active;
     }
 
@@ -380,6 +407,17 @@ public class RecordingActivity extends BaseActivity
         }
     }
 
+    /**
+     * Callback by the {@link MetaDataFragment}
+     * First check the mandatory field inputs. If any of them is empty, call
+     * {@link MetaDataFragment#focusAt(int)} to focus to the question page
+     * we want.
+     *
+     * When all mandatory fields are ready, instantiate a new recording data
+     * and set its corresponding fields.
+     *
+     * Finally, insert the recording into database and start {@link MyRecordingsActivity}.
+     */
     @Override
     public void onFinishClick() {
         if (recordingLanguageString.equals("")) {
@@ -456,6 +494,16 @@ public class RecordingActivity extends BaseActivity
         }
     }
 
+    /**
+     * Callback by {@link MetaDataFieldFragment}
+     * Called whenever an edittext lose focus (i.e. a possible new
+     * user input).
+     *
+     * Saves the user input as Strings for future reference.
+     *
+     * @param inputString user input from the EditText
+     * @param which pointing to the question being answered
+     */
     @Override
     public void onUserInput(String inputString, int which) {
         Log.d("test", "question " + which + " :" + inputString);
@@ -477,6 +525,25 @@ public class RecordingActivity extends BaseActivity
                 break;
             default:
                 break;
+        }
+    }
+
+    /**
+     * Callback by {@link MetaDataFieldFragment}.
+     * Focus the current page to the next page.
+     * If the current page is at the end, call {@link #onFinishClick()}.
+     *
+     * @param currentItem current page number
+     */
+    @Override
+    public void moveToNext(int currentItem) {
+        if (currentItem == MetaDataPagerAdaptor.NUM_Q - 1) {
+            // user on the last question, ready to finish
+            onFinishClick();
+        } else {
+            MetaDataFragment dataFragment =
+                    (MetaDataFragment) fragmentManager.findFragmentByTag(MetaDataFragment.TAG);
+            dataFragment.focusAt(currentItem + 1);
         }
     }
 }

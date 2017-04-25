@@ -17,6 +17,24 @@ import java.util.Locale;
 
 import georgia.languagelandscape.R;
 
+/**
+ * RecordFragment is where user maker recordings.
+ * The fragment layout contains three buttons, one for record,
+ * one for playback and one for saving the recording.
+ *
+ * When a user makes a recording, he/she can discard the current
+ * recording by making a new one. Alternatively, he/she can play & pause the
+ * recording just made and decide to save it.
+ *
+ * When a user decides to save the recording, {@link MetaDataFragment} is load
+ * for user to enter information about the recording.
+ * Other meta-data such as location and date is handled and automatically added
+ * to the recording by this fragment and its listener.
+ *
+ * Activities that contains this fragment must implements
+ * {@link RecordFragmentListener} interface to interact with
+ * record, play and save events.
+ */
 public class RecordFragment extends Fragment {
 
     private Context context;
@@ -80,12 +98,15 @@ public class RecordFragment extends Fragment {
         recordingLocation = (TextView) view.findViewById(R.id.recording_location);
         recordingLocation.setText(location);
         recordingName.setText(title);
+
         Date currentDateTime = new Date();
         SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.UK);
         String date = formatter.format(currentDateTime);
         recordingDate.setText(date);
+        // pass the date to its listener for storage.
         ((RecordFragmentListener) context).setDateString(date);
 
+        // the handler for displaying recording time dynamically
         handler = new Handler();
         timerRunnable = new Runnable() {
             @Override
@@ -107,12 +128,14 @@ public class RecordFragment extends Fragment {
             public void onClick(View v) {
                 boolean success;
                 success = ((RecordFragmentListener) context).onRecordClick(canRecord);
+                // if for any reason attempt to record fails, return
                 if (!success) {
                     return;
                 }
                 recordingTime = System.currentTimeMillis();
                 handler.postDelayed(timerRunnable, 0);
 
+                // set button image according to the state of recorder
                 if (canRecord) {
                     recordButton.setBackgroundResource(R.drawable.ic_stop_black_24dp);
                 } else {
@@ -144,6 +167,11 @@ public class RecordFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Callback when its listener plays or pauses the recording
+     *
+     * @param paused the state of recording: playing or paused
+     */
     public void notifyRecordingPlaying(boolean paused) {
         if (!paused) {
             playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
@@ -155,27 +183,13 @@ public class RecordFragment extends Fragment {
         saveButton.setClickable(canRecord);
     }
 
+    /**
+     * Callback called by its listener that the recording has finished playing.
+     */
     public void notifyRecordingCompleted() {
         playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
         canRecord = true;
         saveButton.setClickable(true);
         recordButton.setClickable(true);
     }
-
-    public void setText(int viewID, String text) {
-        switch (viewID) {
-            case R.id.recording_name:
-                recordingName.setText(text);
-                break;
-            case R.id.recording_date:
-                recordingDate.setText(text);
-                break;
-            case R.id.recording_location:
-                recordingLocation.setText(text);
-                break;
-            default:
-                break;
-        }
-    }
-
 }

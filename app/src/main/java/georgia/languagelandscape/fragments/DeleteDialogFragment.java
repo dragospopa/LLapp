@@ -12,6 +12,11 @@ import georgia.languagelandscape.R;
 import georgia.languagelandscape.data.Recording;
 import georgia.languagelandscape.util.RecordingAdaptor;
 
+/**
+ * A simple {@link DialogFragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link DeleteDialogListener} interface to handle interaction events.
+ */
 public class DeleteDialogFragment extends DialogFragment{
 
     private Context context;
@@ -60,6 +65,13 @@ public class DeleteDialogFragment extends DialogFragment{
         return builder.create();
     }
 
+    /**
+     * The factory method that creates new instance of this fragment
+     * @param id the id of the recording to be deleted
+     * @param title the title of the recording; needed to find the file path to the recording file
+     * @param position adaptor position indicating which view to delete
+     * @return an instance of this class
+     */
     public static DeleteDialogFragment newInstance(String id, String title, int position) {
         DeleteDialogFragment dialog = new DeleteDialogFragment();
 

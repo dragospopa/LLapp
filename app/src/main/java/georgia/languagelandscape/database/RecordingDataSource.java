@@ -18,6 +18,17 @@ import java.util.List;
 import georgia.languagelandscape.data.Recording;
 import georgia.languagelandscape.data.User;
 
+/**
+ * The data provider for Recording.
+ * To use:
+ *      <pre>
+ *      {@code
+ *      RecordingDataSource datasource = new RecordingDataSource(context);
+ *      datasource.open();
+ *      // do something with data
+ *      datasource.close();}
+ *      </pre>
+ */
 public class RecordingDataSource {
 
     private Context context;
@@ -134,7 +145,7 @@ public class RecordingDataSource {
         return recording;
     }
 
-    public long getRecorgindCount() {
+    public long getRecordingCount() {
         return DatabaseUtils.queryNumEntries(database, RecordingTableContract.TABLE_NAME);
     }
 
@@ -144,6 +155,13 @@ public class RecordingDataSource {
         return database.delete(RecordingTableContract.TABLE_NAME, whereClause, whereArgs) > 0;
     }
 
+    /**
+     * Helper function to construct a recording, given a Cursor object.
+     * The Cursor object is left as it is. It is the caller's responsibility to close the Cursor
+     * @param cursor cursor pointing to a row. It's guaranteed that the cursor is pointing to
+     *               at least one valid row.
+     * @return a Recording construct from database
+     */
     private Recording constructRecording(Cursor cursor) {
         Recording recording = new Recording();
         Gson gson = new Gson();
@@ -186,6 +204,10 @@ public class RecordingDataSource {
         return recording;
     }
 
+    /**
+     * Get all recordings in the database
+     * @return a List of Recordings from the database
+     */
     public List<Recording> getAllRecordings() {
         List<Recording> recordings = new ArrayList<>();
         Cursor cursor = database.query(
@@ -201,6 +223,12 @@ public class RecordingDataSource {
         return recordings;
     }
 
+    /**
+     * Get all the Recordings from the database that are specified by their ids
+     * @param recordingIDs a List of String of the ids of the recordings we want
+     * @return a List of Recording matching the id. The list size maybe smaller than the list of ids
+     *         as a recording may not be found in the database.
+     */
     public List<Recording> getAllRecordings(List<String> recordingIDs) {
         List<Recording> recordings = new ArrayList<>();
         Cursor cursor;

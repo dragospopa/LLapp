@@ -16,6 +16,10 @@ import georgia.languagelandscape.data.Recording;
 import georgia.languagelandscape.database.RecordingDataSource;
 import georgia.languagelandscape.util.RecordingAdaptor;
 
+/**
+ * This fragment gets the list of recordings user made, whether uploaded
+ * or not, and displays them in a list
+ */
 public class RecordingsListFragment extends Fragment {
 
     public static final String FRAG_TAG = "recordingListFragment";

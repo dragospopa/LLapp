@@ -7,13 +7,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import java.util.List;
 
 import georgia.languagelandscape.R;
 import georgia.languagelandscape.data.Project;
 
+/**
+ * Adaptor for Project list.
+ */
 public class ProjectAdaptor extends RecyclerView.Adapter<ProjectAdaptor.ViewHolder>{
 
     private Context context;
@@ -70,7 +72,7 @@ public class ProjectAdaptor extends RecyclerView.Adapter<ProjectAdaptor.ViewHold
         holder.moreButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Toast.makeText(context, "not implemented", Toast.LENGTH_SHORT).show();
+                // TODO: show a popup
             }
         });
     }

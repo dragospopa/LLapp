@@ -1,5 +1,8 @@
 package georgia.languagelandscape.data;
 
+/**
+ * dummy user data model class
+ */
 public class User {
 
     String username;

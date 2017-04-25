@@ -8,9 +8,18 @@ import android.view.ViewGroup;
 
 import georgia.languagelandscape.fragments.MetaDataFieldFragment;
 
+/**
+ * The simple {@link FragmentStatePagerAdapter} subclass.
+ *
+ * The {@link #getRegisteredFragment(int)} is a small hack
+ * that help us to get the registered fragment at any given page,
+ * without accidentally referring to a null fragment that has been
+ * destroyed by the pager.
+ * Hence we can reference to any views inside that fragment.
+ */
 public class MetaDataPagerAdaptor extends FragmentStatePagerAdapter {
 
-    private static final int NUM_Q = 10;
+    public static final int NUM_Q = 10;
     private SparseArray<Fragment> registeredFragment = new SparseArray<>();
 
     public MetaDataPagerAdaptor(FragmentManager fm) {

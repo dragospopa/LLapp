@@ -4,7 +4,6 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -16,6 +15,16 @@ import android.widget.EditText;
 import android.widget.TextView;
 
 import georgia.languagelandscape.R;
+
+/**
+ * The Fragment class that will be instantiated by the
+ * {@link georgia.languagelandscape.util.MetaDataPagerAdaptor}.
+ * It contains an EditText for user input and a TextView prompt,
+ * displaying one question at a time to make it more user friendly
+ *
+ * Activities that contains this fragment must implements
+ * {@link MetaDataFieldFragmentListener} interface to interact with finish button click
+ */
 
 public class MetaDataFieldFragment extends Fragment {
 
@@ -43,9 +52,17 @@ public class MetaDataFieldFragment extends Fragment {
     }
 
     public interface MetaDataFieldFragmentListener {
-        public void onUserInput(String inputString, int which);
+        void onUserInput(String inputString, int which);
+
+        void moveToNext(int currentItem);
     }
 
+    /**
+     * The factory method to create an instance of this class
+     *
+     * @param question the page number (i.e. the question number)
+     * @return instance of this class
+     */
     public static MetaDataFieldFragment newInstance(int question) {
         MetaDataFieldFragment metaDataFragment = new MetaDataFieldFragment();
         Bundle bundle = new Bundle();
@@ -122,6 +139,8 @@ public class MetaDataFieldFragment extends Fragment {
             public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
                 switch (actionId) {
                     case EditorInfo.IME_ACTION_NEXT:
+                        // go to the next question or finish
+                        ((MetaDataFieldFragmentListener) context).moveToNext(question);
                         return true;
                     default:
                         return false;
@@ -132,7 +151,11 @@ public class MetaDataFieldFragment extends Fragment {
         field.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
-                Log.d("test", String.valueOf(hasFocus));
+                // it's always harder to get the text from an edittext in a pager
+                // when it's fragment has been destroyed.
+                // So whenever the edittext loses focus,
+                // meaning a user input has been made,
+                // pass this user input and the question number to the parent activity for storage
                 if (!hasFocus) {
                     ((MetaDataFieldFragmentListener) context)
                             .onUserInput(field.getText().toString(), question);
@@ -143,11 +166,10 @@ public class MetaDataFieldFragment extends Fragment {
         return view;
     }
 
-    public String getFieldText() {
-        Log.d("test", String.valueOf((field == null)));
-        return (field == null) ? "" : field.getText().toString();
-    }
-
+    /**
+     * Helper function to focus the
+     * edittext view when current page has been selected
+     */
     public void focusField() {
         field.requestFocus();
         InputMethodManager imm = (InputMethodManager)

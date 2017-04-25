@@ -13,6 +13,13 @@ import android.widget.Toast;
 
 import georgia.languagelandscape.R;
 
+/**
+ * A simple {@link Fragment} subclass.
+ * Activities that contain this fragment must implement the
+ * {@link ForgotPassFragmentListener} interface
+ * to handle interaction events.
+ * Use the newInstance factory method to create an instance of this fragment.
+ */
 public class ForgotPassFragment extends Fragment {
 
     private Context context;

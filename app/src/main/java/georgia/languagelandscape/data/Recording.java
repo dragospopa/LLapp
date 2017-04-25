@@ -15,6 +15,9 @@ import java.util.UUID;
 
 import georgia.languagelandscape.MyRecordingsActivity;
 
+/**
+ * The primary data model class of LL app
+ */
 public class Recording implements Parcelable{
 
     private String recordingID = null;
@@ -267,6 +270,10 @@ public class Recording implements Parcelable{
         return String.format("%02d:%02d", minutes, seconds);
     }
 
+    /**
+     * play this recording starting from {@param at} millisecond
+     * @param at the time from where to play the recording, in millisecond
+     */
     public void play(int at){
         if (paused) {
             // start/resume playing the recording
@@ -282,6 +289,9 @@ public class Recording implements Parcelable{
         }
     }
 
+    /**
+     * helper to initialise and prepare a Mediaplayer
+     */
     private void prepare() {
         if (player != null) return;
         player = new MediaPlayer();
@@ -306,6 +316,10 @@ public class Recording implements Parcelable{
         }
     }
 
+    /**
+     * called by activities and fragments to stop the recording
+     * when necessary during their lifecycle
+     */
     public void stop() {
         if (player == null) return;
         if (player.isPlaying()) {
@@ -319,10 +333,22 @@ public class Recording implements Parcelable{
         player = null;
     }
 
+    /**
+     * called when a user choose to upload this recording to the server
+     * @return true when recording is uploaded on the server and hence visible to the map
+     *         false otherwise.
+     */
     public boolean isUploaded() {
+        // TODO: to be implemented
         return true;
     }
 
+    /**
+     * Get the current playtime of this recording
+     * @return 0 if the recording has never been played;
+     *         the Mediaplayer's current position when the recording is paused but not completed;
+     *         -1 indicating an invalid state.
+     */
     public int getCurrentPlaytime() {
         if (player == null) {
             return 0;
@@ -333,10 +359,14 @@ public class Recording implements Parcelable{
         }
     }
 
-    public void setCurrentPlaytime(int milisec) {
+    /**
+     * Set the Mediaplayer position of this recording to {@param milisec} and start playing
+     * @param millisec desired position in millisecond
+     */
+    public void setCurrentPlaytime(int millisec) {
         if (player == null) {
             prepare();
         }
-        player.seekTo(milisec);
+        player.seekTo(millisec);
     }
 }

@@ -26,6 +26,12 @@ import georgia.languagelandscape.fragments.OnBoardFragment;
 import georgia.languagelandscape.fragments.SignUpFragment;
 import georgia.languagelandscape.fragments.TermsFragment;
 
+/**
+ * MainActivity deals with the onboarding page and all the interaction between
+ * {@link OnBoardFragment}, {@link SignUpFragment} and {@link ForgotPassFragment}.
+ *
+ * It's also the activity where we check for permission to use location.
+ */
 public class MainActivity extends AppCompatActivity
         implements OnBoardFragment.OnBoardFragmentListener,
         SignUpFragment.SignUpFragmentListener, ForgotPassFragment.ForgotPassFragmentListener{

@@ -13,6 +13,13 @@ import android.widget.TextView;
 
 import georgia.languagelandscape.R;
 
+/**
+ * A generic Fragment that display terms and services text
+ *
+ * The text is taken as html text from
+ * <a href="http://languagelandscape.org/terms/">Language Landscape website</a>
+ * and is formatted by Html.fromHtml() method.
+ */
 public class TermsFragment extends Fragment {
 
     private Context context;

@@ -16,6 +16,10 @@ import georgia.languagelandscape.data.Project;
 import georgia.languagelandscape.database.ProjectDataSource;
 import georgia.languagelandscape.util.ProjectAdaptor;
 
+/**
+ * The Fragment class that displays the list of
+ * Projects a user has
+ */
 public class MyProjectsFragment extends Fragment {
 
     private Context context;
@@ -31,6 +35,7 @@ public class MyProjectsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        // get a list of Projects the user has from database
         datasource = new ProjectDataSource(context);
         datasource.open();
         List<Project> projects = datasource.getOwnedProjects();

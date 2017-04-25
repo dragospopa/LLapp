@@ -32,6 +32,13 @@ import georgia.languagelandscape.fragments.MyProjectsFragment;
 import georgia.languagelandscape.fragments.NewProjectFragment;
 import georgia.languagelandscape.fragments.ProfileFragment;
 
+/**
+ * BaseActivity is the super class for all the Activity class that
+ * want to include a navigation drawer on their toolbar.
+ * Such activities have to include a DrawerLayout as their root layout and
+ * call {@link #onDrawerCreated()} in their onCreate method after setting
+ * content view.
+ */
 public class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener,
         ProfileFragment.OnFragmentInteractionListener,

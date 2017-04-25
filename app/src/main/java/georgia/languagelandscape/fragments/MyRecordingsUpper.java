@@ -9,6 +9,10 @@ import android.view.ViewGroup;
 
 import georgia.languagelandscape.R;
 
+/**
+ * A generic Fragment displaying the profile header view
+ * of the user.
+ */
 public class MyRecordingsUpper extends Fragment{
 
     @Nullable

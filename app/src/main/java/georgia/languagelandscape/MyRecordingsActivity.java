@@ -16,6 +16,10 @@ import georgia.languagelandscape.fragments.DeleteDialogFragment;
 import georgia.languagelandscape.fragments.RenameDialogFragment;
 import georgia.languagelandscape.util.RecordingAdaptor;
 
+/**
+ * Handles callback form {@link RecordingAdaptor} when the popup window for
+ * detailed information about a recording is shown.
+ */
 public class MyRecordingsActivity extends BaseActivity
         implements RenameDialogFragment.RenameDialogListener,
         DeleteDialogFragment.DeleteDialogListener{
@@ -31,10 +35,23 @@ public class MyRecordingsActivity extends BaseActivity
         super.onDrawerCreated();
     }
 
+    /**
+     * Rename the recording and its recording file at internal storage. Update the database
+     * with the renamed recording. Doing so, update the list view with this new name.
+     *
+     * The new name is guaranteed to be a valid string for a recording, but the method
+     * still need to call {@link #checkDuplication(String)} to check for duplicated names
+     * in the internal storage to avoid naming conflict.
+     *
+     * The method get the adaptor for the RecyclerView and use it to update view.
+     *
+     * @param recording recording to be renamed
+     * @param toName the new name
+     * @param adaptorPosition pointing to the view in RecyclerView showing
+     *                        this recording information
+     */
     @Override
     public void onRenameClick(Recording recording, String toName, int adaptorPosition) {
-        Log.i("dialog", "changing recording: " + recording.getTitle());
-        Log.i("dialog", recording.getFilePath());
 
         if (toName.equals(recording.getTitle())) {
             return;
@@ -78,6 +95,7 @@ public class MyRecordingsActivity extends BaseActivity
                     .findViewByPosition(adaptorPosition)
                     .findViewById(R.id.recordingList_title);
             title.setText(toName);
+
             /* change the database */
             RecordingDataSource dataSource = new RecordingDataSource(this);
             dataSource.open();
@@ -87,6 +105,12 @@ public class MyRecordingsActivity extends BaseActivity
         }
     }
 
+    /**
+     * Helper for checking recording name duplication in internal storage.
+     *
+     * @param recordingTitle the recording name to be checked
+     * @return number of duplicated file name
+     */
     private int checkDuplication(final String recordingTitle) {
         String audioInternalFilePath = null;
         File audioInternalFileDir = null;
@@ -108,6 +132,14 @@ public class MyRecordingsActivity extends BaseActivity
         return recordings.length;
     }
 
+    /**
+     * Delete the recording from database and the internal storage. In doing so,
+     * remove the view for this recording from the list view as well.
+     *
+     * @param id id of the recording to be deleted. This will be used in RecordingDatasource
+     * @param title title of the recording. Will be used to find file path to be deleted
+     * @param index index of the recording in the list
+     */
     @Override
     public void onDeleteClick(String id, String title, final int index) {
 

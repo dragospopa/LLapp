@@ -21,6 +21,12 @@ import georgia.languagelandscape.data.Recording;
 import georgia.languagelandscape.fragments.DeleteDialogFragment;
 import georgia.languagelandscape.fragments.RenameDialogFragment;
 
+/**
+ * Adaptor for Recording List.
+ * This adaptor also handles removing recording events
+ * when a recording is deleted by user when
+ * the recording list is still active.
+ */
 public class RecordingAdaptor extends RecyclerView.Adapter<RecordingAdaptor.ViewHolder> {
 
     private Context context;
@@ -109,7 +115,7 @@ public class RecordingAdaptor extends RecyclerView.Adapter<RecordingAdaptor.View
                     }
                 }
                 recording.play(0);
-                MyRecordingsActivity.recordingPlaying = true;
+                MyRecordingsActivity.recordingPlaying = !recording.isPaused();
             }
         });
         holder.moreButton.setOnClickListener(new View.OnClickListener() {
@@ -118,6 +124,8 @@ public class RecordingAdaptor extends RecyclerView.Adapter<RecordingAdaptor.View
 
                 LayoutInflater inflator = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                 ViewGroup layout = (ViewGroup) inflator.inflate(R.layout.popup_edit_recording, null);
+
+                // the popup window that will show up when the more button is clicked
                 final PopupWindow popupWindow = new PopupWindow(layout, 600, 850, true);
                 PopupViewHolder popupViewHolder = new PopupViewHolder(layout);
                 popupViewHolder.title.setText(recording.getTitle());
@@ -169,6 +177,11 @@ public class RecordingAdaptor extends RecyclerView.Adapter<RecordingAdaptor.View
         return recordings.size();
     }
 
+    /**
+     * Called when a recording in the list is removed
+     *
+     * @param index index of the recording in list
+     */
     public void removeRecording(int index) {
         recordings.remove(index);
         notifyItemRemoved(index);

@@ -7,15 +7,9 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.webkit.WebSettings;
-import android.webkit.WebView;
-import android.webkit.WebViewClient;
-import android.widget.ListView;
-import android.widget.TextView;
 
 import georgia.languagelandscape.R;
 
@@ -23,12 +17,8 @@ import georgia.languagelandscape.R;
 
 
 /**
- * A simple {@link Fragment} subclass.
- * Activities that contain this fragment must implement the
- * {@link ProfileFragment.OnFragmentInteractionListener} interface
- * to handle interaction events.
- * Use the {@link ProfileFragment#newInstance} factory method to
- * create an instance of this fragment.
+ * One of the generic subclass of {@link Fragment} uesed to display information about the app
+ * Display help info about adding a recording
  */
 public class HelpAddRecordingFragment extends Fragment implements MyProjectsFragment.OnFragmentInteractionListener, View.OnClickListener {
     // TODO: Rename parameter arguments, choose names that match

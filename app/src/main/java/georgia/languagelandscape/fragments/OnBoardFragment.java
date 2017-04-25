@@ -26,6 +26,14 @@ import java.util.Map;
 import georgia.languagelandscape.R;
 import georgia.languagelandscape.data.User;
 
+/**
+ * A simple dummy onboarding page including log in and sign up
+ * when the user first open the app.
+ *
+ * Activities that contains this fragment must implements
+ * {@link OnBoardFragmentListener} interface to interact with
+ * login, signup and forgot password events
+ */
 public class OnBoardFragment extends Fragment {
 
     private Context context;
@@ -70,25 +78,25 @@ public class OnBoardFragment extends Fragment {
         passwordText = (EditText) view.findViewById(R.id.passText);
         forgotPass = (TextView) view.findViewById(R.id.forgetpass);
 
-        if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP) {
-            Drawable logo = context
-                    .getResources()
-                    .getDrawable(R.drawable.ll_logo_full, null);
-            Bitmap bm = ((BitmapDrawable) logo).getBitmap();
-            logo = new BitmapDrawable(
-                    context.getResources(),
-                    Bitmap.createScaledBitmap(
-                            bm,
-                            (int) Math.round(bm.getWidth() * 0.08),
-                            (int) Math.round(bm.getHeight() * 0.08),
-                            true));
-            logoView.setImageDrawable(logo);
-        }
+        // display the logo
+        Drawable logo = context
+                .getResources()
+                .getDrawable(R.drawable.ll_logo_full);
+        Bitmap bm = ((BitmapDrawable) logo).getBitmap();
+        logo = new BitmapDrawable(
+                context.getResources(),
+                Bitmap.createScaledBitmap(
+                        bm,
+                        (int) Math.round(bm.getWidth() * 0.08),
+                        (int) Math.round(bm.getHeight() * 0.08),
+                        true));
+        logoView.setImageDrawable(logo);
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
 
+                // initialize a user
                 if (mRequestQueue == null) {
                     mRequestQueue = Volley.newRequestQueue(context);
                 }

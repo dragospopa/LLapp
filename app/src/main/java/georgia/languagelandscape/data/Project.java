@@ -7,6 +7,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+/**
+ * The model data class representing a collection of recordings
+ * This data class has been made static (i.e. a Project data type can not be passed around between
+ * activities) because much of the work is handled by its corresponding
+ * {@link georgia.languagelandscape.database.ProjectDataSource} class
+ */
 public class Project {
 
     private String projectID = null;

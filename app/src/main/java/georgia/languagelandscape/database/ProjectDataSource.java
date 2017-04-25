@@ -18,6 +18,18 @@ import georgia.languagelandscape.data.Project;
 import georgia.languagelandscape.data.Recording;
 import georgia.languagelandscape.data.User;
 
+/**
+ * Project data provider that encapsulates creating, deleting projects and get all the associated
+ * recordings with the Project object.
+ * To use:
+ *      <pre>
+ *      {@code
+ *      ProjectDataSource datasource = new ProjectDataSource(context);
+ *      datasource.open();
+ *      // do something with data
+ *      datasource.close();}
+ *      </pre>
+ */
 public class ProjectDataSource {
 
     private Context context;
@@ -92,6 +104,11 @@ public class ProjectDataSource {
         database.close();
     }
 
+    /**
+     * Helper function to create a ContentValues object from Project
+     * @param project Project object to be inserted into database
+     * @return ContentValues object that represent the Project
+     */
     private ContentValues toValues(Project project) {
         ContentValues values = new ContentValues();
         Gson gson = new Gson();
@@ -110,6 +127,7 @@ public class ProjectDataSource {
         String languagesString = gson.toJson(project.getLanguages());
         values.put(ProjectTableContract.COLUMN_LANGUAGES, languagesString);
 
+        // insert the recordings ids instead of recordings themselves to avoid overhead
         if (project.getRecordingIDs().isEmpty()) {
             values.put(ProjectTableContract.COLUMN_RECORDINGIDS, "none");
         } else {
@@ -120,23 +138,43 @@ public class ProjectDataSource {
         return values;
     }
 
+    /**
+     * Insert the a Project to database
+     * @param project Project to be inserted
+     * @return Project object inserted
+     */
     public Project createProject(Project project) {
         ContentValues values = toValues(project);
         database.insert(ProjectTableContract.TABLE_NAME, null, values);
         return project;
     }
 
+    /**
+     * Given a project's id, delete the project from database
+     * @param projectID project's id representing the Project to be deleted
+     * @return true if the project is deleted;
+     *         false otherwise
+     */
     public boolean deleteProject(String projectID) {
         String whereClause = ProjectTableContract.COLUMN_ID + "=?";
         String[] whereArgs = new String[]{projectID};
         return database.delete(ProjectTableContract.TABLE_NAME, whereClause, whereArgs) > 0;
     }
 
+    /**
+     * Callback when a recording is added/associated to a project
+     * @param project the project to which recordings are added
+     */
     public void notifyRecordingAdded(Project project) {
         deleteProject(project.getProjectID());
         createProject(project);
     }
 
+    /**
+     * Get all the Projects that the user has.
+     * TODO: take a user id as parameter and return the user's projects
+     * @return a List of Project the user has
+     */
     public List<Project> getOwnedProjects() {
         List<Project> projects = new ArrayList<>();
         Cursor cursor = database.query(
@@ -176,6 +214,8 @@ public class ProjectDataSource {
                             cursor.getColumnIndex(ProjectTableContract.COLUMN_LANGUAGES)), type);
             project.setLanguages(languages);
 
+            // get all the recording ids first
+            // then call the RecordingDataSource to get all recordings
             ArrayList<String> recordingIDs;
             String idString = cursor.getString(
                     cursor.getColumnIndex(ProjectTableContract.COLUMN_RECORDINGIDS));

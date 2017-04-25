@@ -13,6 +13,13 @@ import android.widget.Button;
 import georgia.languagelandscape.R;
 import georgia.languagelandscape.util.MetaDataPagerAdaptor;
 
+/**
+ * The Fragment that contains the ViewPager
+ * for displaying meta-data questions of a new recording one at each page
+ *
+ * Activities that contains this fragment must implements
+ * {@link MetaDataFragmentListener} interface to interact with finish button click
+ */
 public class MetaDataFragment extends Fragment {
 
     private Context context;
@@ -51,6 +58,8 @@ public class MetaDataFragment extends Fragment {
         finishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                // clear the edittext focus so that the onFocusChange callback can be triggered
                 ((MetaDataFragmentListener) context).clearFocus();
                 ((MetaDataFragmentListener) context).onFinishClick();
             }
@@ -59,6 +68,13 @@ public class MetaDataFragment extends Fragment {
         return view;
     }
 
+    /**
+     * Called by the parent activity to move the current page to specified one;
+     * mostly because some mandatory information of a recording is not entered by
+     * the user.
+     *
+     * @param which the position of the page to go to.
+     */
     public void focusAt(int which) {
         pager.setCurrentItem(which);
         MetaDataFieldFragment fieldFragment =

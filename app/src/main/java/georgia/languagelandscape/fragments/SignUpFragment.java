@@ -20,6 +20,14 @@ import android.widget.TextView;
 
 import georgia.languagelandscape.R;
 
+/**
+ * A simple dummy Fragment that sign up for a user
+ * and display the link to the terms and services.
+ *
+ * Activities that contains this fragment must implements
+ * {@link SignUpFragmentListener} interface to interact with
+ * login, signup and forgot password events
+ */
 public class SignUpFragment extends Fragment {
 
     private Context context;
@@ -35,11 +43,11 @@ public class SignUpFragment extends Fragment {
     }
 
     public interface SignUpFragmentListener {
-        public void onSignUpClick();
+        void onSignUpClick();
 
-        public void onLoginTextClick();
+        void onLoginTextClick();
 
-        public void onTermsClick();
+        void onTermsClick();
     }
 
     @Override
@@ -82,6 +90,7 @@ public class SignUpFragment extends Fragment {
             }
         });
 
+        // set the "Terms of Service" text as clickable and underlined
         String terms = context.getResources().getString(R.string.terms_of_service);
         SpannableString content = new SpannableString(terms);
         String underlineString = "Terms of Service";

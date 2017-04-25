@@ -26,7 +26,15 @@ import georgia.languagelandscape.R;
 import georgia.languagelandscape.data.Recording;
 import georgia.languagelandscape.database.RecordingDataSource;
 
-
+/**
+ * The MapFragment populates the home page view of our app.
+ * It is responsible for adding markers to the map
+ * according to the recordings uploaded in the database
+ *
+ * Activities that contains this fragment must implements
+ * {@link mapListener} interface to interact with camera move, marker click,
+ * map click etc.
+ */
 public class MapFragment extends SupportMapFragment implements OnMapReadyCallback, GoogleMap.OnMarkerClickListener {
 
     private GoogleMap mGoogleMap;
@@ -34,13 +42,13 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
     private WeakHashMap<String, Recording> recordingMap = new WeakHashMap<>();
 
     public interface mapListener {
-        public void onMapClick(LatLng latLng);
+        void onMapClick(LatLng latLng);
 
-        public void onMapFragmentReady();
+        void onMapFragmentReady();
 
-        public void onCameraMove();
+        void onCameraMove();
 
-        public void onMarkerClick(Marker marker);
+        void onMarkerClick(Marker marker);
     }
 
     @Override
@@ -59,20 +67,24 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
+        // save our own instance of GoogleMap to be referenced later
         mGoogleMap = googleMap;
 
         if (context instanceof mapListener) {
             ((mapListener) context).onMapFragmentReady();
         }
+
+        // get the current location of the user
+        // set the camera view the current location
         double longitude = getArguments().getDouble(MapActivity.GEO_LONGITUDE);
         double latitude = getArguments().getDouble(MapActivity.GEO_LATITUDE);
-
         CameraPosition cameraPosition = new CameraPosition.Builder()
                 .target(new LatLng(latitude, longitude))
                 .build();
         googleMap.animateCamera(CameraUpdateFactory
                 .newCameraPosition(cameraPosition));
 
+        // get all the recording in the database that have been uploaded
         RecordingDataSource dataSource = new RecordingDataSource(context);
         dataSource.open();
         List<Recording> recordingsFromDB = dataSource.getAllRecordings();
@@ -91,6 +103,8 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
             @Override
             public boolean onMarkerClick(Marker marker) {
 
+                // on marker click, a dialog activity displaying
+                // detailed information about a recording will pop up
                 Recording recordingFromMarker = recordingMap.get(marker.getTag());
                 Bundle bundle = new Bundle();
                 bundle.putParcelable(Recording.PARCEL_KEY, recordingFromMarker);
@@ -110,6 +124,10 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         mGoogleMap.setOnMapClickListener(new GoogleMap.OnMapClickListener() {
             @Override
             public void onMapClick(LatLng latLng) {
+
+                // for aesthetic reasons, we hide the floating button on map click;
+                // but to also decrease the level of depth on the screen when there are too
+                // many floating views
                 if (context instanceof mapListener) {
                     ((mapListener) context).onMapClick(latLng);
                 } else {
@@ -124,6 +142,8 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
         mGoogleMap.setOnCameraMoveListener(new GoogleMap.OnCameraMoveListener() {
             @Override
             public void onCameraMove() {
+
+                // hide the floating buttons
                 if (context instanceof mapListener) {
                     ((mapListener) context).onCameraMove();
                 }
@@ -133,6 +153,7 @@ public class MapFragment extends SupportMapFragment implements OnMapReadyCallbac
 
     @Override
     public boolean onMarkerClick(Marker marker) {
+        // return false so the action is handled by default OnMarkerClick handler
         return false;
     }
 }
