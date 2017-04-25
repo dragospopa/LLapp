@@ -5,7 +5,9 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.List;
 
@@ -30,6 +32,7 @@ public class ProjectAdaptor extends RecyclerView.Adapter<ProjectAdaptor.ViewHold
         public TextView owner;
         public TextView numRecording;
         public TextView description;
+        public Button moreButton;
 
         public ViewHolder(View itemView) {
             super(itemView);
@@ -40,6 +43,7 @@ public class ProjectAdaptor extends RecyclerView.Adapter<ProjectAdaptor.ViewHold
             owner = (TextView) itemView.findViewById(R.id.project_owner);
             numRecording = (TextView) itemView.findViewById(R.id.project_num_recording);
             description = (TextView) itemView.findViewById(R.id.project_description);
+            moreButton = (Button) itemView.findViewById(R.id.more);
         }
     }
 
@@ -63,6 +67,12 @@ public class ProjectAdaptor extends RecyclerView.Adapter<ProjectAdaptor.ViewHold
         }
         holder.owner.setText(String.format("by %s", project.getOwner().getUsername()));
         holder.description.setText(project.getDescription());
+        holder.moreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(context, "not implemented", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
     @Override

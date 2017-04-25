@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<android.support.constraint.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_marginTop="5dp"
-    android:layout_marginBottom="5dp"
-    android:paddingBottom="5dp"
-    android:paddingTop="5dp">
+    android:layout_marginTop="10dp"
+    android:layout_marginBottom="10dp">
 
     <TextView
         android:id="@+id/project_count"
@@ -16,19 +16,31 @@
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"
         android:layout_alignParentStart="true"
-        android:layout_marginLeft="5dp"
         android:textSize="18sp"
-        android:text="1 - " />
+        android:text="1 - "
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="8dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginStart="8dp" />
 
     <TextView
         android:id="@+id/project_full_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="Czech it out!"
+        android:layout_marginLeft="3dp"
+        android:layout_toRightOf="@+id/project_count"
+        tools:text="Czech it out!"
         android:textSize="18sp"
         android:textStyle="bold"
-        android:layout_toRightOf="@+id/project_count"
-        android:layout_marginLeft="2dp"/>
+        android:maxLines="1"
+        android:ellipsize="end"
+        app:layout_constraintBottom_toTopOf="@+id/project_count"
+        app:layout_constraintLeft_toRightOf="@+id/project_count"
+        app:layout_constraintTop_toBottomOf="@+id/project_count"
+        android:layout_marginStart="3dp"
+        app:layout_constraintRight_toLeftOf="@+id/project_num_recording"
+        android:layout_marginRight="8dp" />
 
     <TextView
         android:id="@+id/project_owner"
@@ -37,8 +49,10 @@
         android:text="by chiku"
         android:layout_toRightOf="@+id/project_full_name"
         android:layout_toEndOf="@+id/project_full_name"
-        android:layout_marginLeft="10dp"
-        android:layout_alignBottom="@+id/project_full_name"/>
+        android:layout_alignBottom="@+id/project_full_name"
+        app:layout_constraintLeft_toLeftOf="@+id/project_count"
+        android:layout_marginTop="8dp"
+        app:layout_constraintTop_toBottomOf="@+id/project_count" />
 
     <TextView
         android:id="@+id/project_num_recording"
@@ -49,18 +63,49 @@
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:layout_alignBottom="@+id/project_full_name"
-        android:layout_marginRight="7dp"/>
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/project_full_name"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/project_full_name"
+        app:layout_constraintVertical_bias="0.487"
+        app:layout_constraintRight_toLeftOf="@+id/linearLayout"
+        android:layout_marginRight="4dp" />
 
     <TextView
         android:id="@+id/project_description"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/project_count"
-        android:layout_alignRight="@+id/project_num_recording"
-        android:layout_below="@+id/project_full_name"
-        android:layout_marginTop="5dp"
-        android:maxLines="3"
+        android:layout_marginLeft="0dp"
+        android:layout_marginRight="8dp"
         android:ellipsize="end"
-        android:text="Many people including the Czechs themselves don't realise how many different languages are spoken in the Czech Republic. The only official language - Czech - is by far not the only one spoken there. This project therefore tries to give a voice to lesser acknowledged languages and map the true language landscape of the country." />
+        android:lineSpacingMultiplier="1.2"
+        android:maxLines="3"
+        tools:text="Many people including the Czechs themselves don't realise how many different languages are spoken in the Czech Republic. The only official language - Czech - is by far not the only one spoken there. This project therefore tries to give a voice to lesser acknowledged languages and map the true language landscape of the country."
+        app:layout_constraintLeft_toLeftOf="@+id/project_owner"
+        app:layout_constraintRight_toRightOf="@+id/linearLayout"
+        android:layout_marginTop="5dp"
+        app:layout_constraintTop_toBottomOf="@+id/project_owner"
+        app:layout_constraintHorizontal_bias="0.0" />
 
-</RelativeLayout>
+    <LinearLayout
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:gravity="center|right"
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/project_num_recording"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/project_num_recording"
+        android:layout_marginRight="0dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:id="@+id/linearLayout">
+
+        <Button
+            android:id="@+id/more"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:background="@drawable/ic_more_vert_black_24dp"
+            tools:layout_editor_absoluteX="249dp"
+            tools:layout_editor_absoluteY="55dp" />
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
