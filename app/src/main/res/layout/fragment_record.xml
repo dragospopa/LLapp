@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/content_record"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:focusableInTouchMode="true"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".RecordingActivity">
+    <!--tools:showIn="@layout/activity_record_nav_drawer">-->
+
+
+    <TextView
+        android:id="@+id/recording_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/recording_name"
+        android:layout_below="@+id/recording_name"
+        tools:text="24/04/2017"
+        android:layout_marginLeft="0dp"
+        app:layout_constraintLeft_toLeftOf="@+id/recording_name"
+        android:layout_marginTop="24dp"
+        app:layout_constraintTop_toBottomOf="@+id/recording_name" />
+
+    <TextView
+        android:id="@+id/recording_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/timer"
+        android:layout_below="@+id/timer"
+        android:text="@string/default_recording_name"
+        app:layout_constraintLeft_toLeftOf="@+id/timer"
+        app:layout_constraintTop_toBottomOf="@+id/timer"
+        android:layout_marginTop="24dp" />
+
+    <TextView
+        android:id="@+id/timer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:text="@string/default_duration"
+        android:textSize="18sp"
+        android:fontFamily="sans-serif"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="70dp" />
+
+    <TextView
+        android:id="@+id/recording_location"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/recording_date"
+        android:layout_alignParentRight="true"
+        tools:text="London, United Kingdom"
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/recording_date"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/recording_date"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent" />
+
+    <Button
+        android:id="@+id/player"
+        style="?buttonBarButtonStyle"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:background="@drawable/ic_play_arrow_black_24dp"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/recorder"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/recorder"
+        app:layout_constraintVertical_bias="0.493"
+        app:layout_constraintRight_toLeftOf="@+id/recorder"
+        android:layout_marginRight="8dp"
+        app:layout_constraintHorizontal_bias="0.0" />
+
+
+    <Button
+        android:id="@+id/recorder"
+        style="?buttonBarButtonStyle"
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="@drawable/ic_fiber_manual_record_black_24dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        android:layout_marginTop="32dp"
+        app:layout_constraintTop_toBottomOf="@+id/recording_date" />
+
+
+    <Button
+        android:id="@+id/button_save"
+        style="?buttonBarButtonStyle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/Save"
+        android:layout_marginRight="8dp"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginBottom="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/recorder"
+        android:layout_marginTop="0dp"
+        app:layout_constraintTop_toBottomOf="@+id/recorder"
+        app:layout_constraintLeft_toRightOf="@+id/recorder"
+        android:layout_marginLeft="8dp"
+        app:layout_constraintVertical_bias="0.469"
+        app:layout_constraintHorizontal_bias="1.0" />
+
+</android.support.constraint.ConstraintLayout>

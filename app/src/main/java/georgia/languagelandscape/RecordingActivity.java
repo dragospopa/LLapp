@@ -1,7 +1,6 @@
 package georgia.languagelandscape;
 
 import android.Manifest;
-import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.Address;
@@ -13,44 +12,40 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.support.annotation.NonNull;
-import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.content.ContextCompat;
 import android.util.Log;
-import android.view.KeyEvent;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
-import android.view.inputmethod.InputMethodManager;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import java.io.File;
 import java.io.FilenameFilter;
 import java.io.IOException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
 import georgia.languagelandscape.data.Recording;
 import georgia.languagelandscape.data.User;
 import georgia.languagelandscape.database.RecordingDataSource;
+import georgia.languagelandscape.fragments.MetaDataFieldFragment;
+import georgia.languagelandscape.fragments.MetaDataFragment;
+import georgia.languagelandscape.fragments.RecordFragment;
 
-public class RecordingActivity extends BaseActivity {
+public class RecordingActivity extends BaseActivity
+        implements RecordFragment.RecordFragmentListener,
+        MetaDataFragment.MetaDataFragmentListener,
+        MetaDataFieldFragment.MetaDataFieldFragmentListener {
 
     private static final String LOG_TAG = "AudioRecordTest";
     public static final int REQUEST_RECORD_AUDIO = 1001;
     public static final int CACHE_SIZE = 1024;
     private boolean audioPermissionGranted = false;
     private static String audioFileName = null;
-    private static boolean canRecord = true;
     private static boolean canPlay = true;
-    private long recordingTime = 0L;
     private Recording recording = null;
     private Recording tempRecording = null;
     private String recordingTitle = null;
@@ -59,31 +54,21 @@ public class RecordingActivity extends BaseActivity {
     private String audioInternalFilePath = null;
     private File audioInternalFileDir = null;
     private String recordingDescription = null;
+    private String recordingDateString = null;
+    private String recordingLanguageString = "";
+    private String recordingSpeakerString = "";
+    private String recordingPublicEditString = "";
     private ArrayList<String> recordingSpeaker = null;
     private double longitude = 0.0;
     private double latitude = 0.0;
     private static String location = null;
     private static boolean active = false;
-
-    private Button recordButton = null;
-    private MediaRecorder recorder = null;
-    private Button playButton = null;
-    private MediaPlayer player = null;
-    private TextView recordingTimer = null;
-    private Handler handler = null;
-    private Runnable timerRunnable = null;
-    private TextView recordingName = null;
-    private TextView recordingDate = null;
-    private TextView recordingLocation = null;
-    private EditText userDefinedName = null;
-    private EditText userDefinedLanguages = null;
-    private EditText userDefinedDescription = null;
-    private EditText userDefinedSpeakers = null;
-    private Button saveButton = null;
-    private TextInputLayout nameInputLayout = null;
-    private TextInputLayout languageInputLayout = null;
+    private FragmentManager fragmentManager;
     private Handler completionHandler;
     private Runnable completionRunnable;
+
+    private MediaRecorder recorder = null;
+    private MediaPlayer player = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -91,20 +76,14 @@ public class RecordingActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_record_nav_drawer);
         super.onDrawerCreated();
-        active = true;
 
-        recordingTimer = (TextView) findViewById(R.id.timer);
-        recordingName = (TextView) findViewById(R.id.recording_name);
-        recordingDate = (TextView) findViewById(R.id.recording_date);
-        recordingLocation = (TextView) findViewById(R.id.recording_location);
-        nameInputLayout = (TextInputLayout) findViewById(R.id.userDefined_name_textInput_layout);
+        active = true;
+        longitude = getIntent().getExtras().getDouble(MapActivity.GEO_LONGITUDE);
+        latitude = getIntent().getExtras().getDouble(MapActivity.GEO_LATITUDE);
+        location = updateLocation(longitude, latitude);
+
         recordingLanguages = new ArrayList<>();
         recordingSpeaker = new ArrayList<>();
-
-        userDefinedName = (EditText) findViewById(R.id.userDefined_name);
-        userDefinedLanguages = (EditText) findViewById(R.id.userDefined_languages);
-        userDefinedDescription = (EditText) findViewById(R.id.userDefined_description);
-        userDefinedSpeakers = (EditText) findViewById(R.id.userDefined_speakers);
 
         try {
             audioInternalFilePath = getFilesDir().getCanonicalPath() + "/recordings";
@@ -122,182 +101,25 @@ public class RecordingActivity extends BaseActivity {
                 Recording.defaultRecordingTitle :
                 Recording.defaultRecordingTitle + " " + numDup;
 
-        recordingName.setText(recordingTitle);
-        nameInputLayout.setHint(recordingTitle);
+        fragmentManager = getSupportFragmentManager();
+        RecordFragment recordFragment = RecordFragment.newInstance(location, recordingTitle);
+        fragmentManager
+                .beginTransaction()
+                .replace(R.id.container, recordFragment, RecordFragment.TAG)
+                .commit();
 
-        longitude = getIntent().getExtras().getDouble(MapActivity.GEO_LONGITUDE);
-        latitude = getIntent().getExtras().getDouble(MapActivity.GEO_LATITUDE);
-        location = updateLocation(longitude, latitude);
-        recordingLocation.setText(location);
-
-        saveButton = (Button) findViewById(R.id.button_save);
-        saveButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-
-                completionHandler.removeCallbacks(completionRunnable);
-                // if nothing has been recorded
-                File from = new File(audioFileName);
-                if (!from.exists()) {
-                    finish();
-                    return;
-                }
-                // mandatory fields need to have info
-                String languages = userDefinedLanguages.getText().toString();
-                if (languages.equals("")) {
-                    userDefinedLanguages.requestFocus();
-                    View view = getCurrentFocus();
-                    if (view != null) {
-                        InputMethodManager imm = (InputMethodManager)
-                                getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.showSoftInput(view, 0);
-                    }
-//                        languageInputLayout.setError("Which language did you speak?");
-                    return;
-                } else {
-                    recordingLanguages.add(languages);
-                }
-
-                String speakers = userDefinedSpeakers.getText().toString();
-                if (speakers.equals("")) {
-                    userDefinedSpeakers.requestFocus();
-                    View view = getCurrentFocus();
-                    if (view != null) {
-                        InputMethodManager imm = (InputMethodManager)
-                                getSystemService(Context.INPUT_METHOD_SERVICE);
-                        imm.showSoftInput(view, 0);
-                    }
-//                        userDefinedSpeakers.setError("Please specify the speaker.");
-                    return;
-                } else {
-                    recordingSpeaker.add(speakers);
-                }
-
-                String description = userDefinedDescription.getText().toString();
-                recordingDescription = description.equals("") ? "" : description;
-
-                String title = userDefinedName.getText().toString();
-                recordingTitle = title.equals("") ? Recording.defaultRecordingTitle : title;
-                recordingName.setText(recordingTitle);
-
-                /* copy the file from cache to internal storage */
-                int numDup;
-                String recordingFileName;
-                if (recordingTitle.matches(Recording.defaultRecordingTitle + " [0-9]+$")) {
-                    numDup = checkDuplication(Recording.defaultRecordingTitle);
-                    recordingFileName = numDup == 0 ?
-                            Recording.defaultRecordingTitle :
-                            Recording.defaultRecordingTitle + " " + numDup;
-                } else {
-                    numDup = checkDuplication(recordingTitle);
-                    recordingFileName =
-                            numDup == 0 ? recordingTitle : recordingTitle + " " + numDup;
-                }
-                File to = new File(audioInternalFileDir, recordingFileName + Recording.defaultAudioFormat);
-                audioFileName = to.getAbsolutePath();
-                boolean success = from.renameTo(to);
-
-                /* build the recording class from data collected */
-                if (success) {
-                    MediaMetadataRetriever mmr = new MediaMetadataRetriever();
-                    mmr.setDataSource(audioFileName);
-                    String durationStr = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
-                    long duration = Long.parseLong(durationStr);
-                    recording = new Recording();
-                    recording.setRecordingID();
-                    recording.setDuration(duration);
-                    recording.setTitle(recordingTitle);
-                    recording.setDate(recordingDate.getText().toString());
-                    recording.setDescription(recordingDescription);
-                    recording.setLanguage(recordingLanguages);
-                    recording.setSpeakers(recordingSpeaker);
-                    recording.setLatitude(latitude);
-                    recording.setLongitude(longitude);
-                    recording.setLocation(location);
-                    // TODO: set the uploader in the future
-                    recording.setUploader(new User("franktest@gmail.com", "passwd", "frankie"));
-                    recording.setFilePath(audioFileName);
-                    RecordingDataSource dataSource = new RecordingDataSource(RecordingActivity.this);
-                    dataSource.open();
-                    dataSource.insertRecording(recording);
-                    dataSource.close();
-
-                    Intent intent = new Intent(RecordingActivity.this, MyRecordingsActivity.class);
-                    startActivity(intent);
-                    finish();
-
-                }
-            }
-        });
-
-        userDefinedName.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                switch (actionId) {
-                    case EditorInfo.IME_ACTION_NEXT:
-                        userDefinedLanguages.requestFocus();
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-        });
-        userDefinedLanguages.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                switch (actionId) {
-                    case EditorInfo.IME_ACTION_NEXT:
-                        userDefinedSpeakers.requestFocus();
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-        });
-
-        userDefinedSpeakers.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                switch (actionId) {
-                    case EditorInfo.IME_ACTION_NEXT:
-                        userDefinedDescription.requestFocus();
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-        });
-
-        userDefinedDescription.setOnEditorActionListener(new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView v, int actionId, KeyEvent event) {
-                switch (actionId) {
-                    case EditorInfo.IME_ACTION_DONE:
-                        userDefinedDescription.clearFocus();
-                        View view = getCurrentFocus();
-                        if (view != null) {
-                            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-                            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-                        }
-                        return true;
-                    default:
-                        return false;
-                }
-            }
-        });
-
-        handler = new Handler();
-        timerRunnable = new Runnable() {
+        completionHandler = new Handler();
+        completionRunnable = new Runnable() {
             @Override
             public void run() {
-                long elapsed = System.currentTimeMillis() - recordingTime;
-                int seconds = (int) (elapsed / 1000);
-                int millis = (int) (elapsed % 1000) / 10;
-                int minutes = seconds / 60;
-                seconds = seconds % 60;
-
-                recordingTimer.setText(String.format("%02d:%02d.%02d", minutes, seconds, millis));
-                handler.postDelayed(this, 0);
+                if (tempRecording.isCompleted()) {
+                    RecordFragment recordFragment =
+                            (RecordFragment) fragmentManager.findFragmentByTag(RecordFragment.TAG);
+                    recordFragment.notifyRecordingCompleted();
+                    completionHandler.removeCallbacks(this);
+                } else {
+                    completionHandler.postDelayed(this, 0);
+                }
             }
         };
 
@@ -307,53 +129,6 @@ public class RecordingActivity extends BaseActivity {
             e.printStackTrace();
         }
         audioFileName = audioCacheFilePath + "/" + System.currentTimeMillis() + Recording.defaultAudioFormat;
-
-        recordButton = (Button) findViewById(R.id.recorder);
-        recordButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                onRecord(canRecord);
-            }
-        });
-
-        playButton = (Button) findViewById(R.id.player);
-        completionHandler = new Handler();
-        completionRunnable = new Runnable() {
-            @Override
-            public void run() {
-                if (tempRecording.isCompleted()) {
-                    playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
-                    completionHandler.removeCallbacks(this);
-                    canRecord = true;
-                    saveButton.setClickable(true);
-                    recordButton.setClickable(true);
-                } else {
-                    completionHandler.postDelayed(this, 0);
-                }
-            }
-        };
-        playButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                tempRecording.play(tempRecording.getCurrentPlaytime());
-                if (!tempRecording.isPaused()) {
-                    playButton.setBackgroundResource(R.drawable.ic_pause_black_24dp);
-                    canRecord = false;
-                    recordButton.setClickable(false);
-                    saveButton.setClickable(false);
-                } else if (tempRecording.isPaused()) {
-                    playButton.setBackgroundResource(R.drawable.ic_play_arrow_black_24dp);
-                    canRecord = true;
-                    saveButton.setClickable(true);
-                    recordButton.setClickable(true);
-                }
-                completionHandler.postDelayed(completionRunnable, 0);
-            }
-        });
-
-        Date currentDateTime = new Date();
-        SimpleDateFormat formatter = new SimpleDateFormat("dd/MM/yyyy", Locale.UK);
-        recordingDate.setText(formatter.format(currentDateTime));
     }
 
     private int checkDuplication(final String recordingTitle) {
@@ -371,36 +146,25 @@ public class RecordingActivity extends BaseActivity {
         return recordings.length;
     }
 
-    private void onRecord(boolean canRecord) {
+    private boolean onRecord(boolean canRecord) {
         if (canRecord) {
-            startRecording();
+            return startRecording();
         } else {
-            stopRecording();
+            return stopRecording();
         }
     }
 
-    private void stopRecording() {
-        canRecord = true;
-        saveButton.setClickable(true);
-        playButton.setClickable(true);
-
+    private boolean stopRecording() {
         recorder.stop();
-        handler.removeCallbacks(timerRunnable);
         recorder.release();
         recorder = null;
 
         tempRecording = new Recording();
         tempRecording.setFilePath(audioFileName);
-        /*
-        * Animation:
-        *   -the screen contracts to the top
-        *   -edit|play|delete buttons appear at the bottom of the waveform
-        *   -a list of information about the new recording will appear down below the waveform
-        *   -save & [save and] upload buttons
-        * */
+        return true;
     }
 
-    private void startRecording() {
+    private boolean startRecording() {
         if (!audioPermissionGranted) {
             int permissionCheck = ContextCompat.checkSelfPermission(
                     this, Manifest.permission.RECORD_AUDIO);
@@ -409,15 +173,11 @@ public class RecordingActivity extends BaseActivity {
                         this,
                         new String[]{Manifest.permission.RECORD_AUDIO},
                         REQUEST_RECORD_AUDIO);
-                return;
+                return false;
             } else {
                 audioPermissionGranted = true;
             }
         }
-
-        canRecord = false;
-        saveButton.setClickable(false);
-        playButton.setClickable(false);
 
         recorder = new MediaRecorder();
         recorder.setAudioSource(MediaRecorder.AudioSource.MIC);
@@ -429,10 +189,10 @@ public class RecordingActivity extends BaseActivity {
             recorder.prepare();
         } catch (IOException e) {
             Log.i(LOG_TAG, "prepare() failed.");
+            return false;
         }
-        recordingTime = System.currentTimeMillis();
-        handler.postDelayed(timerRunnable, 0);
         recorder.start();
+        return true;
     }
 
     private String updateLocation(double longitude, double latitude) {
@@ -498,15 +258,6 @@ public class RecordingActivity extends BaseActivity {
                 Environment.MEDIA_MOUNTED_READ_ONLY.equals(state));
     }
 
-    private boolean askLocationPermission() {
-//        if (!isExternalStorageReadable() || !isExternalStorageWritable()) {
-//            Toast.makeText(this, "This app only works on devices with usable external storage",
-//                    Toast.LENGTH_SHORT).show();
-//            return false;
-//        }
-        return true;
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode,
                                            @NonNull String[] permissions,
@@ -521,7 +272,6 @@ public class RecordingActivity extends BaseActivity {
                     Toast.makeText(this,
                             "Unable to record.\nGo to Settings > Privacy to change the permission",
                             Toast.LENGTH_SHORT).show();
-//                    finish();
                 }
         }
     }
@@ -555,6 +305,11 @@ public class RecordingActivity extends BaseActivity {
     }
 
     @Override
+    protected void onStart() {
+        super.onStart();
+    }
+
+    @Override
     protected void onResume() {
         super.onResume();
         active = true;
@@ -564,5 +319,164 @@ public class RecordingActivity extends BaseActivity {
     protected void onRestart() {
         super.onRestart();
         active = true;
+    }
+
+    @Override
+    public boolean onRecordClick(boolean canRecord) {
+        return onRecord(canRecord);
+    }
+
+    @Override
+    public void onPlayClick() {
+        if (tempRecording == null) return;
+        tempRecording.play(tempRecording.getCurrentPlaytime());
+        RecordFragment recordFragment =
+                (RecordFragment) fragmentManager.findFragmentByTag(RecordFragment.TAG);
+        boolean paused = tempRecording.isPaused();
+        recordFragment.notifyRecordingPlaying(paused);
+        if (!paused) {
+            completionHandler.postDelayed(completionRunnable, 0);
+        } else {
+            completionHandler.removeCallbacks(completionRunnable);
+        }
+    }
+
+    @Override
+    public void onSaveClick() {
+        File from = new File(audioFileName);
+        if (!from.exists()) {
+            finish();
+            return;
+        }
+        fragmentManager
+                .beginTransaction()
+                .replace(R.id.container, new MetaDataFragment(), MetaDataFragment.TAG)
+                .addToBackStack(RecordFragment.TAG)
+                .commit();
+
+    }
+
+    @Override
+    public void setDateString(String dateString) {
+        recordingDateString = dateString;
+    }
+
+    @Override
+    public void onBackPressed() {
+        int count = fragmentManager.getBackStackEntryCount();
+
+        if (count == 0) {
+            super.onBackPressed();
+        } else {
+            fragmentManager.popBackStack();
+        }
+    }
+
+    @Override
+    public void clearFocus() {
+        View view = getCurrentFocus();
+        if (view != null) {
+            view.clearFocus();
+        }
+    }
+
+    @Override
+    public void onFinishClick() {
+        if (recordingLanguageString.equals("")) {
+            MetaDataFragment dataFragment =
+                    (MetaDataFragment) fragmentManager.findFragmentByTag(MetaDataFragment.TAG);
+            dataFragment.focusAt(MetaDataFieldFragment.languages);
+            return;
+        } else if (recordingSpeakerString.equals("")) {
+            MetaDataFragment dataFragment =
+                    (MetaDataFragment) fragmentManager.findFragmentByTag(MetaDataFragment.TAG);
+            dataFragment.focusAt(MetaDataFieldFragment.speakers);
+            return;
+        } else {
+            recordingLanguages.add(recordingLanguageString);
+            recordingSpeaker.add(recordingSpeakerString);
+        }
+
+        if (recordingPublicEditString.equals("")) {
+            MetaDataFragment dataFragment =
+                    (MetaDataFragment) fragmentManager.findFragmentByTag(MetaDataFragment.TAG);
+            dataFragment.focusAt(MetaDataFieldFragment.publicEdit);
+            return;
+        }
+
+        recordingTitle = recordingTitle.equals("") ? Recording.defaultRecordingTitle : recordingTitle;
+
+        /* copy the file from cache to internal storage */
+        int numDup;
+        String recordingFileName;
+        if (recordingTitle.matches(Recording.defaultRecordingTitle + " [0-9]+$")) {
+            numDup = checkDuplication(Recording.defaultRecordingTitle);
+            recordingFileName = numDup == 0 ?
+                    Recording.defaultRecordingTitle :
+                    Recording.defaultRecordingTitle + " " + numDup;
+        } else {
+            numDup = checkDuplication(recordingTitle);
+            recordingFileName =
+                    numDup == 0 ? recordingTitle : recordingTitle + " " + numDup;
+        }
+
+        File from = new File(audioFileName);
+        File to = new File(audioInternalFileDir, recordingFileName + Recording.defaultAudioFormat);
+        audioFileName = to.getAbsolutePath();
+        boolean success = from.renameTo(to);
+
+        /* build the recording class from data collected */
+        if (success) {
+            MediaMetadataRetriever mmr = new MediaMetadataRetriever();
+            mmr.setDataSource(audioFileName);
+            String durationStr = mmr.extractMetadata(MediaMetadataRetriever.METADATA_KEY_DURATION);
+            long duration = Long.parseLong(durationStr);
+            recording = new Recording();
+            recording.setRecordingID();
+            recording.setDuration(duration);
+            recording.setTitle(recordingTitle);
+            recording.setDate(recordingDateString);
+            recording.setDescription(recordingDescription);
+            recording.setLanguage(recordingLanguages);
+            recording.setSpeakers(recordingSpeaker);
+            recording.setLatitude(latitude);
+            recording.setLongitude(longitude);
+            recording.setLocation(location);
+            // TODO: set the uploader in the future
+            recording.setUploader(new User("franktest@gmail.com", "passwd", "frankie"));
+            recording.setFilePath(audioFileName);
+            RecordingDataSource dataSource = new RecordingDataSource(RecordingActivity.this);
+            dataSource.open();
+            dataSource.insertRecording(recording);
+            dataSource.close();
+
+            Intent intent = new Intent(RecordingActivity.this, MyRecordingsActivity.class);
+            startActivity(intent);
+            finish();
+        }
+    }
+
+    @Override
+    public void onUserInput(String inputString, int which) {
+        Log.d("test", "question " + which + " :" + inputString);
+        switch (which) {
+            case MetaDataFieldFragment.name:
+                recordingTitle = inputString;
+                break;
+            case MetaDataFieldFragment.languages:
+                recordingLanguageString = inputString;
+                break;
+            case MetaDataFieldFragment.speakers:
+                recordingSpeakerString = inputString;
+                break;
+            case MetaDataFieldFragment.description:
+                recordingDescription = inputString;
+                break;
+            case MetaDataFieldFragment.publicEdit:
+                recordingPublicEditString = inputString;
+                break;
+            default:
+                break;
+        }
     }
 }

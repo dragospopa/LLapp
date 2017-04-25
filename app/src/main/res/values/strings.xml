@@ -84,4 +84,26 @@
     <string name="terms_of_service">By proceeding you also agree to Language Landscape\'s Terms of Service.</string>
     <string name="forgot_pass_send">send</string>
     <string name="forgot_pass_instruction">Enter your Language Landscape username or email address that you used to register. We\'ll send you an email with a link to reset your password.</string>
+    <string name="button_finish">finish</string>
+    <string name="name_prompt">What’s your recording called? Give it a title.</string>
+    <string name="name_hint">Recording title</string>
+    <string name="languages_prompt">What language(s) are in the recording?</string>
+    <string name="languages_hint">Languages</string>
+    <string name="speakers_prompt">Who’s in the recording?</string>
+    <string name="speakers_hint">Speakers</string>
+    <string name="aboutWhat_prompt">What are you talking about in the recording?</string>
+    <string name="aboutWhat_hint">Weather, food, etc.</string>
+    <string name="genre_prompt">What style or genre is the recording?</string>
+    <string name="genre_hint">normal conversation, music, etc.</string>
+    <string name="whichProject_prompt">Is your recording part of a project?</string>
+    <string name="whichProject_hint">project name</string>
+    <string name="description_prompt">Add a description of your recording</string>
+    <string name="description_hint">description</string>
+    <string name="keywords_prompt">Add some keywords for your recording</string>
+    <string name="keywords_hint">anything</string>
+    <string name="publicEdit_prompt">Can other people edit the info about this recording?</string>
+    <string name="publicEdit_hint">yes or no</string>
+    <string name="moreDetail_prompt">Add more detailed info about your recording</string>
+    <string name="moreDetail_hint">detail</string>
+    <string name="button_back">back</string>
 </resources>
