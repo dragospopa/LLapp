@@ -11,7 +11,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -25,6 +24,7 @@ import org.json.JSONObject;
 import georgia.languagelandscape.fragments.ForgotPassFragment;
 import georgia.languagelandscape.fragments.OnBoardFragment;
 import georgia.languagelandscape.fragments.SignUpFragment;
+import georgia.languagelandscape.fragments.TermsFragment;
 
 public class MainActivity extends AppCompatActivity
         implements OnBoardFragment.OnBoardFragmentListener,
@@ -108,6 +108,7 @@ public class MainActivity extends AppCompatActivity
     public void onForgotPassClick() {
         fm.beginTransaction()
                 .replace(R.id.container, new ForgotPassFragment())
+                .addToBackStack(null)
                 .commit();
     }
 
@@ -124,12 +125,16 @@ public class MainActivity extends AppCompatActivity
     public void onLoginTextClick() {
         fm.beginTransaction()
                 .replace(R.id.container, new OnBoardFragment())
+                .addToBackStack(null)
                 .commit();
     }
 
     @Override
     public void onTermsClick() {
-        Toast.makeText(this, "terms", Toast.LENGTH_SHORT).show();
+        fm.beginTransaction()
+                .replace(R.id.container, new TermsFragment())
+                .addToBackStack(null)
+                .commit();
     }
 
     @Override

@@ -1,10 +1,14 @@
 package georgia.languagelandscape.fragments;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.TextPaint;
+import android.text.method.LinkMovementMethod;
 import android.text.style.ClickableSpan;
 import android.text.style.UnderlineSpan;
 import android.view.LayoutInflater;
@@ -91,10 +95,18 @@ public class SignUpFragment extends Fragment {
                     ((SignUpFragmentListener) context).onTermsClick();
                 }
             }
+
+            @Override
+            public void updateDrawState(TextPaint ds) {
+                super.updateDrawState(ds);
+                ds.setUnderlineText(true);
+            }
         };
         content.setSpan(new UnderlineSpan(), start, end, 0);
-        content.setSpan(clickableSpan, start, end, 0);
+        content.setSpan(clickableSpan, start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         termsText.setText(content);
+        termsText.setMovementMethod(LinkMovementMethod.getInstance());
+        termsText.setHighlightColor(Color.TRANSPARENT);
 
         return view;
     }
