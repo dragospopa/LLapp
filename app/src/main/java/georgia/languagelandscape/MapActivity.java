@@ -114,6 +114,7 @@ public class MapActivity extends BaseActivity
                     try {
                         locationManager.removeUpdates(locationListener);
                     } catch (SecurityException e) {
+                        Log.d("location", "could not removeUpdates");
                         e.printStackTrace();
                     }
                 }

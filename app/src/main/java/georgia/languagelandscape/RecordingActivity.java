@@ -27,6 +27,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
+import java.util.UUID;
 
 import georgia.languagelandscape.data.Recording;
 import georgia.languagelandscape.data.User;
@@ -133,7 +134,7 @@ public class RecordingActivity extends BaseActivity
         } catch (IOException e) {
             e.printStackTrace();
         }
-        audioFileName = audioCacheFilePath + "/" + System.currentTimeMillis() + Recording.defaultAudioFormat;
+        audioFileName = audioCacheFilePath + "/" + UUID.randomUUID() + Recording.defaultAudioFormat;
     }
 
     /**
@@ -307,6 +308,13 @@ public class RecordingActivity extends BaseActivity
     protected void onPause() {
         super.onPause();
         active = false;
+        if (recorder != null) {
+            recorder.release();
+        }
+        if (player != null) {
+            player.release();
+            player = null;
+        }
 
         if (tempRecording != null) {
             tempRecording.stop();
