@@ -78,7 +78,9 @@ public class MapActivity extends BaseActivity
         super.onDrawerCreated();
         active = true;
 
-        mapFragment = new MapFragment();
+        if (mapFragment == null) {
+            mapFragment = new MapFragment();
+        }
 //        Bundle bundle = new Bundle();
 //        bundle.putDouble(GEO_LONGITUDE, longitude);
 //        bundle.putDouble(GEO_LATITUDE, latitude);
@@ -109,6 +111,7 @@ public class MapActivity extends BaseActivity
                     Bundle bundle = new Bundle();
                     bundle.putDouble(GEO_LONGITUDE, longitude);
                     bundle.putDouble(GEO_LATITUDE, latitude);
+                    mapFragment = new MapFragment();
                     mapFragment.setArguments(bundle);
 
                     try {
