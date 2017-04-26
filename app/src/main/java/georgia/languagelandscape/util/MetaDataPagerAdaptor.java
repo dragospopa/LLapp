@@ -23,6 +23,9 @@ import georgia.languagelandscape.fragments.MetaDataFieldFragment;
  * without accidentally referring to a null fragment that has been
  * destroyed by the pager.
  * Hence we can reference to any views inside that fragment.
+ *
+ * function {@link #getRegisteredFragment(int)} is from
+ * <a http://stackoverflow.com/questions/8785221/retrieve-a-fragment-from-a-viewpager/15261142#15261142">Stack Overflow</a>
  */
 public class MetaDataPagerAdaptor extends FragmentStatePagerAdapter {
 

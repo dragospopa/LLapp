@@ -46,6 +46,9 @@ import georgia.languagelandscape.util.MetaDataPagerAdaptor;
 
 /**
  * The listener for {@link RecordFragment}, {@link MetaDataFragment}.
+ *
+ * The implementation of the function {@link #onBackPressed()} is from
+ * <a href="http://stackoverflow.com/questions/5448653/how-to-implement-onbackpressed-in-fragments/24881908#24881908">this answer on Stack Overflow</a>
  */
 public class RecordingActivity extends BaseActivity
         implements RecordFragment.RecordFragmentListener,
