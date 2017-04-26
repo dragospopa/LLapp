@@ -1,3 +1,10 @@
+/**
+ * Copyright (C) 2017 Language Landscape Organisation - All Rights Reserved
+ *
+ * Reference list:
+ *      bumptech, Glide 3.7.0, 2016
+ *
+ */
 package georgia.languagelandscape.data;
 
 import android.media.MediaPlayer;
